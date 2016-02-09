@@ -14,22 +14,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var importMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
     
-    var mindmapId:String?;
+    let presenter:Presenter = Presenter();
     
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (sender === importMindmap) {
             let mindmapId = mindmapIdTextField.text;
-            self.mindmapId = mindmapId;
             
-            let tracker = MeteorTracker.getInstance()
-            tracker.connectToServer(self.mindmapId!)
+            //Show loader
+            presenter.connectToServer(mindmapId!)
         }
     }
 }

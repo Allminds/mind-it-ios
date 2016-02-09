@@ -9,7 +9,7 @@
 import SwiftDDP
 
 class MeteorTracker {
-    private let mindmap:MeteorCollection<Node> = MeteorCollection<Node>(name: "Mindmaps")
+    private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
     
     private init() {
@@ -41,5 +41,10 @@ class MeteorTracker {
         print("Subscribed to mindmap");
         //NSNotificationCenter.defaultCenter().postNotificationName("LISTS_SUBSCRIPTION_IS_READY", object: nil);
     }
+    
+    func getNodes() -> [Node] {
+        return mindmap.sorted;
+    }
+    
     
 }
