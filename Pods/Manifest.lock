@@ -1,0 +1,20 @@
+PODS:
+  - CryptoSwift (0.2.2)
+  - SwiftDDP (0.1.9):
+    - CryptoSwift
+    - SwiftWebSocket
+    - XCGLogger
+  - SwiftWebSocket (2.5.0)
+  - XCGLogger (3.2)
+
+DEPENDENCIES:
+  - SwiftDDP
+  - XCGLogger
+
+SPEC CHECKSUMS:
+  CryptoSwift: d382228d6301c09474132417878a741c2a2e68cd
+  SwiftDDP: ed0cd4337cf114a646bc9bbcc7d806a4cee13a12
+  SwiftWebSocket: 168cbde980dc3b5bac925a3d8186f82b3e87768e
+  XCGLogger: da1f341f4bb8979db6e1df64232f04d9698402d4
+
+COCOAPODS: 0.39.0

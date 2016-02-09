@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OAM-PQ-vmo">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--MindMap-->
+        <scene sceneID="jpb-mh-LuU">
+            <objects>
+                <tableViewController id="NuU-PK-STG" customClass="MindmapTableViewController" customModule="MindIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YnJ-vV-aet">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NodeViewCell" id="KDx-8B-1Ud" customClass="NodeViewCell" customModule="MindIt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KDx-8B-1Ud" id="6FL-fv-I7L">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NuU-PK-STG" id="Xag-S5-hbx"/>
+                            <outlet property="delegate" destination="NuU-PK-STG" id="ibc-0m-kwm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="MindMap" id="OlT-9W-j2r">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qDk-gB-VnL"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nqw-K5-lFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2566" y="313"/>
+        </scene>
+        <!--MindIt-->
+        <scene sceneID="zsB-wf-8kN">
+            <objects>
+                <viewController id="P4D-24-yPJ" customClass="HomeViewController" customModule="MindIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ttv-96-fB3"/>
+                        <viewControllerLayoutGuide type="bottom" id="6fA-FR-9mE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zsv-z6-ABy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANb-07-pvo">
+                                <rect key="frame" x="244" y="255" width="113" height="30"/>
+                                <state key="normal" title="Import Mindmap"/>
+                                <connections>
+                                    <segue destination="iAh-sM-ntJ" kind="presentation" identifier="ShowMindmap" id="oCw-n7-Yl2"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a MindMap id or url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76g-06-X3b">
+                                <rect key="frame" x="208" y="174" width="184" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="6IF-um-U1r"/>
+                            <constraint firstItem="ANb-07-pvo" firstAttribute="top" secondItem="76g-06-X3b" secondAttribute="bottom" constant="51" id="Rj2-DF-AbX"/>
+                            <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" constant="110" id="aBL-68-K16"/>
+                            <constraint firstItem="76g-06-X3b" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="dZL-0J-cCU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="MindIt" id="T2l-6x-LWB"/>
+                    <connections>
+                        <outlet property="importMindmap" destination="ANb-07-pvo" id="eMX-OV-hMc"/>
+                        <outlet property="mindmapIdTextField" destination="76g-06-X3b" id="0Dj-nP-woe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kRt-ux-AiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1040" y="313"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ATo-LN-yBl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OAM-PQ-vmo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="plc-re-UJI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="P4D-24-yPJ" kind="relationship" relationship="rootViewController" id="NfL-Bh-U4O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWI-gv-HUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="228" y="313"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jh6-xH-4uH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iAh-sM-ntJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DfQ-LM-dp2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NuU-PK-STG" kind="relationship" relationship="rootViewController" id="8RP-wl-f97"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dLU-pV-d7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1754" y="313"/>
+        </scene>
+    </scenes>
+</document>

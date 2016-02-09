@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA2E1C69EA770014F6FC /* AppDelegate.swift */; };
-		415BBA311C69EA770014F6FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA301C69EA770014F6FC /* ViewController.swift */; };
-		415BBA341C69EA770014F6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA321C69EA770014F6FC /* Main.storyboard */; };
-		415BBA361C69EA770014F6FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA351C69EA770014F6FC /* Assets.xcassets */; };
-		415BBA391C69EA770014F6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA371C69EA770014F6FC /* LaunchScreen.storyboard */; };
 		415BBA441C69EA770014F6FC /* MindItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA431C69EA770014F6FC /* MindItTests.swift */; };
 		415BBA4F1C69EA770014F6FC /* MindItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA4E1C69EA770014F6FC /* MindItUITests.swift */; };
+		415BBA5E1C69EBBC0014F6FC /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA5D1C69EBBC0014F6FC /* Presenter.swift */; };
+		415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */; };
+		415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA631C69EC570014F6FC /* HomeViewController.swift */; };
+		415BBA671C69ECB60014F6FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA661C69ECB60014F6FC /* Constants.swift */; };
+		415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */; };
+		415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA6A1C69ECFE0014F6FC /* Node.swift */; };
+		415BBA6D1C69EE2D0014F6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6C1C69EE2D0014F6FC /* Main.storyboard */; };
+		415BBA6F1C69EED80014F6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */; };
+		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.debug.xcconfig"; sourceTree = "<group>"; };
 		415BBA2B1C69EA770014F6FC /* MindIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BBA2E1C69EA770014F6FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		415BBA301C69EA770014F6FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		415BBA331C69EA770014F6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		415BBA351C69EA770014F6FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		415BBA381C69EA770014F6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		415BBA3A1C69EA770014F6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		415BBA3F1C69EA770014F6FC /* MindItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BBA431C69EA770014F6FC /* MindItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindItTests.swift; sourceTree = "<group>"; };
@@ -47,6 +49,16 @@
 		415BBA4A1C69EA770014F6FC /* MindItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BBA4E1C69EA770014F6FC /* MindItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindItUITests.swift; sourceTree = "<group>"; };
 		415BBA501C69EA770014F6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		415BBA5D1C69EBBC0014F6FC /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapTableViewController.swift; sourceTree = "<group>"; };
+		415BBA631C69EC570014F6FC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		415BBA661C69ECB60014F6FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeteorTracker.swift; sourceTree = "<group>"; };
+		415BBA6A1C69ECFE0014F6FC /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		415BBA6C1C69EE2D0014F6FC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +94,8 @@
 				415BBA421C69EA770014F6FC /* MindItTests */,
 				415BBA4D1C69EA770014F6FC /* MindItUITests */,
 				415BBA2C1C69EA770014F6FC /* Products */,
+				8A9E1BAF047398BC6325C3E9 /* Pods */,
+				EB248A7160CFF005A3F1568D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +113,11 @@
 			isa = PBXGroup;
 			children = (
 				415BBA2E1C69EA770014F6FC /* AppDelegate.swift */,
-				415BBA301C69EA770014F6FC /* ViewController.swift */,
-				415BBA321C69EA770014F6FC /* Main.storyboard */,
-				415BBA351C69EA770014F6FC /* Assets.xcassets */,
-				415BBA371C69EA770014F6FC /* LaunchScreen.storyboard */,
+				415BBA651C69EC9C0014F6FC /* model */,
+				415BBA5F1C69EBD70014F6FC /* view */,
+				415BBA5C1C69EB870014F6FC /* presenter */,
 				415BBA3A1C69EA770014F6FC /* Info.plist */,
+				415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */,
 			);
 			path = MindIt;
 			sourceTree = "<group>";
@@ -125,6 +140,59 @@
 			path = MindItUITests;
 			sourceTree = "<group>";
 		};
+		415BBA5C1C69EB870014F6FC /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+				415BBA5D1C69EBBC0014F6FC /* Presenter.swift */,
+			);
+			name = presenter;
+			sourceTree = "<group>";
+		};
+		415BBA5F1C69EBD70014F6FC /* view */ = {
+			isa = PBXGroup;
+			children = (
+				415BBA601C69EBE40014F6FC /* ViewControllers */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		415BBA601C69EBE40014F6FC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */,
+				415BBA6C1C69EE2D0014F6FC /* Main.storyboard */,
+				415BBA631C69EC570014F6FC /* HomeViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		415BBA651C69EC9C0014F6FC /* model */ = {
+			isa = PBXGroup;
+			children = (
+				415BBA661C69ECB60014F6FC /* Constants.swift */,
+				415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */,
+				415BBA6A1C69ECFE0014F6FC /* Node.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		8A9E1BAF047398BC6325C3E9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */,
+				CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EB248A7160CFF005A3F1568D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 415BBA531C69EA770014F6FC /* Build configuration list for PBXNativeTarget "MindIt" */;
 			buildPhases = (
+				B4B0711896852B2818841963 /* Check Pods Manifest.lock */,
 				415BBA271C69EA770014F6FC /* Sources */,
 				415BBA281C69EA770014F6FC /* Frameworks */,
 				415BBA291C69EA770014F6FC /* Resources */,
+				2AED9E894902E3F100520F47 /* Embed Pods Frameworks */,
+				8A685CBA4B799A8A7EE8DD6F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,9 +303,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				415BBA391C69EA770014F6FC /* LaunchScreen.storyboard in Resources */,
-				415BBA361C69EA770014F6FC /* Assets.xcassets in Resources */,
-				415BBA341C69EA770014F6FC /* Main.storyboard in Resources */,
+				415BBA6D1C69EE2D0014F6FC /* Main.storyboard in Resources */,
+				415BBA6F1C69EED80014F6FC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,13 +324,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2AED9E894902E3F100520F47 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MindIt/Pods-MindIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A685CBA4B799A8A7EE8DD6F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MindIt/Pods-MindIt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4B0711896852B2818841963 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		415BBA271C69EA770014F6FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				415BBA311C69EA770014F6FC /* ViewController.swift in Sources */,
+				415BBA671C69ECB60014F6FC /* Constants.swift in Sources */,
+				415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */,
+				415BBA5E1C69EBBC0014F6FC /* Presenter.swift in Sources */,
 				415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */,
+				415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */,
+				415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */,
+				415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,25 +417,6 @@
 			targetProxy = 415BBA4B1C69EA770014F6FC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		415BBA321C69EA770014F6FC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				415BBA331C69EA770014F6FC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		415BBA371C69EA770014F6FC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				415BBA381C69EA770014F6FC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		415BBA511C69EA770014F6FC /* Debug */ = {
@@ -400,6 +504,7 @@
 		};
 		415BBA541C69EA770014F6FC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MindIt/Info.plist;
@@ -411,6 +516,7 @@
 		};
 		415BBA551C69EA770014F6FC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MindIt/Info.plist;
@@ -487,6 +593,7 @@
 				415BBA551C69EA770014F6FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		415BBA561C69EA770014F6FC /* Build configuration list for PBXNativeTarget "MindItTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +602,7 @@
 				415BBA581C69EA770014F6FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		415BBA591C69EA770014F6FC /* Build configuration list for PBXNativeTarget "MindItUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +611,7 @@
 				415BBA5B1C69EA770014F6FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
