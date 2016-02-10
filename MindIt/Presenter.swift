@@ -9,13 +9,17 @@
 class Presenter{
     
     //MARK : Properties
-    
     let meteorTracker:MeteorTracker = MeteorTracker.getInstance()
     
     //MARK : Methods
-    
-    func connectToServer(mindmapId: String) {
-        meteorTracker.connectToServer(mindmapId)
+    func connectToServer(mindmapId: String) -> Bool {
+        if(meteorTracker.isConnectedToNetwork()) {
+            meteorTracker.connectToServer(mindmapId)
+            return true
+        }
+        else {
+            return false
+        }
     }
     
     func getNodes() -> [Node] {
