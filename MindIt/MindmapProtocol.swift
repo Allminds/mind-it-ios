@@ -11,5 +11,8 @@ protocol MindmapProtocol {
     optional func expand();
     optional func add();
     optional func delete();*/
+    
     func getNodes() -> [Node]
+    func getNodeCount() -> Int
+    func getNodeAt(index : Int) -> Node
 }

@@ -1,4 +1,4 @@
-//
+    //
 //  MindmapCollection.swift
 //  MindIt
 //
@@ -10,6 +10,8 @@ import SwiftDDP
 
 class MindmapCollection: MeteorCollection<Node> {
     
+    //Mark : Properties
+    //let presenter : DataObserverProtocol = Presenter.getInstance()
     //MARK: Initialisers
     override init(name: String) {
         super.init(name: name)
@@ -20,6 +22,10 @@ class MindmapCollection: MeteorCollection<Node> {
     override func documentWasAdded(collection: String, id: String, fields: NSDictionary?) {
         super.documentWasAdded(collection, id: id, fields: fields)
         print("Newly Added")
+        
+        let presenter = Presenter.getInstance()
+        presenter.documentAdded(id)
+        //presenter.documentAdded(id)
     }
     
     //Delete Will nerver be called (Soft delete)

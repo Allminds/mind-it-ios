@@ -21,6 +21,7 @@ class Node: MeteorDocument {
     var childSubTree:[String]?
     var index:Int?
     
+    
     //MARK : Initialiser
     required init(id: String, fields: NSDictionary?) {
         super.init(id: id, fields: fields)

@@ -20,6 +20,8 @@
 		4181518A1C6B198A0021B86C /* Connectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418151891C6B198A0021B86C /* Connectable.swift */; };
 		4181518C1C6B1A750021B86C /* MindmapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518B1C6B1A750021B86C /* MindmapProtocol.swift */; };
 		4181518E1C6B347B0021B86C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518D1C6B347B0021B86C /* Config.swift */; };
+		418151901C6B3A120021B86C /* DataObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */; };
+		418151921C6B3C020021B86C /* ViewDataUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418151911C6B3C020021B86C /* ViewDataUtility.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
 		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
@@ -63,6 +65,8 @@
 		418151891C6B198A0021B86C /* Connectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectable.swift; sourceTree = "<group>"; };
 		4181518B1C6B1A750021B86C /* MindmapProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapProtocol.swift; sourceTree = "<group>"; };
 		4181518D1C6B347B0021B86C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObserverProtocol.swift; sourceTree = "<group>"; };
+		418151911C6B3C020021B86C /* ViewDataUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewDataUtility.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTableViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
 		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,8 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				415BBA5D1C69EBBC0014F6FC /* Presenter.swift */,
+				418151911C6B3C020021B86C /* ViewDataUtility.swift */,
 				4181518B1C6B1A750021B86C /* MindmapProtocol.swift */,
 				418151891C6B198A0021B86C /* Connectable.swift */,
+				4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */,
 			);
 			name = presenter;
 			sourceTree = "<group>";
@@ -181,9 +187,9 @@
 		415BBA651C69EC9C0014F6FC /* model */ = {
 			isa = PBXGroup;
 			children = (
+				415BBA6A1C69ECFE0014F6FC /* Node.swift */,
 				415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */,
 				41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */,
-				415BBA6A1C69ECFE0014F6FC /* Node.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -396,8 +402,10 @@
 				4181518E1C6B347B0021B86C /* Config.swift in Sources */,
 				4181518C1C6B1A750021B86C /* MindmapProtocol.swift in Sources */,
 				415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */,
+				418151921C6B3C020021B86C /* ViewDataUtility.swift in Sources */,
 				415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */,
 				415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */,
+				418151901C6B3A120021B86C /* DataObserverProtocol.swift in Sources */,
 				4181518A1C6B198A0021B86C /* Connectable.swift in Sources */,
 				415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */,
 			);

@@ -10,13 +10,16 @@ import SwiftDDP
 import SystemConfiguration
 
 class MeteorTracker {
+    //MARK : Properties
     private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
     
+    //MARK : Intialiser
     private init() {
         
     }
     
+    //MARK: Methods
     static func getInstance() -> MeteorTracker {
         if(meteorTracker == nil) {
             meteorTracker = MeteorTracker();
@@ -24,7 +27,7 @@ class MeteorTracker {
         return meteorTracker!;
     }
     
-    func getMindmap() -> MeteorCollection<Node> {
+    func getMindmap() -> MindmapCollection {
         return mindmap;
     }
     

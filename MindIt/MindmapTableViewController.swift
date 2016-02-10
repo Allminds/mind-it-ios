@@ -12,8 +12,7 @@ import SwiftDDP
 class MindmapTableViewController: UITableViewController {
     
     //MARK:Properties
-    let presenter: MindmapProtocol = Presenter();
-    var mindmap:[Node]?;
+    let presenter: MindmapProtocol = Presenter.getInstance();
     
     //MARK : Methods
     override func viewDidLoad() {
@@ -22,7 +21,6 @@ class MindmapTableViewController: UITableViewController {
     }
     
     func reloadTableView() {
-        mindmap = presenter.getNodes()
         self.tableView.reloadData()
     }
     
@@ -37,18 +35,14 @@ class MindmapTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (mindmap == nil) {
-            return 0;
-        }
-        else {
-            return mindmap!.count
-        }
+        let count = presenter.getNodeCount();
+        return count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("NodeViewCell", forIndexPath: indexPath) as! NodeViewCell
-        let node = mindmap![indexPath.row]
+        let node = presenter.getNodeAt(indexPath.row);
         
         cell.textLabel?.text = node.valueForKey("name") as? String;
         cell._id = node.valueForKey("id") as? String;

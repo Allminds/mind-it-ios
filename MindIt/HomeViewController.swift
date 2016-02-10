@@ -13,11 +13,12 @@ class HomeViewController: UIViewController {
     //MARK : Properties
     @IBOutlet weak var importMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
-    
-    let presenter:Connectable = Presenter();
     var messageFrame = UIView()
     var activityIndicator = UIActivityIndicatorView()
     var strLabel = UILabel()
+    
+    let presenter:Connectable = Presenter.getInstance();
+    
     
     
     //MARK : Methods
