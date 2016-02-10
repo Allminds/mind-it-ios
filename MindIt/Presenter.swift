@@ -6,10 +6,11 @@
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
 
-class Presenter{
+class Presenter: Connectable , MindmapProtocol {
     
     //MARK : Properties
     let meteorTracker:MeteorTracker = MeteorTracker.getInstance()
+    
     
     //MARK : Methods
     func connectToServer(mindmapId: String) -> Bool {
@@ -25,5 +26,4 @@ class Presenter{
     func getNodes() -> [Node] {
         return meteorTracker.getNodes();
     }
-    
 }

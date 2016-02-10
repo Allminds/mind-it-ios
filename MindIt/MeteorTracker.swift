@@ -30,7 +30,7 @@ class MeteorTracker {
     
     
     func connectToServer(mindmapId: String) -> Bool {
-        Meteor.connect(URL) {
+        Meteor.connect(Config.URL) {
             Meteor.subscribe("mindmap" , params: [mindmapId]) {
                 self.mindmapSubscriptionIsReady()
             }

@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var importMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
     
-    let presenter:Presenter = Presenter();
+    let presenter:Connectable = Presenter();
     var messageFrame = UIView()
     var activityIndicator = UIActivityIndicatorView()
     var strLabel = UILabel()
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        mindmapIdTextField.text = Config.MINDMAPID
     }
     
     func progressBarDisplayer(msg:String, _ indicator:Bool ) {
@@ -48,6 +49,7 @@ class HomeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (sender === importMindmap) {
             let mindmapId = mindmapIdTextField.text;
+            
             
             //Show loader
             progressBarDisplayer("Loading Mindmap", true)

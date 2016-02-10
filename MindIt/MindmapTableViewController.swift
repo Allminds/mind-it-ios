@@ -9,27 +9,20 @@
 import UIKit
 import SwiftDDP
 
-
-
-
 class MindmapTableViewController: UITableViewController {
     
-    let presenter: Presenter = Presenter();
+    //MARK:Properties
+    let presenter: MindmapProtocol = Presenter();
+    var mindmap:[Node]?;
     
-    var mindmap:[Node] = MeteorTracker.getInstance().getMindmap().sorted;
-    var mindmapCollection:[Node]?;
-    
-    
-    
+    //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = mindmap
-        //mindmap = presenter.getNodes();
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: METEOR_COLLECTION_SET_DID_CHANGE, object: nil)
     }
     
     func reloadTableView() {
-        mindmap = MeteorTracker.getInstance().getMindmap().sorted
+        mindmap = presenter.getNodes()
         self.tableView.reloadData()
     }
     
@@ -44,18 +37,18 @@ class MindmapTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-/*        if (mindmap == nil) {
+        if (mindmap == nil) {
             return 0;
         }
-        else { */
-            return mindmap.count
-        //}
+        else {
+            return mindmap!.count
+        }
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("NodeViewCell", forIndexPath: indexPath) as! NodeViewCell
-        let node = mindmap[indexPath.row]
+        let node = mindmap![indexPath.row]
         
         cell.textLabel?.text = node.valueForKey("name") as? String;
         cell._id = node.valueForKey("id") as? String;
