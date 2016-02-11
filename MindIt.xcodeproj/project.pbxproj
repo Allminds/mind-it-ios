@@ -10,20 +10,18 @@
 		415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA2E1C69EA770014F6FC /* AppDelegate.swift */; };
 		415BBA441C69EA770014F6FC /* MindItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA431C69EA770014F6FC /* MindItTests.swift */; };
 		415BBA4F1C69EA770014F6FC /* MindItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA4E1C69EA770014F6FC /* MindItUITests.swift */; };
-		415BBA5E1C69EBBC0014F6FC /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA5D1C69EBBC0014F6FC /* Presenter.swift */; };
+		415BBA5E1C69EBBC0014F6FC /* TableViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA5D1C69EBBC0014F6FC /* TableViewPresenter.swift */; };
 		415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */; };
 		415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA631C69EC570014F6FC /* HomeViewController.swift */; };
 		415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */; };
 		415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA6A1C69ECFE0014F6FC /* Node.swift */; };
 		415BBA6D1C69EE2D0014F6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6C1C69EE2D0014F6FC /* Main.storyboard */; };
 		415BBA6F1C69EED80014F6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */; };
-		4181518A1C6B198A0021B86C /* Connectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418151891C6B198A0021B86C /* Connectable.swift */; };
-		4181518C1C6B1A750021B86C /* MindmapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518B1C6B1A750021B86C /* MindmapProtocol.swift */; };
 		4181518E1C6B347B0021B86C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518D1C6B347B0021B86C /* Config.swift */; };
-		418151901C6B3A120021B86C /* DataObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */; };
-		418151921C6B3C020021B86C /* ViewDataUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418151911C6B3C020021B86C /* ViewDataUtility.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
+		41B102801C6C98B000A106FA /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */; };
+		41B102821C6C9A1B00A106FA /* TableViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */; };
 		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,20 +53,18 @@
 		415BBA4A1C69EA770014F6FC /* MindItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BBA4E1C69EA770014F6FC /* MindItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindItUITests.swift; sourceTree = "<group>"; };
 		415BBA501C69EA770014F6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		415BBA5D1C69EBBC0014F6FC /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		415BBA5D1C69EBBC0014F6FC /* TableViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewPresenter.swift; sourceTree = "<group>"; };
 		415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapTableViewController.swift; sourceTree = "<group>"; };
 		415BBA631C69EC570014F6FC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeteorTracker.swift; sourceTree = "<group>"; };
 		415BBA6A1C69ECFE0014F6FC /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		415BBA6C1C69EE2D0014F6FC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		418151891C6B198A0021B86C /* Connectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connectable.swift; sourceTree = "<group>"; };
-		4181518B1C6B1A750021B86C /* MindmapProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapProtocol.swift; sourceTree = "<group>"; };
 		4181518D1C6B347B0021B86C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObserverProtocol.swift; sourceTree = "<group>"; };
-		418151911C6B3C020021B86C /* ViewDataUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewDataUtility.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTableViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
+		41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
+		41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,11 +151,8 @@
 		415BBA5C1C69EB870014F6FC /* presenter */ = {
 			isa = PBXGroup;
 			children = (
-				415BBA5D1C69EBBC0014F6FC /* Presenter.swift */,
-				418151911C6B3C020021B86C /* ViewDataUtility.swift */,
-				4181518B1C6B1A750021B86C /* MindmapProtocol.swift */,
-				418151891C6B198A0021B86C /* Connectable.swift */,
-				4181518F1C6B3A120021B86C /* DataObserverProtocol.swift */,
+				415BBA5D1C69EBBC0014F6FC /* TableViewPresenter.swift */,
+				41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */,
 			);
 			name = presenter;
 			sourceTree = "<group>";
@@ -178,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */,
+				41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */,
 				415BBA631C69EC570014F6FC /* HomeViewController.swift */,
 				41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */,
 			);
@@ -395,18 +389,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B102801C6C98B000A106FA /* TableViewDelegate.swift in Sources */,
 				415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */,
-				415BBA5E1C69EBBC0014F6FC /* Presenter.swift in Sources */,
+				41B102821C6C9A1B00A106FA /* TableViewPresenterDelegate.swift in Sources */,
+				415BBA5E1C69EBBC0014F6FC /* TableViewPresenter.swift in Sources */,
 				41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */,
 				41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */,
 				4181518E1C6B347B0021B86C /* Config.swift in Sources */,
-				4181518C1C6B1A750021B86C /* MindmapProtocol.swift in Sources */,
 				415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */,
-				418151921C6B3C020021B86C /* ViewDataUtility.swift in Sources */,
 				415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */,
 				415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */,
-				418151901C6B3A120021B86C /* DataObserverProtocol.swift in Sources */,
-				4181518A1C6B198A0021B86C /* Connectable.swift in Sources */,
 				415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

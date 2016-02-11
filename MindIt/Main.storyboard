@@ -34,7 +34,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqw-K5-lFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2566" y="313"/>
+            <point key="canvasLocation" x="1825" y="313"/>
         </scene>
         <!--MindIt-->
         <scene sceneID="zsB-wf-8kN">
@@ -52,7 +52,7 @@
                                 <rect key="frame" x="244" y="255" width="113" height="30"/>
                                 <state key="normal" title="Import Mindmap"/>
                                 <connections>
-                                    <segue destination="iAh-sM-ntJ" kind="presentation" identifier="ShowMindmap" id="oCw-n7-Yl2"/>
+                                    <segue destination="NuU-PK-STG" kind="show" id="kdJ-y0-Qgo"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a MindMap id or url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76g-06-X3b">
@@ -96,24 +96,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWI-gv-HUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="228" y="313"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Jh6-xH-4uH">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iAh-sM-ntJ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DfQ-LM-dp2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NuU-PK-STG" kind="relationship" relationship="rootViewController" id="8RP-wl-f97"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dLU-pV-d7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1754" y="313"/>
         </scene>
     </scenes>
 </document>

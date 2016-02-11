@@ -9,10 +9,16 @@
 import UIKit
 import SwiftDDP
 
-class MindmapTableViewController: UITableViewController {
+class MindmapTableViewController: UITableViewController , TableViewDelegate {
     
     //MARK:Properties
-    let presenter: MindmapProtocol = Presenter.getInstance();
+    private var messageFrame = UIView()
+    private var activityIndicator = UIActivityIndicatorView()
+    private var strLabel = UILabel()
+    
+    var presenter: TableViewPresenter?
+    var mindmapId: String?
+    
     
     //MARK : Methods
     override func viewDidLoad() {
@@ -35,14 +41,14 @@ class MindmapTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = presenter.getNodeCount();
+        let count = presenter!.getNodeCount();
         return count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("NodeViewCell", forIndexPath: indexPath) as! NodeViewCell
-        let node = presenter.getNodeAt(indexPath.row);
+        let node = presenter!.getNodeAt(indexPath.row);
         
         cell.textLabel?.text = node.valueForKey("name") as? String;
         cell._id = node.valueForKey("id") as? String;
@@ -52,13 +58,41 @@ class MindmapTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        presenter =  TableViewPresenter(tableViewDelegate: self);
+        print("Connecting to network....")
+        progressBarDisplayer("Loading Mindmap", true)
+        if(!presenter!.connectToServer(mindmapId!)) {
+            print("Network Error")
+        }
+        
+        //self.tableView.reloadData()
     }
     
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
-        if let _ = sender.sourceViewController as? HomeViewController {
+    func stopProgressBar(error: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.messageFrame.removeFromSuperview()
         }
+        print("Error : " , error)
     }
+    
+    private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
+        print(msg)
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
+        strLabel.text = msg
+        strLabel.textColor = UIColor.whiteColor()
+        messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 180, height: 50))
+        messageFrame.layer.cornerRadius = 15
+        messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        if indicator {
+            activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+            activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            activityIndicator.startAnimating()
+            messageFrame.addSubview(activityIndicator)
+        }
+        messageFrame.addSubview(strLabel)
+        view.addSubview(messageFrame)
+    }
+    
     
     /*
     // Override to support conditional editing of the table view.
