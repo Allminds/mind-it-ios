@@ -6,16 +6,16 @@
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
 
-class TableViewPresenter:TableViewPresenterDelegate {
+class TableViewPresenter:TrackerDelagate {
     
     //MARK : Properties
     var mindmap:[Node] = [Node]();
     var meteorTracker:MeteorTracker?
-    let tableViewDelegate:TableViewDelegate
+    let tableViewPresenterDelegate:TableViewPresenterDelegate
     
     //MARK : Initializers
-    init(tableViewDelegate : TableViewDelegate){
-        self.tableViewDelegate = tableViewDelegate;
+    init(tableViewDelegate : TableViewPresenterDelegate){
+        self.tableViewPresenterDelegate = tableViewDelegate;
         meteorTracker = MeteorTracker.getInstance(self);
     }
     
@@ -47,7 +47,7 @@ class TableViewPresenter:TableViewPresenterDelegate {
         return mindmap[index];
     }
     
-    func stopProgressBar(error: String) {
-        tableViewDelegate.stopProgressBar(error)
+    func connected(error: String) {
+        tableViewPresenterDelegate.stopProgressBar(error)
     }
 }

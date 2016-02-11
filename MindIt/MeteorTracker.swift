@@ -13,17 +13,17 @@ class MeteorTracker {
     //MARK : Properties
     private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
-    let tableViewPresenterDelegate : TableViewPresenterDelegate
+    let trackerDelagate : TrackerDelagate
     
     //MARK : Intialiser
-    private init(tableViewPresenterDelegate : TableViewPresenterDelegate) {
-        self.tableViewPresenterDelegate = tableViewPresenterDelegate;
+    private init(trackerDelagate : TrackerDelagate) {
+        self.trackerDelagate = trackerDelagate;
     }
     
     //MARK: Methods
-    static func getInstance(tableViewPresenterDelegate : TableViewPresenterDelegate) -> MeteorTracker {
+    static func getInstance(trackerDelagate : TrackerDelagate) -> MeteorTracker {
         if(meteorTracker == nil) {
-            meteorTracker = MeteorTracker(tableViewPresenterDelegate: tableViewPresenterDelegate);
+            meteorTracker = MeteorTracker(trackerDelagate : trackerDelagate);
         }
         return meteorTracker!;
     }
@@ -44,7 +44,7 @@ class MeteorTracker {
     
     func mindmapSubscriptionIsReady() {
         print("Subscribed to mindmap " , mindmap.count);
-        tableViewPresenterDelegate.stopProgressBar("Working")
+        trackerDelagate.connected("Working")
         //NSNotificationCenter.defaultCenter().postNotificationName("LISTS_SUBSCRIPTION_IS_READY", object: nil);
     }
     
