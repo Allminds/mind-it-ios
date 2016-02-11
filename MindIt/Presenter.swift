@@ -5,6 +5,7 @@
 //  Created by Swapnil Gaikwad on 09/02/16.
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
+import Foundation
 
 class Presenter: Connectable , MindmapProtocol, DataObserverProtocol{
     
@@ -12,12 +13,12 @@ class Presenter: Connectable , MindmapProtocol, DataObserverProtocol{
     static private var presenter : Presenter? = nil;
     var mindmap:[Node]?;
     let meteorTracker:MeteorTracker
-    //let viewDataUtility : ViewDataUtility
+    let viewDataUtility : ViewDataUtility
     
     //MARK : Initializers
     private init(){
         meteorTracker = MeteorTracker.getInstance();
-        //viewDataUtility = ViewDataUtility();
+        viewDataUtility = ViewDataUtility();
     }
     //MARK : Methods
     
@@ -44,7 +45,10 @@ class Presenter: Connectable , MindmapProtocol, DataObserverProtocol{
     }
     
     func documentAdded(id: String) {
-        //viewDataUtility.addDocumentToViewData(id);
+        viewDataUtility.addDocumentToViewData(id , mindmap: mindmap!);
+    }
+    func documentChanged(id : String){
+        viewDataUtility.UpdateDocumentToViewData(id)
     }
     
     func getNodeCount() -> Int{

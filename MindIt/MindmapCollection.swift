@@ -25,7 +25,6 @@ class MindmapCollection: MeteorCollection<Node> {
         
         let presenter = Presenter.getInstance()
         presenter.documentAdded(id)
-        //presenter.documentAdded(id)
     }
     
     //Delete Will nerver be called (Soft delete)
@@ -37,5 +36,7 @@ class MindmapCollection: MeteorCollection<Node> {
     override func documentWasChanged(collection: String, id: String, fields: NSDictionary?, cleared: [String]?) {
         super.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
         print("Newly changed " , fields)
+        let presenter = Presenter.getInstance()
+        
     }
 }

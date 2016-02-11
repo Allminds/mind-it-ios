@@ -10,5 +10,5 @@
 
 struct Config {
     static let URL:String = "ws://www.mindit.xyz/websocket";
-    static let MINDMAPID = "xGKioxxPSzww5T8yf"
+    static let MINDMAPID = "oTa2DJPeZbrpS5gyJ"
 }
