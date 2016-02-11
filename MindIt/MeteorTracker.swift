@@ -44,8 +44,7 @@ class MeteorTracker {
     
     func mindmapSubscriptionIsReady() {
         print("Subscribed to mindmap " , mindmap.count);
-        trackerDelagate.connected("Working")
-        //NSNotificationCenter.defaultCenter().postNotificationName("LISTS_SUBSCRIPTION_IS_READY", object: nil);
+        trackerDelagate.connected("Connected")
     }
     
     func getNodes() -> [Node] {

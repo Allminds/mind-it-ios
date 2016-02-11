@@ -1,5 +1,5 @@
 //
-//  TableViewDelegate.swift
+//  TrackerDelegate.swift
 //  MindIt
 //
 //  Created by Swapnil Gaikwad on 11/02/16.
@@ -7,6 +7,6 @@
 //
 
 
-protocol TableViewPresenterDelegate {
-    func stopProgressBar(error: String)
+protocol TrackerDelagate {
+    func connected(error: String)
 }

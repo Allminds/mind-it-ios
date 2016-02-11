@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		412431881C6D07D8007A7E81 /* PresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412431871C6D07D8007A7E81 /* PresenterDelegate.swift */; };
+		4124318A1C6D08F0007A7E81 /* TrackerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412431891C6D08F0007A7E81 /* TrackerDelegate.swift */; };
 		415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA2E1C69EA770014F6FC /* AppDelegate.swift */; };
 		415BBA441C69EA770014F6FC /* MindItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA431C69EA770014F6FC /* MindItTests.swift */; };
 		415BBA4F1C69EA770014F6FC /* MindItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BBA4E1C69EA770014F6FC /* MindItUITests.swift */; };
@@ -20,8 +22,6 @@
 		4181518E1C6B347B0021B86C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518D1C6B347B0021B86C /* Config.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
-		41B102801C6C98B000A106FA /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */; };
-		41B102821C6C9A1B00A106FA /* TableViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */; };
 		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.debug.xcconfig"; sourceTree = "<group>"; };
+		412431871C6D07D8007A7E81 /* PresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterDelegate.swift; sourceTree = "<group>"; };
+		412431891C6D08F0007A7E81 /* TrackerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerDelegate.swift; sourceTree = "<group>"; };
 		415BBA2B1C69EA770014F6FC /* MindIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BBA2E1C69EA770014F6FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		415BBA3A1C69EA770014F6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,8 +65,6 @@
 		4181518D1C6B347B0021B86C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTableViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
-		41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
-		41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				415BBA5D1C69EBBC0014F6FC /* TableViewPresenter.swift */,
-				41B102811C6C9A1B00A106FA /* TableViewPresenterDelegate.swift */,
+				412431891C6D08F0007A7E81 /* TrackerDelegate.swift */,
 			);
 			name = presenter;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */,
-				41B1027F1C6C98B000A106FA /* TableViewDelegate.swift */,
+				412431871C6D07D8007A7E81 /* PresenterDelegate.swift */,
 				415BBA631C69EC570014F6FC /* HomeViewController.swift */,
 				41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */,
 			);
@@ -389,14 +389,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B102801C6C98B000A106FA /* TableViewDelegate.swift in Sources */,
 				415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */,
-				41B102821C6C9A1B00A106FA /* TableViewPresenterDelegate.swift in Sources */,
 				415BBA5E1C69EBBC0014F6FC /* TableViewPresenter.swift in Sources */,
 				41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */,
+				412431881C6D07D8007A7E81 /* PresenterDelegate.swift in Sources */,
 				41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */,
 				4181518E1C6B347B0021B86C /* Config.swift in Sources */,
 				415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */,
+				4124318A1C6D08F0007A7E81 /* TrackerDelegate.swift in Sources */,
 				415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */,
 				415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */,
 				415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */,

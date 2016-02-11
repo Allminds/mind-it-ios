@@ -9,7 +9,7 @@
 import UIKit
 import SwiftDDP
 
-class MindmapTableViewController: UITableViewController , TableViewPresenterDelegate {
+class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     //MARK:Properties
     private var messageFrame = UIView()
@@ -28,10 +28,6 @@ class MindmapTableViewController: UITableViewController , TableViewPresenterDele
     
     func reloadTableView() {
         self.tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: - Table view data source
@@ -58,19 +54,32 @@ class MindmapTableViewController: UITableViewController , TableViewPresenterDele
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        presenter =  TableViewPresenter(tableViewDelegate: self);
+        presenter =  TableViewPresenter(presenterDelegate: self);
         print("Connecting to network....")
         progressBarDisplayer("Loading Mindmap", true)
         if(!presenter!.connectToServer(mindmapId!)) {
-            print("Network Error")
+            stopProgressBar("Network error");
         }
         
         //self.tableView.reloadData()
     }
     
     func stopProgressBar(error: String) {
+        print("Conection Result : " , error)
         dispatch_async(dispatch_get_main_queue()) {
             self.messageFrame.removeFromSuperview()
+        }
+        
+        switch(error) {
+            case "Connected":
+                //Render Table View
+            break
+            case "Network error":
+                //Render Error View
+            break
+            
+            default:
+                print("New Error found")
         }
     }
     

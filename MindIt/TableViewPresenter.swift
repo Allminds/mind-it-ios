@@ -11,21 +11,19 @@ class TableViewPresenter:TrackerDelagate {
     //MARK : Properties
     var mindmap:[Node] = [Node]();
     var meteorTracker:MeteorTracker?
-    let tableViewPresenterDelegate:TableViewPresenterDelegate
+    let presenterDelegate:PresenterDelegate
     
     //MARK : Initializers
-    init(tableViewDelegate : TableViewPresenterDelegate){
-        self.tableViewPresenterDelegate = tableViewDelegate;
+    init(presenterDelegate : PresenterDelegate){
+        self.presenterDelegate = presenterDelegate;
         meteorTracker = MeteorTracker.getInstance(self);
     }
     
     
     //MARK : Methods
-    
     func connectToServer(mindmapId: String) -> Bool {
         if(meteorTracker!.isConnectedToNetwork()) {
             meteorTracker!.connectToServer(mindmapId)
-            //tableViewDelegate.stopProgressBar("No Error")
             return true
         }
         else {
@@ -48,6 +46,6 @@ class TableViewPresenter:TrackerDelagate {
     }
     
     func connected(error: String) {
-        tableViewPresenterDelegate.stopProgressBar(error)
+        presenterDelegate.stopProgressBar(error)
     }
 }
