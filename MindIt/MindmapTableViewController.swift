@@ -16,8 +16,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     private var activityIndicator : UIActivityIndicatorView!
     private var strLabel : UILabel!
     */
-    
-    
+
     var presenter: TableViewPresenter!
     var mindmapId: String?
     
@@ -25,6 +24,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: METEOR_COLLECTION_SET_DID_CHANGE, object: nil)
     }
     
@@ -64,7 +64,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         
         
         if(!presenter.connectToServer(mindmapId!)) {
-            stopProgressBar("Network error");
+            stopProgressBar(Config.NETWORK_ERROR);
         }
         
     }
@@ -77,17 +77,40 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             //}
         
         switch(result) {
-            case "Connected":
-                //Render Table View
+            case Config.CONNECTED:
+                //Render Table View 
+                //Delete if overhead and not required.
+                self.tableView.reloadData()
             break
             
-            case "Network error":
+            case Config.NETWORK_ERROR  :
                 //Render Error View
+                print("Error in Network")
+                giveAlert(Config.NETWORK_ERROR);
+                break
+            
+            case "Invalid mindmap":
+                print("Invalid mindmap")
+                giveAlert("Invalid mindmap")
             break
             
             default:
                 print("New Error found")
         }
+    }
+    
+    func giveAlert(errorMessage : String) {
+        let refreshAlert = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+            //print("Handle Ok logic here")
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+            //print("Handle Cancel Logic here")
+        }))
+        
+        presentViewController(refreshAlert, animated: true, completion: nil)
     }
     
     /*private func progressBarDisplayer(msg:String, _ indicator:Bool ) {

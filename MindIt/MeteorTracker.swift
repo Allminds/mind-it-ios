@@ -14,6 +14,7 @@ class MeteorTracker {
     private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
     let trackerDelagate : TrackerDelegate
+    var mindmapId:String?
     
     //MARK : Intialiser
     private init(trackerDelagate : TrackerDelegate) {
@@ -36,7 +37,8 @@ class MeteorTracker {
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
             Meteor.subscribe("mindmap" , params: [mindmapId]) {
-                self.mindmapSubscriptionIsReady("Connected")
+                self.mindmapId = mindmapId
+                self.mindmapSubscriptionIsReady(Config.CONNECTED)
             }
         }
         return true;

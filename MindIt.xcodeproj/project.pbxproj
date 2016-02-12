@@ -20,6 +20,7 @@
 		415BBA6D1C69EE2D0014F6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6C1C69EE2D0014F6FC /* Main.storyboard */; };
 		415BBA6F1C69EED80014F6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */; };
 		4181518E1C6B347B0021B86C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518D1C6B347B0021B86C /* Config.swift */; };
+		419D58D51C6DE5F40043FC29 /* TreeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D58D41C6DE5F40043FC29 /* TreeBuilder.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
 		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
@@ -63,6 +64,7 @@
 		415BBA6C1C69EE2D0014F6FC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4181518D1C6B347B0021B86C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		419D58D41C6DE5F40043FC29 /* TreeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeBuilder.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTableViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
 		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				415BBA5D1C69EBBC0014F6FC /* TableViewPresenter.swift */,
+				419D58D41C6DE5F40043FC29 /* TreeBuilder.swift */,
 				412431891C6D08F0007A7E81 /* TrackerDelegate.swift */,
 			);
 			name = presenter;
@@ -400,6 +403,7 @@
 				415BBA691C69ECDA0014F6FC /* MeteorTracker.swift in Sources */,
 				415BBA641C69EC570014F6FC /* HomeViewController.swift in Sources */,
 				415BBA6B1C69ECFE0014F6FC /* Node.swift in Sources */,
+				419D58D51C6DE5F40043FC29 /* TreeBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

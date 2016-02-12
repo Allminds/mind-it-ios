@@ -22,8 +22,8 @@ class TableViewPresenter:TrackerDelegate {
     
     //MARK : Methods
     func connectToServer(mindmapId: String) -> Bool {
-        if(meteorTracker!.isConnectedToNetwork()) {
-            meteorTracker!.connectToServer(mindmapId)
+        if(meteorTracker.isConnectedToNetwork()) {
+            meteorTracker.connectToServer(mindmapId)
             return true
         }
         else {
@@ -31,25 +31,34 @@ class TableViewPresenter:TrackerDelegate {
         }
     }
     
-    func getNodes() -> [Node] {
+    /*func getNodes() -> [Node] {
         mindmap = meteorTracker!.getNodes();
         return mindmap;
-    }
+    }*/
     
     func getNodeCount() -> Int{
-        mindmap = meteorTracker!.getMindmap().sorted
-        return mindmap.count
+        return meteorTracker!.getMindmap().sorted.count
     }
     
     func getNodeAt(index : Int) -> Node{
         return mindmap[index];
     }
     
-    func connected(result: String) {
+    func connected(var result: String) {
+        let collection = meteorTracker.getMindmap();
+        let count : Int = collection.count
+        if(count < 1) {
+            result = "Invalid mindmap";
+        }
+        else {
+            let tree : TreeBuilder = TreeBuilder();
+            mindmap = tree.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
+        }
         presenterDelegate.stopProgressBar(result)
     }
     
     func reset() {
         meteorTracker.unsubscribe();
     }
+    
 }
