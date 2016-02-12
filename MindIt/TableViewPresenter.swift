@@ -53,6 +53,7 @@ class TableViewPresenter:TrackerDelegate {
         else if(meteorTracker.mindmapId != nil) {
             let tree : TreeBuilder = TreeBuilder();
             mindmap = tree.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
+            print("Mindmap : " , mindmap)
         }
         else {
             print("Error in Presenter No MindmapID")

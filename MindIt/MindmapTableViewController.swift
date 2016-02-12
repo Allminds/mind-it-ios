@@ -81,6 +81,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
                 //Render Table View 
                 //Delete if overhead and not required.
                 self.tableView.reloadData()
+                print("Ok")
             break
             
             case Config.NETWORK_ERROR  :
