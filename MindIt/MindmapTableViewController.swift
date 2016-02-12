@@ -12,11 +12,13 @@ import SwiftDDP
 class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     //MARK:Properties
-    private var messageFrame = UIView()
-    private var activityIndicator = UIActivityIndicatorView()
-    private var strLabel = UILabel()
+    /*private var messageFrame: UIView!
+    private var activityIndicator : UIActivityIndicatorView!
+    private var strLabel : UILabel!
+    */
     
-    var presenter: TableViewPresenter?
+    
+    var presenter: TableViewPresenter!
     var mindmapId: String?
     
     
@@ -37,14 +39,14 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = presenter!.getNodeCount();
+        let count = presenter.getNodeCount();
         return count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("NodeViewCell", forIndexPath: indexPath) as! NodeViewCell
-        let node = presenter!.getNodeAt(indexPath.row);
+        let node = presenter.getNodeAt(indexPath.row);
         
         cell.textLabel?.text = node.valueForKey("name") as? String;
         cell._id = node.valueForKey("id") as? String;
@@ -54,26 +56,31 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        //progressBarDisplayer("Loading Mindmap", true)
+        //Set values
         presenter =  TableViewPresenter(presenterDelegate: self);
         print("Connecting to network....")
-        progressBarDisplayer("Loading Mindmap", true)
-        if(!presenter!.connectToServer(mindmapId!)) {
+        presenter.reset();
+        
+        
+        if(!presenter.connectToServer(mindmapId!)) {
             stopProgressBar("Network error");
         }
         
-        //self.tableView.reloadData()
     }
     
-    func stopProgressBar(error: String) {
-        print("Conection Result : " , error)
-        dispatch_async(dispatch_get_main_queue()) {
-            self.messageFrame.removeFromSuperview()
-        }
+    func stopProgressBar(result: String) {
+        print("Conection Result : " , result)
         
-        switch(error) {
+            //dispatch_async(dispatch_get_main_queue()) {
+            //self.messageFrame.removeFromSuperview()
+            //}
+        
+        switch(result) {
             case "Connected":
                 //Render Table View
             break
+            
             case "Network error":
                 //Render Error View
             break
@@ -83,12 +90,12 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         }
     }
     
-    private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
+    /*private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
         print(msg)
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
         strLabel.text = msg
         strLabel.textColor = UIColor.whiteColor()
-        messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 200, height: 50))
+        let messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 200, height: 50))
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
@@ -99,52 +106,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         }
         messageFrame.addSubview(strLabel)
         view.addSubview(messageFrame)
-    }
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
+        self.messageFrame = messageFrame
+        print("Message : " , self.messageFrame)
+    }*/
     
 }

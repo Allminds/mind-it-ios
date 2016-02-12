@@ -66,4 +66,19 @@ class Node: MeteorDocument {
             print("No Such element found : " , key);
         }
     }
+    func getName() -> String{
+        return self.name!
+    }
+    func getChildSubtree() -> [String]{
+        return self.childSubTree!
+    }
+    func getRootId() -> String {
+        return self.rootId!
+    }
+    func getLeft() -> [String]{
+        return self.left!
+    }
+    func getRight() -> [String]{
+        return self.right!
+    }
 }

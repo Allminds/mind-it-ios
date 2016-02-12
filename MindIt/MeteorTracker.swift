@@ -13,15 +13,15 @@ class MeteorTracker {
     //MARK : Properties
     private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
-    let trackerDelagate : TrackerDelagate
+    let trackerDelagate : TrackerDelegate
     
     //MARK : Intialiser
-    private init(trackerDelagate : TrackerDelagate) {
+    private init(trackerDelagate : TrackerDelegate) {
         self.trackerDelagate = trackerDelagate;
     }
     
     //MARK: Methods
-    static func getInstance(trackerDelagate : TrackerDelagate) -> MeteorTracker {
+    static func getInstance(trackerDelagate : TrackerDelegate) -> MeteorTracker {
         if(meteorTracker == nil) {
             meteorTracker = MeteorTracker(trackerDelagate : trackerDelagate);
         }
@@ -36,19 +36,23 @@ class MeteorTracker {
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
             Meteor.subscribe("mindmap" , params: [mindmapId]) {
-                self.mindmapSubscriptionIsReady()
+                self.mindmapSubscriptionIsReady("Connected")
             }
         }
         return true;
     }
     
-    func mindmapSubscriptionIsReady() {
+    func mindmapSubscriptionIsReady(result : String) {
         print("Subscribed to mindmap " , mindmap.count);
-        trackerDelagate.connected("Connected")
+        trackerDelagate.connected(result)
     }
     
     func getNodes() -> [Node] {
         return mindmap.sorted;
+    }
+    
+    func unsubscribe() {
+        Meteor.unsubscribe("mindmap")
     }
     
     func isConnectedToNetwork() -> Bool {

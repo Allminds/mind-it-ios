@@ -8,5 +8,5 @@
 
 
 protocol PresenterDelegate {
-    func stopProgressBar(error: String)
+    func stopProgressBar(result: String)
 }

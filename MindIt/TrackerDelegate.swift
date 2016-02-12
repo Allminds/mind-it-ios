@@ -7,6 +7,7 @@
 //
 
 
-protocol TrackerDelagate {
-    func connected(error: String)
+protocol TrackerDelegate {
+    func connected(result: String)
+    func reset()
 }
