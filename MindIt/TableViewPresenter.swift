@@ -37,7 +37,7 @@ class TableViewPresenter:TrackerDelegate {
     }*/
     
     func getNodeCount() -> Int{
-        return meteorTracker!.getMindmap().sorted.count
+        return mindmap.count
     }
     
     func getNodeAt(index : Int) -> Node{
@@ -50,9 +50,12 @@ class TableViewPresenter:TrackerDelegate {
         if(count < 1) {
             result = "Invalid mindmap";
         }
-        else {
+        else if(meteorTracker.mindmapId != nil) {
             let tree : TreeBuilder = TreeBuilder();
             mindmap = tree.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
+        }
+        else {
+            print("Error in Presenter No MindmapID")
         }
         presenterDelegate.stopProgressBar(result)
     }
