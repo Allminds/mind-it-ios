@@ -63,4 +63,9 @@ class TableViewPresenter:TrackerDelegate {
         }
     }
     
+    /*func getChilds(node : Node) {
+        var nodes : [Node] = meteorTracker.getChilds(node)
+        print(nodes)
+    }*/
+    
 }

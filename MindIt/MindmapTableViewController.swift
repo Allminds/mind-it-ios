@@ -59,11 +59,14 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NodeViewCell", forIndexPath: indexPath) as! NodeViewCell
+        
+        let cellIdentifier = "NodeViewCell"
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NodeViewCell
+        
         let node = presenter.getNodeAt(indexPath.row);
         
-        cell.textLabel?.text = node.valueForKey("name") as? String;
-        cell._id = node.valueForKey("id") as? String;
+        cell.setData(node , presenter: presenter)
         
         return cell
     }

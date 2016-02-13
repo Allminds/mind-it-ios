@@ -62,6 +62,16 @@ class MeteorTracker {
         Meteor.unsubscribe("mindmap")
     }
     
+    /*func getChilds(node : Node) -> [Node] {
+        var nodes : [Node] = [Node]()
+        let childSubTree : [String] = (node.valueForKey("childSubTree") as? [String])!
+        
+        for childId in childSubTree {
+            nodes.append(mindmap.findOne(childId)!)
+        }
+        return nodes
+    }*/
+    
     func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))

@@ -81,4 +81,23 @@ class Node: MeteorDocument {
     func getRight() -> [String]{
         return self.right!
     }
+    
+    func hasChilds() -> Bool {
+        //Root Element
+        if(parentId == nil) {
+            if(left?.count > 0 || right?.count > 0) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        //For non - Root element.
+        else if(childSubTree?.count == 0) {
+            return false
+        }
+        else {
+            return true
+        }
+    }
 }
