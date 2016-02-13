@@ -9,5 +9,5 @@
 
 protocol TrackerDelegate {
     func connected(result: String)
-    func reset()
+    func resetConnection()
 }

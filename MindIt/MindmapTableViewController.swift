@@ -12,19 +12,33 @@ import SwiftDDP
 class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     //MARK:Properties
-    /*private var messageFrame: UIView!
-    private var activityIndicator : UIActivityIndicatorView!
-    private var strLabel : UILabel!
-    */
+    var messageFrame: UIView!
+    var activityIndicator : UIActivityIndicatorView!
+    var strLabel : UILabel!
+    
 
     var presenter: TableViewPresenter!
-    var mindmapId: String?
+    var mindmapId: String!
     
     
     //MARK : Methods
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        progressBarDisplayer("Loading Mindmap", true)
+        //Set values
+        presenter =  TableViewPresenter()
+        presenter.delegate = self
+        print("Connecting to network....")
+        
+        presenter.resetConnection()
+        
+        if(!presenter.connectToServer(mindmapId)) {
+            stopProgressBar(Config.NETWORK_ERROR)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: METEOR_COLLECTION_SET_DID_CHANGE, object: nil)
     }
     
@@ -54,34 +68,20 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         return cell
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        //progressBarDisplayer("Loading Mindmap", true)
-        //Set values
-        presenter =  TableViewPresenter(presenterDelegate: self);
-        print("Connecting to network....")
-        presenter.reset();
-        
-        
-        if(!presenter.connectToServer(mindmapId!)) {
-            stopProgressBar(Config.NETWORK_ERROR);
-        }
-        
-    }
+
     
     func stopProgressBar(result: String) {
         print("Conection Result : " , result)
         
-            //dispatch_async(dispatch_get_main_queue()) {
-            //self.messageFrame.removeFromSuperview()
-            //}
+        dispatch_async(dispatch_get_main_queue()) {
+                self.messageFrame.removeFromSuperview()
+        }
         
         switch(result) {
             case Config.CONNECTED:
                 //Render Table View 
                 //Delete if overhead and not required.
-                self.tableView.reloadData()
-                print("Ok")
+                reloadTableView()
             break
             
             case Config.NETWORK_ERROR  :
@@ -114,7 +114,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         presentViewController(refreshAlert, animated: true, completion: nil)
     }
     
-    /*private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
+    private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
         print(msg)
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
         strLabel.text = msg
@@ -131,7 +131,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         messageFrame.addSubview(strLabel)
         view.addSubview(messageFrame)
         self.messageFrame = messageFrame
-        print("Message : " , self.messageFrame)
-    }*/
+        print("MessageFrame : " , self.messageFrame)
+    }
     
 }

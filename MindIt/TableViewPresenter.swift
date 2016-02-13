@@ -11,12 +11,12 @@ class TableViewPresenter:TrackerDelegate {
     //MARK : Properties
     var mindmap:[Node] = [Node]()
     var meteorTracker:MeteorTracker!
-    var presenterDelegate:PresenterDelegate
+    var delegate:PresenterDelegate!
     
     //MARK : Initializers
-    init(presenterDelegate : PresenterDelegate){
-        self.presenterDelegate = presenterDelegate;
-        meteorTracker = MeteorTracker.getInstance(self);
+    init(){
+        meteorTracker = MeteorTracker.getInstance();
+        meteorTracker.delagate = self
     }
     
     
@@ -30,12 +30,7 @@ class TableViewPresenter:TrackerDelegate {
             return false
         }
     }
-    
-    /*func getNodes() -> [Node] {
-        mindmap = meteorTracker!.getNodes();
-        return mindmap;
-    }*/
-    
+
     func getNodeCount() -> Int{
         return mindmap.count
     }
@@ -52,17 +47,20 @@ class TableViewPresenter:TrackerDelegate {
         }
         else if(meteorTracker.mindmapId != nil) {
             let tree : TreeBuilder = TreeBuilder();
+            //mindmap = collection.sorted
             mindmap = tree.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
             print("Mindmap : " , mindmap)
         }
         else {
             print("Error in Presenter No MindmapID")
         }
-        presenterDelegate.stopProgressBar(result)
+        delegate.stopProgressBar(result)
     }
     
-    func reset() {
-        meteorTracker.unsubscribe();
+    func resetConnection() {
+        if(MeteorTracker.isConnected) {
+            meteorTracker.unsubscribe();
+        }
     }
     
 }

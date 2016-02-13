@@ -13,21 +13,25 @@ class MeteorTracker {
     //MARK : Properties
     private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
     private static var meteorTracker: MeteorTracker? = nil;
-    let trackerDelagate : TrackerDelegate
+    
+    var delagate : TrackerDelegate? //Presenter
+    
     var mindmapId:String?
+    static var isConnected:Bool = false
     
     //MARK : Intialiser
-    private init(trackerDelagate : TrackerDelegate) {
-        self.trackerDelagate = trackerDelagate;
+    private init() {
+        
     }
     
     //MARK: Methods
-    static func getInstance(trackerDelagate : TrackerDelegate) -> MeteorTracker {
+    static func getInstance() -> MeteorTracker {
         if(meteorTracker == nil) {
-            meteorTracker = MeteorTracker(trackerDelagate : trackerDelagate);
+            meteorTracker = MeteorTracker();
         }
         return meteorTracker!;
     }
+    
     
     func getMindmap() -> MindmapCollection {
         return mindmap;
@@ -36,21 +40,22 @@ class MeteorTracker {
     
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
-            Meteor.subscribe("mindmap" , params: [mindmapId]) {
-                self.mindmapId = mindmapId
-                self.mindmapSubscriptionIsReady(Config.CONNECTED)
-            }
+            MeteorTracker.isConnected = true
+            self.subscribe(mindmapId)
         }
-        return true;
+        return true
     }
     
-    func mindmapSubscriptionIsReady(result : String) {
+    private func subscribe(mindmapId : String) {
+        Meteor.subscribe("mindmap" , params: [mindmapId]) {
+            self.mindmapId = mindmapId
+            self.mindmapSubscriptionIsReady(Config.CONNECTED)
+        }
+    }
+    
+    private func mindmapSubscriptionIsReady(result : String) {
         print("Subscribed to mindmap " , mindmap.count);
-        trackerDelagate.connected(result)
-    }
-    
-    func getNodes() -> [Node] {
-        return mindmap.sorted;
+        delagate!.connected(result)
     }
     
     func unsubscribe() {

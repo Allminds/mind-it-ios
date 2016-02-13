@@ -10,8 +10,6 @@ import SwiftDDP
 
 class MindmapCollection: MeteorCollection<Node> {
     
-    //Mark : Properties
-    //let presenter : DataObserverProtocol = Presenter.getInstance()
     //MARK: Initialisers
     override init(name: String) {
         super.init(name: name)
