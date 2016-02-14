@@ -23,7 +23,8 @@ class MindmapCollection: MeteorCollection<Node> {
         super.documentWasAdded(collection, id: id, fields: fields)
         //sleep(1)
         print("Newly Added " , id)
-        delegate.notifyDocumentAdded()
+        //delegate.notifyDocumentAdded(id , fields : fields)
+        delegate.determineTypeOfChange(id, fields: fields)
     }
     
     //Delete Will nerver be called (Soft delete)
@@ -31,11 +32,14 @@ class MindmapCollection: MeteorCollection<Node> {
         super.documentWasRemoved(collection, id: id)
         print("Newly Removed")
         //delegate.notifyDocumentAdded()
+        //delegate.determineTypeOfChange(id, fields: fields)
     }
     
     override func documentWasChanged(collection: String, id: String, fields: NSDictionary?, cleared: [String]?) {
         super.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
         print("Newly changed " , id)
-        delegate.notifyDocumentAdded()
+        
+        delegate.determineTypeOfChange(id, fields: fields)
+        //delegate.notifyDocumentAdded()
     }
 }

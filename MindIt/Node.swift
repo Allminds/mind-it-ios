@@ -12,6 +12,7 @@ class Node: MeteorDocument {
     
     //MARK : Properties
     var collection:String = "Mindmaps"
+    var id: String?
     var parentId:String?
     var position:String?
     var rootId:String?
@@ -20,12 +21,15 @@ class Node: MeteorDocument {
     var name:String?
     var childSubTree:[String]?
     var index:Int?
+    var isExpanded = true
+    
+    // Name , left , right , parentId , childSubTree may change
     
     
     //MARK : Initialiser
     required init(id: String, fields: NSDictionary?) {
         super.init(id: id, fields: fields)
-        
+        self.id = id
     }
     
     //mark : Added new Code

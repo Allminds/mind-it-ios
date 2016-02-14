@@ -103,7 +103,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         }
     }
     
-    func updateChanges() {
+    func updateUI() {
         //print("Final Count : " , presenter.mindmap.count)
         reloadTableView()
     }
