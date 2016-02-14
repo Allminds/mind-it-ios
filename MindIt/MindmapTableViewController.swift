@@ -28,7 +28,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         //Set values
         presenter =  TableViewPresenter()
         presenter.delegate = self
-        print("Connecting to network....")
+        //print("Connecting to network....")
         
         presenter.resetConnection()
         
@@ -74,7 +74,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
 
     
     func stopProgressBar(result: String) {
-        print("Conection Result : " , result)
+        //print("Conection Result : " , result)
         
         dispatch_async(dispatch_get_main_queue()) {
                 self.messageFrame.removeFromSuperview()
@@ -104,7 +104,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     func updateChanges() {
-        print("Final Count : " , presenter.mindmap.count)
+        //print("Final Count : " , presenter.mindmap.count)
         reloadTableView()
     }
     
@@ -123,7 +123,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
-        print(msg)
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
         strLabel.text = msg
         strLabel.textColor = UIColor.whiteColor()
@@ -139,7 +138,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         messageFrame.addSubview(strLabel)
         view.addSubview(messageFrame)
         self.messageFrame = messageFrame
-        print("MessageFrame : " , self.messageFrame)
+        //print("MessageFrame : " , self.messageFrame)
     }
     
 }

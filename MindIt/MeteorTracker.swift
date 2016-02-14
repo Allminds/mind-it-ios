@@ -64,7 +64,7 @@ class MeteorTracker : CollectionDelegate {
     }
     
     func notifyDocumentAdded() {
-        print("New Count : " , mindmap.count)
+        //print("New Count : " , mindmap.count)
         delagate?.notifyDocumentAdded(mindmap)
     }
     

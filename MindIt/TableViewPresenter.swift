@@ -51,7 +51,7 @@ class TableViewPresenter:TrackerDelegate {
             //mindmap = collection.sorted
             let treeBuilder : TreeBuilder = TreeBuilder();
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
-            print("Mindmap : " , mindmap)
+            //print("Tree Node Count to Display : " , mindmap.count)
             isViewInitialised = true
         }
         else {
@@ -67,12 +67,12 @@ class TableViewPresenter:TrackerDelegate {
     }
     
     func notifyDocumentAdded(collection : MindmapCollection) {
-        print("Updated Mindmap Count : " , mindmap.count)
+        //print("Updated Mindmap Count : " , mindmap.count)
         if(isViewInitialised == true) {
             let treeBuilder = TreeBuilder()
             //mindmap = collection.sorted
             mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: meteorTracker.mindmapId!)
-            print("Updated Mindmap Count : " , mindmap.count)
+            print("Tree Node Count to Display : " , mindmap.count)
             delegate.updateChanges()
         }
     }
