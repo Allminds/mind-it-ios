@@ -103,6 +103,11 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         }
     }
     
+    func updateChanges() {
+        print("Final Count : " , presenter.mindmap.count)
+        reloadTableView()
+    }
+    
     func giveAlert(errorMessage : String) {
         let refreshAlert = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         

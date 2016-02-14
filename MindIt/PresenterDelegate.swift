@@ -9,4 +9,6 @@
 
 protocol PresenterDelegate {
     func stopProgressBar(result: String)
+    
+    func updateChanges()
 }

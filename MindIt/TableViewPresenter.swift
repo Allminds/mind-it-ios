@@ -13,6 +13,8 @@ class TableViewPresenter:TrackerDelegate {
     var meteorTracker:MeteorTracker!
     var delegate:PresenterDelegate!
     
+    var isViewInitialised = false
+    
     //MARK : Initializers
     init(){
         meteorTracker = MeteorTracker.getInstance();
@@ -42,14 +44,15 @@ class TableViewPresenter:TrackerDelegate {
     func connected(var result: String) {
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count
-        if(count < 1) {
+        if(count == 0) {
             result = "Invalid mindmap";
         }
         else if(meteorTracker.mindmapId != nil) {
-            let tree : TreeBuilder = TreeBuilder();
             //mindmap = collection.sorted
-            mindmap = tree.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
+            let treeBuilder : TreeBuilder = TreeBuilder();
+            mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
             print("Mindmap : " , mindmap)
+            isViewInitialised = true
         }
         else {
             print("Error in Presenter No MindmapID")
@@ -60,6 +63,17 @@ class TableViewPresenter:TrackerDelegate {
     func resetConnection() {
         if(MeteorTracker.isConnected) {
             meteorTracker.unsubscribe();
+        }
+    }
+    
+    func notifyDocumentAdded(collection : MindmapCollection) {
+        print("Updated Mindmap Count : " , mindmap.count)
+        if(isViewInitialised == true) {
+            let treeBuilder = TreeBuilder()
+            //mindmap = collection.sorted
+            mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: meteorTracker.mindmapId!)
+            print("Updated Mindmap Count : " , mindmap.count)
+            delegate.updateChanges()
         }
     }
     

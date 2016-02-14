@@ -49,7 +49,6 @@ class NodeViewCell: UITableViewCell {
         if(isChildNode == false) {
             if(isExpanded == true) {
                 toggleImageView.image = UIImage(named: "1")
-                
                 isExpanded = false
             }
             else {
@@ -58,7 +57,6 @@ class NodeViewCell: UITableViewCell {
             }
         }
     }
-    
     
     
 }

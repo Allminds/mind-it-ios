@@ -9,9 +9,9 @@
 import SwiftDDP
 import SystemConfiguration
 
-class MeteorTracker {
+class MeteorTracker : CollectionDelegate {
     //MARK : Properties
-    private let mindmap:MindmapCollection = MindmapCollection(name: "Mindmaps")
+    private let mindmap:MindmapCollection
     private static var meteorTracker: MeteorTracker? = nil;
     
     var delagate : TrackerDelegate? //Presenter
@@ -21,7 +21,8 @@ class MeteorTracker {
     
     //MARK : Intialiser
     private init() {
-        
+        mindmap  = MindmapCollection(name: "Mindmaps")
+        mindmap.delegate = self
     }
     
     //MARK: Methods
@@ -60,6 +61,11 @@ class MeteorTracker {
     
     func unsubscribe() {
         Meteor.unsubscribe("mindmap")
+    }
+    
+    func notifyDocumentAdded() {
+        print("New Count : " , mindmap.count)
+        delagate?.notifyDocumentAdded(mindmap)
     }
     
     /*func getChilds(node : Node) -> [Node] {

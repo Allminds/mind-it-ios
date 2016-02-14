@@ -10,4 +10,5 @@
 protocol TrackerDelegate {
     func connected(result: String)
     func resetConnection()
+    func notifyDocumentAdded(collection : MindmapCollection)
 }

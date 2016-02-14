@@ -11,8 +11,6 @@ class TreeBuilder {
 
     
     func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String) -> [Node] {
-        
-        
         let root : Node? = mindmapCollection.findOne(rootId)
         
         if(root != nil) {

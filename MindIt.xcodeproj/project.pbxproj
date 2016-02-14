@@ -20,6 +20,7 @@
 		415BBA6D1C69EE2D0014F6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6C1C69EE2D0014F6FC /* Main.storyboard */; };
 		415BBA6F1C69EED80014F6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */; };
 		4181518E1C6B347B0021B86C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181518D1C6B347B0021B86C /* Config.swift */; };
+		4193011A1C701F7000E0A69B /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419301191C701F7000E0A69B /* CollectionDelegate.swift */; };
 		419D58D51C6DE5F40043FC29 /* TreeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D58D41C6DE5F40043FC29 /* TreeBuilder.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
@@ -65,6 +66,7 @@
 		415BBA6C1C69EE2D0014F6FC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4181518D1C6B347B0021B86C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		419301191C701F7000E0A69B /* CollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		419D58D41C6DE5F40043FC29 /* TreeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeBuilder.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				415BBA6A1C69ECFE0014F6FC /* Node.swift */,
 				415BBA681C69ECDA0014F6FC /* MeteorTracker.swift */,
+				419301191C701F7000E0A69B /* CollectionDelegate.swift */,
 				41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */,
 			);
 			name = model;
@@ -400,6 +403,7 @@
 				415BBA5E1C69EBBC0014F6FC /* TableViewPresenter.swift in Sources */,
 				41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */,
 				412431881C6D07D8007A7E81 /* PresenterDelegate.swift in Sources */,
+				4193011A1C701F7000E0A69B /* CollectionDelegate.swift in Sources */,
 				41AE17BC1C69FBEB002A74D1 /* NodeViewCell.swift in Sources */,
 				4181518E1C6B347B0021B86C /* Config.swift in Sources */,
 				415BBA2F1C69EA770014F6FC /* AppDelegate.swift in Sources */,
