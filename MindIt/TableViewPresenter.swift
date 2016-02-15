@@ -5,6 +5,7 @@
 //  Created by Swapnil Gaikwad on 09/02/16.
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
+import Foundation
 
 class TableViewPresenter:TrackerDelegate {
     
@@ -64,21 +65,79 @@ class TableViewPresenter:TrackerDelegate {
         }
     }
     
-    func notifyDocumentChanged(var collection : MindmapCollection?) {
-        if(collection == nil) {
-            collection = meteorTracker.getMindmap()
-        }
-        
+    func notifyDocumentChanged(id : String , fields : NSDictionary?) {
         if(isViewInitialised == true) {
-            let treeBuilder = TreeBuilder()
-            mindmap = treeBuilder.buidTreeFromCollection(collection!, rootId: meteorTracker.mindmapId!)
-            delegate.updateChanges()
+            // Call Build tree.
+            let collection : MindmapCollection = meteorTracker.getMindmap()
+            let node : Node = collection.findOne(id)!
+            var rootId : String
+            
+            if(node.isRoot()) {
+                rootId = node.getId();
+            }
+            else {
+                rootId = node.getRootId()
+            }
+            
+            let treeBuilder : TreeBuilder = TreeBuilder()
+            mindmap = treeBuilder.buidTreeFromCollection(meteorTracker.getMindmap(), rootId: rootId)
+            reloadView()
         }
     }
     
-    /*func getChilds(node : Node) {
-    var nodes : [Node] = meteorTracker.getChilds(node)
-    print(nodes)
-    }*/
+    func addSubtree(node : Node) {
+        let indexOfNode : Int = mindmap.indexOf(node)! + 1;
+        var childSubtree : [String]?
+        
+        if(node.isRoot()) {
+            childSubtree = node.getRootSubTree()
+        }
+        else {
+            childSubtree = node.getChildSubtree()
+        }
+        for (index , nodeId) in (childSubtree?.enumerate())! {
+            let childNode: Node? = meteorTracker.getMindmap().findOne(nodeId)
+            if(childNode?.hasChilds() == true) {
+                childNode?.setNodeState(Config.COLLAPSED)
+            }
+            else {
+                childNode?.setNodeState(Config.CHILD_NODE)
+            }
+            childNode?.setDepth(node.getDepth()+1)
+            
+            mindmap.insert(childNode!, atIndex: indexOfNode + index)
+        }
+        reloadView();
+    }
+    func removeSubtree(node : Node) {
+        if(node.isRoot() == true) {
+            mindmap = [Node]()
+            mindmap.append(node)
+            reloadView()
+            return
+        }
+        
+        
+        let indexOfNode : Int = mindmap.indexOf(node)! + 1;
+        let collection = meteorTracker.getMindmap()
+        var childSubtreeCount : Int = 0
+        
+        TreeBuilder.subTreeNodes = [Node]()
+        
+        TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
+        
+        childSubtreeCount = TreeBuilder.subTreeNodes.count
+        
+        print("Child Nodes Count : " , childSubtreeCount)
+        
+        mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + childSubtreeCount))
+        reloadView();
+    }
+
+    
+    
+    func reloadView(){
+        delegate.updateChanges()    //reflect new changes to view
+    }
     
 }

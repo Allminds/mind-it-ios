@@ -62,19 +62,9 @@ class MeteorTracker : CollectionDelegate {
         Meteor.unsubscribe("mindmap")
     }
     
-    func notifyDocumentChanged() {
-        delagate?.notifyDocumentChanged(mindmap)
+    func notifyDocumentChanged(id: String , fields : NSDictionary?) {
+        delagate?.notifyDocumentChanged(id , fields: fields)
     }
-    
-    /*func getChilds(node : Node) -> [Node] {
-    var nodes : [Node] = [Node]()
-    let childSubTree : [String] = (node.valueForKey("childSubTree") as? [String])!
-    
-    for childId in childSubTree {
-    nodes.append(mindmap.findOne(childId)!)
-    }
-    return nodes
-    }*/
     
     func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()

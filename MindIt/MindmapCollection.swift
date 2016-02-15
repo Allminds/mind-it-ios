@@ -23,7 +23,7 @@
             super.documentWasAdded(collection, id: id, fields: fields)
             //sleep(1)
             print("Newly Added " , id)
-            delegate.notifyDocumentChanged()
+            delegate.notifyDocumentChanged(id , fields:  fields)
         }
         
         //Delete Will nerver be called (Soft delete)
@@ -35,6 +35,6 @@
         override func documentWasChanged(collection: String, id: String, fields: NSDictionary?, cleared: [String]?) {
             super.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
             print("Newly changed " , id)
-            delegate.notifyDocumentChanged()
+            delegate.notifyDocumentChanged(id , fields:  fields)
         }
     }

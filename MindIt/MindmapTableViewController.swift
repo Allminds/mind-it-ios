@@ -61,7 +61,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NodeViewCell
         
         let node = presenter.getNodeAt(indexPath.row);
-        cell.setData(node)
+        cell.setData(node, presenter: presenter)
         return cell
     }
     

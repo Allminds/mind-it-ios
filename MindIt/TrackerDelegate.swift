@@ -6,9 +6,10 @@
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
 
+import Foundation
 
 protocol TrackerDelegate {
     func connected(result: String)
     func resetConnection()
-    func notifyDocumentChanged(collection : MindmapCollection?)
+    func notifyDocumentChanged(id : String , fields : NSDictionary?)
 }

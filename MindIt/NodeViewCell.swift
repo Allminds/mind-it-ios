@@ -11,8 +11,7 @@ import UIKit
 class NodeViewCell: UITableViewCell {
     //MARK: Properties
     var node: Node?
-    var isExpanded : Bool?
-    var isChildNode : Bool?
+    var presenter : TableViewPresenter?
     
     @IBOutlet weak var nodeDataLabel: UILabel!
     @IBOutlet weak var toggleImageView: UIImageView!
@@ -22,18 +21,24 @@ class NodeViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setData(node: Node) {
+    func setData(node: Node, presenter : TableViewPresenter) {
+        self.presenter = presenter
         self.node = node
         
-        nodeDataLabel.text = node.getName()
-        if(node.hasChilds()) {
-            isChildNode = false
-            isExpanded = true
-            toggleImageView.image = UIImage(named: "2")
-        }
-        else {
-            isChildNode = true
-            toggleImageView.image = UIImage(named: "3")
+        nodeDataLabel.text = node.getName() + " " + String(node.getDepth())
+        
+        switch(node.getNodeState()) {
+            case Config.COLLAPSED:
+                toggleImageView.image = UIImage(named: "1")
+                break
+            case Config.EXPANDED:
+                toggleImageView.image = UIImage(named: "2")
+                break
+            case Config.CHILD_NODE:
+                toggleImageView.image = UIImage(named: "3")
+                break
+            default:
+                print("Didn't get state.")
         }
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("imageClicked"))
@@ -41,19 +46,20 @@ class NodeViewCell: UITableViewCell {
         toggleImageView.userInteractionEnabled = true
     }
     
+    //Expand Collapse
     func imageClicked() {
-        if(isChildNode == false) {
-            if(isExpanded == true) {
-                toggleImageView.image = UIImage(named: "1")
-                isExpanded = false
-            }
-            else {
-                toggleImageView.image = UIImage(named: "2")
-                isExpanded = true
-            }
+        if(node?.getNodeState() == Config.EXPANDED) {
+            //Collapse Node
+            presenter!.removeSubtree(node!)
+            toggleImageView.image = UIImage(named: "1")
+            node?.setNodeState(Config.COLLAPSED)
+        }
+        else if(node?.getNodeState() == Config.COLLAPSED) {
+            //Expand Node
+            presenter!.addSubtree(node!)
+            toggleImageView.image = UIImage(named: "2")
+            node?.setNodeState(Config.EXPANDED)
         }
     }
-    
-    
 }
 

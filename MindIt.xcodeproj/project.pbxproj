@@ -168,6 +168,7 @@
 		415BBA5F1C69EBD70014F6FC /* view */ = {
 			isa = PBXGroup;
 			children = (
+				412431871C6D07D8007A7E81 /* PresenterDelegate.swift */,
 				415BBA6E1C69EED80014F6FC /* LaunchScreen.storyboard */,
 				415BBA6C1C69EE2D0014F6FC /* Main.storyboard */,
 				415BBA601C69EBE40014F6FC /* ViewControllers */,
@@ -179,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */,
-				412431871C6D07D8007A7E81 /* PresenterDelegate.swift */,
 				415BBA631C69EC570014F6FC /* HomeViewController.swift */,
 				41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */,
 			);

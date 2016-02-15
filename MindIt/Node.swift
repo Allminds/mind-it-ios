@@ -21,7 +21,8 @@ class Node: MeteorDocument {
     var name:String?
     var childSubTree:[String]?
     var index:Int?
-    
+    var depth : Int?
+    var state: String = Config.UNDEFINED
     
     //MARK : Initialiser
     required init(id: String, fields: NSDictionary?) {
@@ -82,6 +83,37 @@ class Node: MeteorDocument {
     func getRight() -> [String]{
         return self.right!
     }
+    func getDepth() -> Int{
+        return self.depth!
+    }
+    func getNodeState() -> String {
+        return state
+    }
+    
+    func getId() -> String {
+        return id!
+    }
+    
+    func getRootSubTree() -> [String] {
+        return right! + left!
+    }
+    
+    func isRoot() ->Bool{
+        if(self.parentId == nil){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    func setDepth(depth : Int) {
+        self.depth = depth
+    }
+    func setNodeState(state : String) {
+        self.state = state
+    }
+    
     
     func hasChilds() -> Bool {
         //Root Element
