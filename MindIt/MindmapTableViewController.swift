@@ -16,7 +16,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     var activityIndicator : UIActivityIndicatorView!
     var strLabel : UILabel!
     
-
+    
     var presenter: TableViewPresenter!
     var mindmapId: String!
     
@@ -25,10 +25,9 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         progressBarDisplayer("Loading Mindmap", true)
-        //Set values
+        
         presenter =  TableViewPresenter()
         presenter.delegate = self
-        //print("Connecting to network....")
         
         presenter.resetConnection()
         
@@ -39,7 +38,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: METEOR_COLLECTION_SET_DID_CHANGE, object: nil)
     }
     
     func reloadTableView() {
@@ -53,59 +51,57 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = presenter.getNodeCount();
-        return count
+        return presenter.getNodeCount();
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "NodeViewCell"
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NodeViewCell
         
         let node = presenter.getNodeAt(indexPath.row);
-        
-        cell.setData(node , presenter: presenter)
-        
+        cell.setData(node)
         return cell
     }
     
-
+    
     
     func stopProgressBar(result: String) {
         //print("Conection Result : " , result)
         
         dispatch_async(dispatch_get_main_queue()) {
-                self.messageFrame.removeFromSuperview()
+            self.messageFrame.removeFromSuperview()
         }
         
         switch(result) {
-            case Config.CONNECTED:
-                //Render Table View 
-                //Delete if overhead and not required.
-                reloadTableView()
+        case Config.CONNECTED:
+            //Render Table View
+            dispatch_async(dispatch_get_main_queue(), {
+                self.reloadTableView()
+            })
             break
             
-            case Config.NETWORK_ERROR  :
-                //Render Error View
-                print("Error in Network")
-                giveAlert(Config.NETWORK_ERROR);
-                break
-            
-            case "Invalid mindmap":
-                print("Invalid mindmap")
-                giveAlert("Invalid mindmap")
+        case Config.NETWORK_ERROR  :
+            //Render Error View
+            print("Error in Network")
+            giveAlert(Config.NETWORK_ERROR);
             break
             
-            default:
-                print("New Error found")
+        case "Invalid mindmap":
+            print("Invalid mindmap")
+            giveAlert("Invalid mindmap")
+            break
+            
+        default:
+            print("New Error found")
         }
     }
     
-    func updateUI() {
-        //print("Final Count : " , presenter.mindmap.count)
-        reloadTableView()
+    func updateChanges() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.reloadTableView()
+        })
     }
     
     func giveAlert(errorMessage : String) {
@@ -138,7 +134,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         messageFrame.addSubview(strLabel)
         view.addSubview(messageFrame)
         self.messageFrame = messageFrame
-        //print("MessageFrame : " , self.messageFrame)
     }
     
 }

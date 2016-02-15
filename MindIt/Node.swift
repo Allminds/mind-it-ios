@@ -12,7 +12,7 @@ class Node: MeteorDocument {
     
     //MARK : Properties
     var collection:String = "Mindmaps"
-    var id: String?
+    var id : String?
     var parentId:String?
     var position:String?
     var rootId:String?
@@ -21,9 +21,6 @@ class Node: MeteorDocument {
     var name:String?
     var childSubTree:[String]?
     var index:Int?
-    var isExpanded = true
-    
-    // Name , left , right , parentId , childSubTree may change
     
     
     //MARK : Initialiser

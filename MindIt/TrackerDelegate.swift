@@ -6,11 +6,9 @@
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
 
-import SwiftDDP
 
 protocol TrackerDelegate {
     func connected(result: String)
     func resetConnection()
-    //func notifyDocumentAdded(collection : MindmapCollection , id : String , fields: NSDictionary?) -> Bool
-    func changeInRightRemoved(rightArray : [String])
+    func notifyDocumentChanged(collection : MindmapCollection?)
 }

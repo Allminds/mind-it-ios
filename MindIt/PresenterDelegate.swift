@@ -10,5 +10,5 @@
 protocol PresenterDelegate {
     func stopProgressBar(result: String)
     
-    func updateUI()
+    func updateChanges()
 }

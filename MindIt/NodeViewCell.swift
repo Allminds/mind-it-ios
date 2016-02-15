@@ -14,8 +14,6 @@ class NodeViewCell: UITableViewCell {
     var isExpanded : Bool?
     var isChildNode : Bool?
     
-    var presenter: TableViewPresenter!
-    
     @IBOutlet weak var nodeDataLabel: UILabel!
     @IBOutlet weak var toggleImageView: UIImageView!
     
@@ -23,13 +21,11 @@ class NodeViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
-    func setData(node: Node , presenter : TableViewPresenter) {
+    
+    func setData(node: Node) {
         self.node = node
         
-        self.presenter = presenter
-        
-        nodeDataLabel.text = node.valueForKey("name") as? String;
+        nodeDataLabel.text = node.getName()
         if(node.hasChilds()) {
             isChildNode = false
             isExpanded = true

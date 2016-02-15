@@ -8,7 +8,7 @@
 
 class TreeBuilder {
     private var treeNodes : [Node] = [Node]();
-
+    
     
     func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String) -> [Node] {
         let root : Node? = mindmapCollection.findOne(rootId)
@@ -23,7 +23,6 @@ class TreeBuilder {
         if(right != nil) {
             for rightChildId in right! {
                 let rightNode = mindmapCollection.findOne(rightChildId)
-                //treeNodes.append(rightNode!)
                 traverseTree(rightNode , mindmapCollection: mindmapCollection)
             }
         }
@@ -31,7 +30,6 @@ class TreeBuilder {
         if(left != nil) {
             for leftChildId in left! {
                 let leftNode = mindmapCollection.findOne(leftChildId)
-                //treeNodes.append(leftNode!)
                 traverseTree(leftNode , mindmapCollection: mindmapCollection)
             }
         }

@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (sender === importMindmap) {
             let mindmapId : String = mindmapIdTextField.text!;
-            
+            //Passing mindmap ID
             let tableViewController = segue.destinationViewController as! MindmapTableViewController;
             tableViewController.mindmapId = mindmapId
         }

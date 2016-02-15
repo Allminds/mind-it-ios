@@ -14,8 +14,7 @@ class MeteorTracker : CollectionDelegate {
     private let mindmap:MindmapCollection
     private static var meteorTracker: MeteorTracker? = nil;
     
-    var delagate : TrackerDelegate? //Presenter
-    
+    var delagate : TrackerDelegate?
     var mindmapId:String?
     static var isConnected:Bool = false
     
@@ -62,16 +61,19 @@ class MeteorTracker : CollectionDelegate {
     func unsubscribe() {
         Meteor.unsubscribe("mindmap")
     }
-
+    
+    func notifyDocumentChanged() {
+        delagate?.notifyDocumentChanged(mindmap)
+    }
     
     /*func getChilds(node : Node) -> [Node] {
-        var nodes : [Node] = [Node]()
-        let childSubTree : [String] = (node.valueForKey("childSubTree") as? [String])!
-        
-        for childId in childSubTree {
-            nodes.append(mindmap.findOne(childId)!)
-        }
-        return nodes
+    var nodes : [Node] = [Node]()
+    let childSubTree : [String] = (node.valueForKey("childSubTree") as? [String])!
+    
+    for childId in childSubTree {
+    nodes.append(mindmap.findOne(childId)!)
+    }
+    return nodes
     }*/
     
     func isConnectedToNetwork() -> Bool {
@@ -88,41 +90,6 @@ class MeteorTracker : CollectionDelegate {
         let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         return (isReachable && !needsConnection)
-    }
-    
-    func determineTypeOfChange(id : String , fields: NSDictionary?) {
-        
-        let field : String! = fields?.allKeys.first as? String
-        
-        print("Field Name : " , field)
-        
-        switch(field) {
-            case "name":
-                //No reload
-                //Change UI mindmap array change only
-                break
-            case "right":
-                // remove from right
-                delagate?.changeInRightRemoved((fields?.valueForKey("right") as? [String])!) //Should be Root Ids
-                // add in right
-                // change order only
-                break
-            case "left":
-                // remove from left
-                // add in left
-                // change order only
-                break
-            case "childSubTree":
-                // remove from childSubTree
-                // add in childSubTree
-                // change order only
-                break
-            case "parentId":
-                // Called for add operation
-                break
-            default:
-                break
-        }
     }
     
 }

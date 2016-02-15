@@ -1,45 +1,40 @@
     //
-//  MindmapCollection.swift
-//  MindIt
-//
-//  Created by Swapnil Gaikwad on 09/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
-
-import SwiftDDP
-
-class MindmapCollection: MeteorCollection<Node> {
+    //  MindmapCollection.swift
+    //  MindIt
+    //
+    //  Created by Swapnil Gaikwad on 09/02/16.
+    //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
+    //
     
-    var delegate : CollectionDelegate!
+    import SwiftDDP
     
-    //MARK: Initialisers
-    override init(name: String) {
-        super.init(name: name)
-    }
-    
-    
-    //MARK : Methods
-    override func documentWasAdded(collection: String, id: String, fields: NSDictionary?) {
-        super.documentWasAdded(collection, id: id, fields: fields)
-        //sleep(1)
-        print("Newly Added " , id)
-        //delegate.notifyDocumentAdded(id , fields : fields)
-        delegate.determineTypeOfChange(id, fields: fields)
-    }
-    
-    //Delete Will nerver be called (Soft delete)
-    override func documentWasRemoved(collection: String, id: String) {
-        super.documentWasRemoved(collection, id: id)
-        print("Newly Removed")
-        //delegate.notifyDocumentAdded()
-        //delegate.determineTypeOfChange(id, fields: fields)
-    }
-    
-    override func documentWasChanged(collection: String, id: String, fields: NSDictionary?, cleared: [String]?) {
-        super.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
-        print("Newly changed " , id)
+    class MindmapCollection: MeteorCollection<Node> {
         
-        delegate.determineTypeOfChange(id, fields: fields)
-        //delegate.notifyDocumentAdded()
+        var delegate : CollectionDelegate!
+        
+        //MARK: Initialisers
+        override init(name: String) {
+            super.init(name: name)
+        }
+        
+        
+        //MARK : Methods
+        override func documentWasAdded(collection: String, id: String, fields: NSDictionary?) {
+            super.documentWasAdded(collection, id: id, fields: fields)
+            //sleep(1)
+            print("Newly Added " , id)
+            delegate.notifyDocumentChanged()
+        }
+        
+        //Delete Will nerver be called (Soft delete)
+        override func documentWasRemoved(collection: String, id: String) {
+            super.documentWasRemoved(collection, id: id)
+            print("Newly Removed")
+        }
+        
+        override func documentWasChanged(collection: String, id: String, fields: NSDictionary?, cleared: [String]?) {
+            super.documentWasChanged(collection, id: id, fields: fields, cleared: cleared)
+            print("Newly changed " , id)
+            delegate.notifyDocumentChanged()
+        }
     }
-}
