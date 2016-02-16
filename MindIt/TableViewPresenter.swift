@@ -70,14 +70,7 @@ class TableViewPresenter:TrackerDelegate {
             // Call Build tree.
             let collection : MindmapCollection = meteorTracker.getMindmap()
             let node : Node = collection.findOne(id)!
-            var rootId : String
-            
-            if(node.isRoot()) {
-                rootId = node.getId();
-            }
-            else {
-                rootId = node.getRootId()
-            }
+            let rootId : String = node.getRootId()
             
             let treeBuilder : TreeBuilder = TreeBuilder()
             mindmap = treeBuilder.buidTreeFromCollection(meteorTracker.getMindmap(), rootId: rootId)
@@ -116,7 +109,6 @@ class TableViewPresenter:TrackerDelegate {
             reloadView()
             return
         }
-        
         
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         let collection = meteorTracker.getMindmap()

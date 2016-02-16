@@ -12,10 +12,9 @@ import SwiftDDP
 class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     //MARK:Properties
-    var messageFrame: UIView!
+    var loader: Loader!
     var activityIndicator : UIActivityIndicatorView!
     var strLabel : UILabel!
-    
     
     var presenter: TableViewPresenter!
     var mindmapId: String!
@@ -71,7 +70,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         //print("Conection Result : " , result)
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.messageFrame.removeFromSuperview()
+            self.loader.hide()
         }
         
         switch(result) {
@@ -119,21 +118,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
-        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
-        strLabel.text = msg
-        strLabel.textColor = UIColor.whiteColor()
-        let messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 200, height: 50))
-        messageFrame.layer.cornerRadius = 15
-        messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        if indicator {
-            activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-            activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            activityIndicator.startAnimating()
-            messageFrame.addSubview(activityIndicator)
-        }
-        messageFrame.addSubview(strLabel)
-        view.addSubview(messageFrame)
-        self.messageFrame = messageFrame
+        self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
+        loader.show(msg)
     }
     
 }

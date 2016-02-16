@@ -20,6 +20,9 @@ class TreeBuilder {
             treeNodes.append(root!)
             root?.setDepth(0);
         }
+        else {
+            return [Node]()
+        }
         
         
         let left : [String]? = root?.left
