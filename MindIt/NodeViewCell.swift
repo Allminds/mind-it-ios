@@ -27,9 +27,12 @@ class NodeViewCell: UITableViewCell {
         self.presenter = presenter
         self.node = node
         
-        
-        nodeDataLabel.text = node.getName()
-        leftPaddingConstraint.constant = CGFloat(10 + node.getDepth() * 20)
+        if(node.getName() == ""){        // To add blank node on label
+            nodeDataLabel.text = "  "
+        }else{
+            nodeDataLabel.text = node.getName()
+        }
+         leftPaddingConstraint.constant = CGFloat(10 + node.getDepth() * 20)
         
         if(node.isRoot()) {
             return
