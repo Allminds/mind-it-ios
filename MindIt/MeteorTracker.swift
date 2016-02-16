@@ -14,9 +14,9 @@ class MeteorTracker : CollectionDelegate {
     private let mindmap:MindmapCollection
     private static var meteorTracker: MeteorTracker? = nil;
     
-    var delagate : TrackerDelegate?
+    weak var delagate : TrackerDelegate?
     var mindmapId:String?
-    static var isConnected:Bool = false
+    var isConnected:Bool = false
     
     //MARK : Intialiser
     private init() {
@@ -40,7 +40,7 @@ class MeteorTracker : CollectionDelegate {
     
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
-            MeteorTracker.isConnected = true
+            self.isConnected = true
             self.subscribe(mindmapId)
         }
         return true

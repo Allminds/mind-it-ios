@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol TrackerDelegate {
+protocol TrackerDelegate: NSObjectProtocol {
     func connected(result: String)
-    func resetConnection()
     func notifyDocumentChanged(id : String , fields : NSDictionary?)
 }

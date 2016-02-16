@@ -19,26 +19,19 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     var presenter: TableViewPresenter!
     var mindmapId: String!
     
-    
     //MARK : Methods
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        progressBarDisplayer()
-        
-        presenter =  TableViewPresenter()
-        presenter.delegate = self
-        
-        presenter.resetConnection()
-        
-        if(!presenter.connectToServer(mindmapId)) {
-            stopProgressBar(Config.NETWORK_ERROR)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        showProgressBar()
+        presenter.connectToServer(mindmapId)
     }
     
     func reloadTableView() {
@@ -66,23 +59,16 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         return cell
     }
     
+    func didConnectSuccessfully() {
+        stopProgressBar()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.reloadTableView()
+        })
+    }
     
-    
-    func stopProgressBar(result: String) {
-        //print("Conection Result : " , result)
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.loader.hide()
-        }
-        
-        switch(result) {
-        case Config.CONNECTED:
-            //Render Table View
-            dispatch_async(dispatch_get_main_queue(), {
-                self.reloadTableView()
-            })
-            break
-            
+    func didFailToConnectWithError(error: String) {
+        stopProgressBar()
+        switch(error) {
         case Config.NETWORK_ERROR  :
             //Render Error View
             print("Error in Network")
@@ -96,6 +82,17 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             
         default:
             print("New Error found")
+        }
+    }
+    
+    private func showProgressBar() {
+        self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
+        loader.show("Loading Mindmap...")
+    }
+    
+    private func stopProgressBar() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.loader.hide()
         }
     }
     
@@ -117,11 +114,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         }))
         
         presentViewController(refreshAlert, animated: true, completion: nil)
-    }
-    
-    private func progressBarDisplayer() {
-        self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
-        loader.show("Loading Mindmap...")
     }
     
 }

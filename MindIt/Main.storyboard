@@ -22,14 +22,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AvC-wJ-UHp">
-                                            <rect key="frame" x="0.0" y="0.0" width="32" height="43"/>
+                                            <rect key="frame" x="5" y="12" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="43" id="9ht-Au-LKg"/>
-                                                <constraint firstAttribute="width" constant="32" id="N7t-5W-SFA"/>
+                                                <constraint firstAttribute="height" constant="20" id="9ht-Au-LKg"/>
+                                                <constraint firstAttribute="width" constant="20" id="N7t-5W-SFA"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Data" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-Fi-byd">
-                                            <rect key="frame" x="42" y="12" width="548" height="20"/>
+                                            <rect key="frame" x="35" y="12" width="555" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -38,8 +38,9 @@
                                     <constraints>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="top" secondItem="6FL-fv-I7L" secondAttribute="top" constant="12" id="10c-ca-KzG"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="leading" secondItem="AvC-wJ-UHp" secondAttribute="trailing" constant="10" id="VHQ-kc-8T3"/>
-                                        <constraint firstItem="AvC-wJ-UHp" firstAttribute="top" secondItem="6FL-fv-I7L" secondAttribute="top" id="auC-8l-m69"/>
-                                        <constraint firstItem="AvC-wJ-UHp" firstAttribute="leading" secondItem="6FL-fv-I7L" secondAttribute="leading" id="iRh-MK-zsP"/>
+                                        <constraint firstItem="AvC-wJ-UHp" firstAttribute="top" secondItem="6FL-fv-I7L" secondAttribute="top" constant="5" id="auC-8l-m69"/>
+                                        <constraint firstItem="AvC-wJ-UHp" firstAttribute="leading" secondItem="6FL-fv-I7L" secondAttribute="leading" constant="5" id="iRh-MK-zsP"/>
+                                        <constraint firstItem="AvC-wJ-UHp" firstAttribute="top" secondItem="hHJ-Fi-byd" secondAttribute="top" id="j0F-N1-4bp"/>
                                         <constraint firstAttribute="trailing" secondItem="hHJ-Fi-byd" secondAttribute="trailing" constant="10" id="mnO-TQ-2Bd"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="centerY" secondItem="6FL-fv-I7L" secondAttribute="centerY" id="pMU-bz-Uz6"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="centerX" secondItem="6FL-fv-I7L" secondAttribute="centerX" id="qA3-Ff-bxU"/>
@@ -47,12 +48,14 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="auC-8l-m69"/>
                                             <exclude reference="pMU-bz-Uz6"/>
                                             <exclude reference="qA3-Ff-bxU"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="leftPaddingConstraint" destination="VHQ-kc-8T3" id="WMc-y1-JFg"/>
                                     <outlet property="nodeDataLabel" destination="hHJ-Fi-byd" id="AK6-FO-emT"/>
                                     <outlet property="toggleImageView" destination="AvC-wJ-UHp" id="OYG-c9-1eD"/>
                                 </connections>

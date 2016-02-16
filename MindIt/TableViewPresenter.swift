@@ -7,30 +7,34 @@
 //
 import Foundation
 
-class TableViewPresenter:TrackerDelegate {
+class TableViewPresenter:NSObject, TrackerDelegate {
     
     //MARK : Properties
     var mindmap:[Node] = [Node]()
-    var meteorTracker:MeteorTracker!
-    var delegate:PresenterDelegate!
+    private var meteorTracker:MeteorTracker!
+    private weak var viewDelegate:PresenterDelegate!
     
     var isViewInitialised = false
     
     //MARK : Initializers
-    init(){
-        meteorTracker = MeteorTracker.getInstance();
+    init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker){
+        super.init()
+        self.viewDelegate = viewDelegate
+        self.meteorTracker = meteorTracker
+        if(meteorTracker.isConnected) {
+            meteorTracker.unsubscribe();
+        }
         meteorTracker.delagate = self
     }
     
     
     //MARK : Methods
-    func connectToServer(mindmapId: String) -> Bool {
+    func connectToServer(mindmapId: String){
         if(meteorTracker.isConnectedToNetwork()) {
             meteorTracker.connectToServer(mindmapId)
-            return true
         }
         else {
-            return false
+            viewDelegate.didFailToConnectWithError(Config.NETWORK_ERROR)
         }
     }
     
@@ -42,26 +46,20 @@ class TableViewPresenter:TrackerDelegate {
         return mindmap[index];
     }
     
-    func connected(var result: String) {
+    func connected(result: String) {
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count
         if(count == 0) {
-            result = "Invalid mindmap";
+            viewDelegate.didFailToConnectWithError("Invalid mindmap")
         }
         else if(meteorTracker.mindmapId != nil) {
             let treeBuilder : TreeBuilder = TreeBuilder();
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
             isViewInitialised = true
+            viewDelegate.didConnectSuccessfully()
         }
         else {
-            print("Error in Presenter No MindmapID")
-        }
-        delegate.stopProgressBar(result)
-    }
-    
-    func resetConnection() {
-        if(MeteorTracker.isConnected) {
-            meteorTracker.unsubscribe();
+            viewDelegate.didFailToConnectWithError(result)
         }
     }
     
@@ -126,10 +124,8 @@ class TableViewPresenter:TrackerDelegate {
         reloadView();
     }
 
-    
-    
     func reloadView(){
-        delegate.updateChanges()    //reflect new changes to view
+        viewDelegate.updateChanges()    //reflect new changes to view
     }
     
 }

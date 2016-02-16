@@ -16,6 +16,8 @@ class NodeViewCell: UITableViewCell {
     @IBOutlet weak var nodeDataLabel: UILabel!
     @IBOutlet weak var toggleImageView: UIImageView!
     
+    @IBOutlet weak var leftPaddingConstraint: NSLayoutConstraint!
+    
     //MARK : Method
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -25,7 +27,9 @@ class NodeViewCell: UITableViewCell {
         self.presenter = presenter
         self.node = node
         
+        
         nodeDataLabel.text = node.getName()
+        leftPaddingConstraint.constant = CGFloat(10 + node.getDepth() * 20)
         
         if(node.isRoot()) {
             return
