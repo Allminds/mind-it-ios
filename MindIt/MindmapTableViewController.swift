@@ -23,7 +23,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     //MARK : Methods
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        progressBarDisplayer("Loading Mindmap", true)
+        progressBarDisplayer()
         
         presenter =  TableViewPresenter()
         presenter.delegate = self
@@ -37,6 +37,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
     }
     
     func reloadTableView() {
@@ -117,9 +119,9 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         presentViewController(refreshAlert, animated: true, completion: nil)
     }
     
-    private func progressBarDisplayer(msg:String, _ indicator:Bool ) {
+    private func progressBarDisplayer() {
         self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
-        loader.show(msg)
+        loader.show("Loading Mindmap...")
     }
     
 }

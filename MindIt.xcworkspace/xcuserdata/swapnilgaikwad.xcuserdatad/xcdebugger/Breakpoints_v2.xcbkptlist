@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindIt/MindmapTableViewController.swift"
-            timestampString = "477293483.820717"
+            timestampString = "477295778.375478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "MindmapTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -64,22 +64,6 @@
             startingLineNumber = "116"
             endingLineNumber = "116"
             landmarkName = "documentWasAdded(_:id:fields:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MindIt/TreeBuilder.swift"
-            timestampString = "477292465.57742"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "buidTreeFromCollection(_:rootId:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
