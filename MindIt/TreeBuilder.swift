@@ -52,7 +52,9 @@ class TreeBuilder {
                 if(rightNode != nil) {
                     rightNode?.setDepth(1)
                     if(rightNode?.hasChilds() == true) {
-                        rightNode?.setNodeState(Config.COLLAPSED)
+                        if(rightNode?.getNodeState() == Config.UNDEFINED) {
+                            rightNode?.setNodeState(Config.COLLAPSED)
+                        }
                     }
                     else {
                         rightNode?.setNodeState(Config.CHILD_NODE)
@@ -72,7 +74,9 @@ class TreeBuilder {
                 if(leftNode != nil) {
                     leftNode?.setDepth(1)
                     if(leftNode?.hasChilds() == true) {
-                        leftNode?.setNodeState(Config.COLLAPSED)
+                        if(leftNode?.getNodeState() == Config.UNDEFINED) {
+                            leftNode?.setNodeState(Config.COLLAPSED)
+                        }
                     }
                     else {
                         leftNode?.setNodeState(Config.CHILD_NODE)
@@ -96,7 +100,15 @@ class TreeBuilder {
             for childId in childSubTree! {
                 let nextChildNode = mindmapCollection.findOne(childId)
                 nextChildNode?.setDepth(depth)
-                if(nextChildNode?.getNodeState() == Config.EXPANDED) {
+                
+                if(nextChildNode != nil) {
+                    treeNodes.append(nextChildNode!)
+                }
+                
+                if(nextChildNode?.getNodeState() == Config.UNDEFINED) {
+                    nextChildNode?.setNodeState(Config.CHILD_NODE)
+                }
+                else if(nextChildNode?.getNodeState() == Config.EXPANDED) {
                     traverseTree(nextChildNode, mindmapCollection: mindmapCollection , depth: depth + 1)
                 } 
             }
