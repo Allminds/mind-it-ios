@@ -71,7 +71,7 @@ class TableViewPresenter:NSObject, TrackerDelegate {
             let rootId : String = node.getRootId()
             
             let treeBuilder : TreeBuilder = TreeBuilder()
-            mindmap = treeBuilder.buidTreeFromCollection(meteorTracker.getMindmap(), rootId: rootId)
+            mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId)
             reloadView()
         }
     }

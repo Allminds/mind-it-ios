@@ -28,21 +28,11 @@ class TreeBuilder {
         let left : [String]? = root?.left
         let right : [String]? = root?.right
         
-        if(root?.hasChilds() == true) {
-            if(root?.getNodeState() == Config.UNDEFINED) {
-                root?.setNodeState(Config.EXPANDED)
-            }
-            else {
-                isCalledFirstTime = false
-            }
+        if(root?.getNodeState() == Config.UNDEFINED) {
+            root?.setNodeState(Config.EXPANDED)
         }
         else {
-            if(root?.getNodeState() == Config.UNDEFINED) {
-                root?.setNodeState(Config.CHILD_NODE)
-            }
-            else {
-                isCalledFirstTime = false
-            }
+            isCalledFirstTime = false
         }
         
         if(right != nil) {
@@ -108,7 +98,10 @@ class TreeBuilder {
                 if(nextChildNode?.getNodeState() == Config.UNDEFINED) {
                     nextChildNode?.setNodeState(Config.CHILD_NODE)
                 }
-                else if(nextChildNode?.getNodeState() == Config.EXPANDED) {
+                else if(nextChildNode?.getNodeState() != Config.COLLAPSED) {
+                    if(nextChildNode?.hasChilds() == true && nextChildNode?.getNodeState() == Config.CHILD_NODE) {
+                        nextChildNode?.setNodeState(Config.EXPANDED)
+                    }
                     traverseTree(nextChildNode, mindmapCollection: mindmapCollection , depth: depth + 1)
                 } 
             }

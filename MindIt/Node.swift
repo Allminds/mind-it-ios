@@ -75,7 +75,12 @@ class Node: MeteorDocument {
         return self.childSubTree!
     }
     func getRootId() -> String {
-        return self.rootId!
+        if(isRoot()){
+            return self.id!
+        }
+        else{
+            return self.rootId!
+        }
     }
     func getLeft() -> [String]{
         return self.left!
