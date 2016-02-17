@@ -76,6 +76,7 @@ class TableViewPresenter:NSObject, TrackerDelegate {
         }
     }
     
+    //Expand
     func addSubtree(node : Node) {
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         var childSubtree : [String]?
@@ -100,6 +101,8 @@ class TableViewPresenter:NSObject, TrackerDelegate {
         }
         reloadView();
     }
+    
+    //Collapse
     func removeSubtree(node : Node) {
         if(node.isRoot() == true) {
             mindmap = [Node]()
