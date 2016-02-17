@@ -8,8 +8,7 @@
 
 class TreeBuilder {
     private var treeNodes : [Node] = [Node]();
-    static var subTreeNodes : [Node] = [Node]();
-    
+    static var subTreeCount = 0;
     
     func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String) -> [Node] {
         let root : Node? = mindmapCollection.findOne(rootId)
@@ -106,13 +105,14 @@ class TreeBuilder {
     
     static func getChildSubTree(root : Node? ,mindmapCollection : MindmapCollection) {
         if(root != nil) {
-            let childSubTree = root?.childSubTree
-            
-            for childId in childSubTree! {
-                let nextChildNode = mindmapCollection.findOne(childId)
-                subTreeNodes.append(nextChildNode!)
-                if(nextChildNode?.getNodeState() == Config.EXPANDED) {
-                    getChildSubTree(nextChildNode, mindmapCollection: mindmapCollection)
+            if(root?.getNodeState() == Config.EXPANDED) {
+                let childSubTree = root?.childSubTree
+                for childId in childSubTree! {
+                    let nextChildNode = mindmapCollection.findOne(childId)
+                    if(nextChildNode != nil) {
+                        TreeBuilder.subTreeCount++;
+                        getChildSubTree(nextChildNode, mindmapCollection: mindmapCollection)
+                    }
                 }
             }
         }

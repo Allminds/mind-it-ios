@@ -114,12 +114,9 @@ class TableViewPresenter:NSObject, TrackerDelegate {
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         let collection = meteorTracker.getMindmap()
         var childSubtreeCount : Int = 0
-        
-        TreeBuilder.subTreeNodes = [Node]()
-        
+        TreeBuilder.subTreeCount = 0
         TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
-        
-        childSubtreeCount = TreeBuilder.subTreeNodes.count
+        childSubtreeCount =  TreeBuilder.subTreeCount
         
         print("Child Nodes Count : " , childSubtreeCount)
         
