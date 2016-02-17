@@ -104,7 +104,7 @@ class Node: MeteorDocument {
     }
     
     func isRoot() ->Bool{
-        if(self.parentId == nil){
+        if(self.parentId == nil && self.rootId == nil){
             return true;
         }
         else{

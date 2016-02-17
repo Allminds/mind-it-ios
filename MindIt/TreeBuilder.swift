@@ -21,14 +21,9 @@ class TreeBuilder {
         
         var isCalledFirstTime: Bool = true
         
-        if(root != nil) {
-            treeNodes.append(root!)
-            root?.setDepth(0);
-        }
-        else {
-            return [Node]()
-        }
-        
+        treeNodes.append(root!)
+        root?.setDepth(0);
+    
         
         let left : [String]? = root?.getLeft()
         let right : [String]? = root?.getRight()
@@ -36,7 +31,6 @@ class TreeBuilder {
         if(right?.count == 0) {
             presenterDelegate?.lastRightNode = (root?.getId())!
         }
-        
         
         if(root?.getNodeState() == Config.UNDEFINED) {
             root?.setNodeState(Config.EXPANDED)
@@ -52,8 +46,9 @@ class TreeBuilder {
                     continue
                 }
                 
-                rightNode?.setDepth(1)
-                if(rightNode?.hasChilds() == true) {
+              rightNode?.setDepth(1)
+              if(rightNode?.hasChilds() == true) {
+                
                     if(rightNode?.getNodeState() == Config.UNDEFINED) {
                         rightNode?.setNodeState(Config.COLLAPSED)
                     }

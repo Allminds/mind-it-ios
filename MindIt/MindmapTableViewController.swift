@@ -99,6 +99,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     func updateChanges() {
         dispatch_async(dispatch_get_main_queue(), {
             self.reloadTableView()
+            //self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
         })
     }
     
