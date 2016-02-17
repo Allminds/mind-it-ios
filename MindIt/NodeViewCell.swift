@@ -16,6 +16,7 @@ class NodeViewCell: UITableViewCell {
     @IBOutlet weak var nodeDataLabel: UILabel!
     @IBOutlet weak var toggleImageView: UIImageView!
     @IBOutlet weak var leftPaddingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var saperatorView: UIView!
     
     

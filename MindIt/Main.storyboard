@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--MindMap-->
@@ -35,37 +34,25 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-G8-3pH">
-                                            <rect key="frame" x="0.0" y="27" width="600" height="5"/>
-                                            <color key="backgroundColor" red="0.22361705406929622" green="1" blue="0.42293259521256987" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="5" id="vy0-WJ-yHV"/>
-                                            </constraints>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cXB-R0-60n">
+                                            <rect key="frame" x="0.0" y="40" width="600" height="4"/>
+                                            <color key="backgroundColor" red="0.70484713520331055" green="1" blue="0.56370390652095348" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="top" secondItem="6FL-fv-I7L" secondAttribute="top" constant="12" id="10c-ca-KzG"/>
-                                        <constraint firstItem="Hdd-G8-3pH" firstAttribute="leading" secondItem="6FL-fv-I7L" secondAttribute="leading" id="2Jz-cz-OYv"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Hdd-G8-3pH" secondAttribute="bottom" constant="-8" id="Dmb-iz-0ts"/>
-                                        <constraint firstItem="Hdd-G8-3pH" firstAttribute="bottom" secondItem="hHJ-Fi-byd" secondAttribute="bottom" id="EgL-gu-pYw"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="leading" secondItem="AvC-wJ-UHp" secondAttribute="trailing" constant="10" id="VHQ-kc-8T3"/>
                                         <constraint firstItem="AvC-wJ-UHp" firstAttribute="top" secondItem="6FL-fv-I7L" secondAttribute="top" constant="5" id="auC-8l-m69"/>
                                         <constraint firstItem="AvC-wJ-UHp" firstAttribute="leading" secondItem="6FL-fv-I7L" secondAttribute="leading" constant="5" id="iRh-MK-zsP"/>
-                                        <constraint firstAttribute="trailing" secondItem="Hdd-G8-3pH" secondAttribute="trailing" id="j07-GY-EHQ"/>
                                         <constraint firstItem="AvC-wJ-UHp" firstAttribute="top" secondItem="hHJ-Fi-byd" secondAttribute="top" id="j0F-N1-4bp"/>
                                         <constraint firstAttribute="trailing" secondItem="hHJ-Fi-byd" secondAttribute="trailing" constant="10" id="mnO-TQ-2Bd"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="centerY" secondItem="6FL-fv-I7L" secondAttribute="centerY" id="pMU-bz-Uz6"/>
                                         <constraint firstItem="hHJ-Fi-byd" firstAttribute="centerX" secondItem="6FL-fv-I7L" secondAttribute="centerX" id="qA3-Ff-bxU"/>
                                         <constraint firstAttribute="bottom" secondItem="hHJ-Fi-byd" secondAttribute="bottom" constant="12" id="rfg-11-6jC"/>
-                                        <constraint firstItem="Hdd-G8-3pH" firstAttribute="leading" secondItem="6FL-fv-I7L" secondAttribute="leading" id="vwH-kE-7gD"/>
-                                        <constraint firstAttribute="trailing" secondItem="Hdd-G8-3pH" secondAttribute="trailing" id="zYS-99-q2n"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="auC-8l-m69"/>
-                                            <exclude reference="2Jz-cz-OYv"/>
-                                            <exclude reference="Dmb-iz-0ts"/>
-                                            <exclude reference="j07-GY-EHQ"/>
                                             <exclude reference="pMU-bz-Uz6"/>
                                             <exclude reference="qA3-Ff-bxU"/>
                                         </mask>
@@ -74,7 +61,7 @@
                                 <connections>
                                     <outlet property="leftPaddingConstraint" destination="VHQ-kc-8T3" id="WMc-y1-JFg"/>
                                     <outlet property="nodeDataLabel" destination="hHJ-Fi-byd" id="AK6-FO-emT"/>
-                                    <outlet property="saperatorView" destination="Hdd-G8-3pH" id="hFN-uC-Kgb"/>
+                                    <outlet property="saperatorView" destination="cXB-R0-60n" id="Bqf-lu-nL1"/>
                                     <outlet property="toggleImageView" destination="AvC-wJ-UHp" id="OYG-c9-1eD"/>
                                 </connections>
                             </tableViewCell>

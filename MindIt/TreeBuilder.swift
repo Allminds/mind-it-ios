@@ -33,6 +33,11 @@ class TreeBuilder {
         let left : [String]? = root?.getLeft()
         let right : [String]? = root?.getRight()
         
+        if(right?.count == 0) {
+            presenterDelegate?.lastRightNode = (root?.getId())!
+        }
+        
+        
         if(root?.getNodeState() == Config.UNDEFINED) {
             root?.setNodeState(Config.EXPANDED)
         }
@@ -60,11 +65,12 @@ class TreeBuilder {
                     rightNode?.setNodeState(Config.CHILD_NODE)
                 }
                 treeNodes.append(rightNode!)
-                    
+                
                 if(isCalledFirstTime == false && rightNode?.getNodeState() == Config.EXPANDED) {
                     traverseTree(rightNode , mindmapCollection: mindmapCollection , depth: 2)
                 }
             }
+            presenterDelegate?.lastRightNode = (treeNodes.last?.getId())!
         }
         
         
