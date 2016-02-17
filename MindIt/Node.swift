@@ -11,18 +11,18 @@ import SwiftDDP
 class Node: MeteorDocument {
     
     //MARK : Properties
-    var collection:String = "Mindmaps"
-    var id : String?
-    var parentId:String?
-    var position:String?
-    var rootId:String?
-    var left:[String]?
-    var right:[String]?
-    var name:String?
-    var childSubTree:[String]?
-    var index:Int?
-    var depth : Int?
-    var state: String = Config.UNDEFINED
+    private var collection:String = "Mindmaps"
+    private var id : String?
+    private var parentId:String?
+    private var position:String?
+    private var rootId:String?
+    private var left:[String]?
+    private var right:[String]?
+    private var name:String?
+    private var childSubTree:[String]?
+    private var index:Int?
+    private var depth : Int?
+    private var state: String = Config.UNDEFINED
     
     //MARK : Initialiser
     required init(id: String, fields: NSDictionary?) {

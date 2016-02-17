@@ -6,4 +6,7 @@
 //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
 //
 
-import Foundation
+
+protocol TreeBuilderDelegate {
+    var lastRightNode: String {get set}
+}

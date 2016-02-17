@@ -7,14 +7,14 @@
 //
 import Foundation
 
-class TableViewPresenter:NSObject, TrackerDelegate {
+class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //MARK : Properties
     var mindmap:[Node] = [Node]()
     private var meteorTracker:MeteorTracker!
     private weak var viewDelegate:PresenterDelegate!
-    
     var isViewInitialised = false
+    var lastRightNode = "";
     
     //MARK : Initializers
     init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker){
@@ -53,7 +53,7 @@ class TableViewPresenter:NSObject, TrackerDelegate {
             viewDelegate.didFailToConnectWithError("Invalid mindmap")
         }
         else if(meteorTracker.mindmapId != nil) {
-            let treeBuilder : TreeBuilder = TreeBuilder();
+            let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
             isViewInitialised = true
             viewDelegate.didConnectSuccessfully()
@@ -70,7 +70,7 @@ class TableViewPresenter:NSObject, TrackerDelegate {
             let node : Node = collection.findOne(id)!
             let rootId : String = node.getRootId()
             
-            let treeBuilder : TreeBuilder = TreeBuilder()
+            let treeBuilder : TreeBuilder = TreeBuilder(presenter: self)
             mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId)
             reloadView()
         }
@@ -87,8 +87,9 @@ class TableViewPresenter:NSObject, TrackerDelegate {
         else {
             childSubtree = node.getChildSubtree()
         }
+        var childNode : Node?
         for (index , nodeId) in (childSubtree?.enumerate())! {
-            let childNode: Node? = meteorTracker.getMindmap().findOne(nodeId)
+            childNode = meteorTracker.getMindmap().findOne(nodeId)
             if(childNode?.hasChilds() == true) {
                 childNode?.setNodeState(Config.COLLAPSED)
             }
@@ -98,6 +99,9 @@ class TableViewPresenter:NSObject, TrackerDelegate {
             childNode?.setDepth(node.getDepth()+1)
             
             mindmap.insert(childNode!, atIndex: indexOfNode + index)
+        }
+        if(self.lastRightNode == node.getId()){
+            self.lastRightNode = (childNode?.getId())!
         }
         reloadView();
     }
@@ -114,13 +118,19 @@ class TableViewPresenter:NSObject, TrackerDelegate {
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         let collection = meteorTracker.getMindmap()
         var childSubtreeCount : Int = 0
-        TreeBuilder.subTreeCount = 0
+        
+        TreeBuilder.subTreeNodes = [String]()
         TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
-        childSubtreeCount =  TreeBuilder.subTreeCount
+        childSubtreeCount =  TreeBuilder.subTreeNodes.count
         
         print("Child Nodes Count : " , childSubtreeCount)
         
         mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + childSubtreeCount))
+        
+        if(TreeBuilder.subTreeNodes.contains(self.lastRightNode)){
+            self.lastRightNode = node.getId();
+        }
+        
         reloadView();
     }
 
