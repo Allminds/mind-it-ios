@@ -97,25 +97,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a MindMap id or url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76g-06-X3b">
+                                <rect key="frame" x="208" y="285" width="184" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANb-07-pvo">
-                                <rect key="frame" x="244" y="255" width="113" height="30"/>
+                                <rect key="frame" x="244" y="344" width="113" height="30"/>
                                 <state key="normal" title="Import Mindmap"/>
                                 <connections>
                                     <segue destination="NuU-PK-STG" kind="show" id="kdJ-y0-Qgo"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a MindMap id or url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76g-06-X3b">
-                                <rect key="frame" x="208" y="174" width="184" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="JhG-Gu-ynh">
+                                <rect key="frame" x="251" y="142" width="98" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="bk1-ni-mzE"/>
+                                    <constraint firstAttribute="width" constant="98" id="x3V-NY-bUV"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="6IF-um-U1r"/>
-                            <constraint firstItem="ANb-07-pvo" firstAttribute="top" secondItem="76g-06-X3b" secondAttribute="bottom" constant="51" id="Rj2-DF-AbX"/>
-                            <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" constant="110" id="aBL-68-K16"/>
-                            <constraint firstItem="76g-06-X3b" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="dZL-0J-cCU"/>
+                            <constraint firstItem="JhG-Gu-ynh" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" constant="78" id="LXp-wf-5zR"/>
+                            <constraint firstItem="JhG-Gu-ynh" firstAttribute="centerX" secondItem="76g-06-X3b" secondAttribute="centerX" id="Ln8-Wc-ZWS"/>
+                            <constraint firstItem="JhG-Gu-ynh" firstAttribute="centerX" secondItem="ANb-07-pvo" secondAttribute="centerX" id="Nqf-5Y-fHK"/>
+                            <constraint firstItem="ANb-07-pvo" firstAttribute="top" secondItem="76g-06-X3b" secondAttribute="bottom" constant="29" id="flg-5X-bIa"/>
+                            <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="43" id="mD0-E0-Cot"/>
+                            <constraint firstItem="JhG-Gu-ynh" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="qtf-Fw-8MI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MindIt" id="T2l-6x-LWB"/>
@@ -147,4 +156,7 @@
             <point key="canvasLocation" x="228" y="313"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="49" height="50"/>
+    </resources>
 </document>
