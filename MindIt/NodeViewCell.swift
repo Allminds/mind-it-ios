@@ -36,9 +36,11 @@ class NodeViewCell: UITableViewCell {
         }
         saperatorView.hidden = (node.getId() != presenter.lastRightNode)
     
-         leftPaddingConstraint.constant = CGFloat(10 + node.getDepth() * 20)
+         leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
         
         if(node.isRoot()) {
+            nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
+            nodeDataLabel.textColor = UIColor.orangeColor()
             return
         }
         
