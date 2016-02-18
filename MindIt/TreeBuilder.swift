@@ -40,66 +40,45 @@ class TreeBuilder {
         }
         
         if(right != nil) {
-            for rightChildId in right! {
-                let rightNode = mindmapCollection.findOne(rightChildId)
-                if(rightNode == nil) {
-                    continue
-                }
-                
-              rightNode?.setDepth(1)
-              if(rightNode?.hasChilds() == true) {
-                
-                    if(rightNode?.getNodeState() == Config.UNDEFINED) {
-                        rightNode?.setNodeState(Config.COLLAPSED)
-                    }
-                    else if(rightNode?.getNodeState() == Config.CHILD_NODE) {
-                        rightNode?.setNodeState(Config.COLLAPSED)
-                    }
-                }
-                else {
-                    rightNode?.setNodeState(Config.CHILD_NODE)
-                }
-                treeNodes.append(rightNode!)
-                
-                if(isCalledFirstTime == false && rightNode?.getNodeState() == Config.EXPANDED) {
-                    traverseTree(rightNode , mindmapCollection: mindmapCollection , depth: 2)
-                }
-            }
+            getRootChilds(right! , mindmapCollection : mindmapCollection  , isCalledFirstTime:  isCalledFirstTime)
             presenterDelegate?.lastRightNode = (treeNodes.last?.getId())!
         }
         
-        
         if(left != nil) {
-            for leftChildId in left! {
-                let leftNode = mindmapCollection.findOne(leftChildId)
-                
-                if(leftNode == nil) {
-                    continue
-                }
-                
-                leftNode?.setDepth(1)
-                if(leftNode?.hasChilds() == true) {
-                    if(leftNode?.getNodeState() == Config.UNDEFINED) {
-                        leftNode?.setNodeState(Config.COLLAPSED)
-                    }
-                    else if(leftNode?.getNodeState() == Config.CHILD_NODE) {
-                        leftNode?.setNodeState(Config.COLLAPSED)
-                    }
-                }
-                else {
-                    leftNode?.setNodeState(Config.CHILD_NODE)
-                }
-                treeNodes.append(leftNode!)
-                
-                if(isCalledFirstTime == false && leftNode?.getNodeState() == Config.EXPANDED) {
-                    traverseTree(leftNode , mindmapCollection: mindmapCollection , depth: 2)
-                }
-            }
+            getRootChilds(left! , mindmapCollection: mindmapCollection, isCalledFirstTime: isCalledFirstTime)
         }
         
         return treeNodes;
     }
     
+    
+    private func getRootChilds(nodeIds : [String] , mindmapCollection : MindmapCollection , isCalledFirstTime : Bool ) {
+        for rightChildId in nodeIds {
+            let rightNode = mindmapCollection.findOne(rightChildId)
+            if(rightNode == nil) {
+                continue
+            }
+    
+            rightNode?.setDepth(1)
+            if(rightNode?.hasChilds() == true) {
+    
+                if(rightNode?.getNodeState() == Config.UNDEFINED) {
+                    rightNode?.setNodeState(Config.COLLAPSED)
+                }
+                else if(rightNode?.getNodeState() == Config.CHILD_NODE) {
+                    rightNode?.setNodeState(Config.COLLAPSED)
+                }
+            }
+            else {
+                rightNode?.setNodeState(Config.CHILD_NODE)
+            }
+            treeNodes.append(rightNode!)
+    
+            if(isCalledFirstTime == false && rightNode?.getNodeState() == Config.EXPANDED) {
+                traverseTree(rightNode , mindmapCollection: mindmapCollection , depth: 2)
+            }
+        }
+    }
     
     private func traverseTree(root : Node? ,mindmapCollection : MindmapCollection , depth: Int) {
         if(root != nil) {

@@ -42,8 +42,13 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         return mindmap.count
     }
     
-    func getNodeAt(index : Int) -> Node{
-        return mindmap[index];
+    func getNodeAt(index : Int) -> Node? {
+        if(index < mindmap.count) {
+            return mindmap[index]
+        }
+        else {
+            return nil
+        }
     }
     
     func connected(result: String) {
