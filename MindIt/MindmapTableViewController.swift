@@ -35,7 +35,9 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     func reloadTableView() {
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
     }
     
     // MARK: - Table view data source
@@ -79,9 +81,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     func didConnectSuccessfully() {
         stopProgressBar()
-        dispatch_async(dispatch_get_main_queue(), {
-            self.reloadTableView()
-        })
+        self.reloadTableView()
     }
     
     func didFailToConnectWithError(error: String) {
@@ -104,8 +104,10 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     private func showProgressBar() {
-        self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
-        loader.show("Loading Mindmap...")
+        dispatch_async(dispatch_get_main_queue(), {
+            self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
+            self.loader.show("Loading Mindmap...")
+        })
     }
     
     private func stopProgressBar() {
@@ -115,10 +117,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     func updateChanges() {
-        dispatch_async(dispatch_get_main_queue(), {
             self.reloadTableView()
             //self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-        })
     }
     
     func giveAlert(errorMessage : String) {
