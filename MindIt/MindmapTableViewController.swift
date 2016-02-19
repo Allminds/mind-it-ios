@@ -55,9 +55,20 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NodeViewCell
         
         let node : Node? = presenter.getNodeAt(indexPath.row)
+        
+        
         if(node == nil) {
             cell.nodeDataLabel.text = Config.NETWORK_ERROR
-            giveAlert(Config.NETWORK_ERROR)
+            //giveAlert(Config.NETWORK_ERROR)
+        }
+        else if(indexPath.row == 0) {
+            //Root Element.
+            cell.nodeDataLabel.text = node?.getName()
+            cell.nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
+            cell.nodeDataLabel.textColor = UIColor.orangeColor()
+            cell.toggleImageView.image = UIImage()
+            cell.saperatorView.hidden = (node?.getId() != presenter.lastRightNode)
+            return cell
         }
         else {
             cell.setData(node!, presenter: presenter)

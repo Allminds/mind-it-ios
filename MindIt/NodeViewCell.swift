@@ -31,18 +31,14 @@ class NodeViewCell: UITableViewCell {
         
         if(node.getName() == ""){        // To add blank node on label
             nodeDataLabel.text = "  "
-        }else{
+        }
+        else
+        {
             nodeDataLabel.text = node.getName()
         }
-        saperatorView.hidden = (node.getId() != presenter.lastRightNode)
-    
-         leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
         
-        if(node.isRoot()) {
-            nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
-            nodeDataLabel.textColor = UIColor.orangeColor()
-            return
-        }
+        saperatorView.hidden = (node.getId() != presenter.lastRightNode)
+        leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
         
         switch(node.getNodeState()) {
             case Config.COLLAPSED:
