@@ -1,10 +1,3 @@
-//
-//  Loader.swift
-//  MindIt
-//
-//  Created by Swapnil Gaikwad on 16/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
 
 import UIKit
 
@@ -20,10 +13,10 @@ class Loader: UIView {
         activityIndicator.startAnimating()
         self.alpha = 0
         view.addSubview(self)
-
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.alpha = 1
-            })
+            
+        })
     }
     
     func hide() {

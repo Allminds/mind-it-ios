@@ -1,10 +1,3 @@
-//
-//  NodeTableViewCell.swift
-//  MindIt
-//
-//  Created by Swapnil Gaikwad on 09/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
 
 import UIKit
 
@@ -19,7 +12,6 @@ class NodeViewCell: UITableViewCell {
     
     @IBOutlet weak var saperatorView: UIView!
     
-    
     //MARK : Method
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -28,18 +20,15 @@ class NodeViewCell: UITableViewCell {
     func setData(node: Node, presenter : TableViewPresenter) {
         self.presenter = presenter
         self.node = node
-        
-        if(node.getName() == ""){        // To add blank node on label
+        if(node.getName() == "") {        // To add blank node on label
             nodeDataLabel.text = "  "
         }
         else
         {
             nodeDataLabel.text = node.getName()
         }
-        
         saperatorView.hidden = (node.getId() != presenter.lastRightNode)
         leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
-        
         switch(node.getNodeState()) {
             case Config.COLLAPSED:
                 toggleImageView.image = UIImage(named: Config.COLLAPSED)
@@ -63,13 +52,13 @@ class NodeViewCell: UITableViewCell {
     func imageClicked() {
         if(node?.getNodeState() == Config.EXPANDED) {
             //Collapse Node
-            presenter!.removeSubtree(node!)
+            presenter!.removeSubtree(node!)   //removes subtree of that node from tableview
             toggleImageView.image = UIImage(named: Config.COLLAPSED)
             node?.setNodeState(Config.COLLAPSED)
         }
         else if(node?.getNodeState() == Config.COLLAPSED) {
             //Expand Node
-            presenter!.addSubtree(node!)
+            presenter!.addSubtree(node!) //add subtree of that node to tableview
             toggleImageView.image = UIImage(named: Config.EXPANDED)
             node?.setNodeState(Config.EXPANDED)
         }

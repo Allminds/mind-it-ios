@@ -1,14 +1,6 @@
-//
-//  MindmapTableViewController.swift
-//  MindIt-IOS
-//
-//  Created by Swapnil Gaikwad on 08/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
 
 import UIKit
 import SwiftDDP
-
 class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     //MARK:Properties
@@ -20,7 +12,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     var mindmapId: String!
     
     //MARK : Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
@@ -40,8 +31,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         })
     }
     
-    // MARK: - Table view data source
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -52,7 +41,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cellIdentifier = "NodeViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NodeViewCell
         
@@ -88,7 +76,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         stopProgressBar()
         switch(error) {
         case Config.NETWORK_ERROR  :
-            //Render Error View
             print("Error in Network")
             giveAlert(Config.NETWORK_ERROR);
             break
@@ -99,7 +86,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             break
             
         default:
-            print("New Error found")
+           print("Something went wrong")
         }
     }
     

@@ -1,10 +1,3 @@
-//
-//  TreeBuilder.swift
-//  MindIt
-//
-//  Created by Swapnil Gaikwad on 12/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
 
 class TreeBuilder {
     private var treeNodes : [Node] = [Node]();
@@ -18,16 +11,12 @@ class TreeBuilder {
     
     func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String) -> [Node] {
         let root : Node? = mindmapCollection.findOne(rootId)
-        
         var isCalledFirstTime: Bool = true
-        
-        treeNodes.append(root!)
-        root?.setDepth(0);
-    
-        
         let left : [String]? = root?.getLeft()
         let right : [String]? = root?.getRight()
         
+        treeNodes.append(root!)
+        root?.setDepth(0);
         if(right?.count == 0) {
             presenterDelegate?.lastRightNode = (root?.getId())!
         }
@@ -103,7 +92,6 @@ class TreeBuilder {
                         nextChildNode?.setNodeState(Config.CHILD_NODE)
                     }
                 }
-                    //Code refactor
                 else if(nextChildNode?.getNodeState() == Config.CHILD_NODE ) {
                     if(nextChildNode?.hasChilds() == true) {
                         nextChildNode?.setNodeState(Config.COLLAPSED)

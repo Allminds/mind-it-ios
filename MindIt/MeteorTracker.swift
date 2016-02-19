@@ -1,17 +1,11 @@
-//
-//  MeteorTracker.swift
-//  MindIt-IOS
-//
-//  Created by Swapnil Gaikwad on 09/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
 
 import SwiftDDP
 import SystemConfiguration
 
 class MeteorTracker : CollectionDelegate {
+    
     //MARK : Properties
-    private let mindmap:MindmapCollection
+    private let mindmap: MindmapCollection
     private static var meteorTracker: MeteorTracker? = nil;
     
     weak var delagate : TrackerDelegate?
@@ -32,11 +26,9 @@ class MeteorTracker : CollectionDelegate {
         return meteorTracker!;
     }
     
-    
     func getMindmap() -> MindmapCollection {
         return mindmap;
     }
-    
     
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
@@ -66,7 +58,7 @@ class MeteorTracker : CollectionDelegate {
         delagate?.notifyDocumentChanged(id , fields: fields)
     }
     
-    func isConnectedToNetwork() -> Bool {
+    func isConnectedToNetwork() -> Bool {   //methos checks connectivity to network
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)

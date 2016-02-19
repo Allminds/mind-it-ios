@@ -1,11 +1,3 @@
-//
-//  Mindmap.swift
-//  MindIt-IOS
-//
-//  Created by Swapnil Gaikwad on 08/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
-
 import SwiftDDP
 
 class Node: MeteorDocument {
@@ -30,7 +22,6 @@ class Node: MeteorDocument {
         self.id = id
     }
     
-    //mark : Added new Code
     override func setValue(value: AnyObject?, forKey key: String) {
         switch(key) {
             
@@ -68,12 +59,15 @@ class Node: MeteorDocument {
             print("No Such element found : " , key);
         }
     }
-    func getName() -> String{
+    
+    func getName() -> String {
         return self.name!
     }
-    func getChildSubtree() -> [String]{
+    
+    func getChildSubtree() -> [String] {
         return self.childSubTree!
     }
+    
     func getRootId() -> String {
         if(isRoot()){
             return self.id!
@@ -82,15 +76,19 @@ class Node: MeteorDocument {
             return self.rootId!
         }
     }
+    
     func getLeft() -> [String]{
         return self.left!
     }
+    
     func getRight() -> [String]{
         return self.right!
     }
+    
     func getDepth() -> Int{
         return self.depth!
     }
+    
     func getNodeState() -> String {
         return state
     }
@@ -103,7 +101,7 @@ class Node: MeteorDocument {
         return right! + left!
     }
     
-    func isRoot() ->Bool{
+    func isRoot() ->Bool {
         if(self.parentId == nil && self.rootId == nil){
             return true;
         }
@@ -115,13 +113,12 @@ class Node: MeteorDocument {
     func setDepth(depth : Int) {
         self.depth = depth
     }
+    
     func setNodeState(state : String) {
         self.state = state
     }
     
-    
     func hasChilds() -> Bool {
-        //Root Element
         if(parentId == nil) {
             if(left?.count > 0 || right?.count > 0) {
                 return true
@@ -130,7 +127,6 @@ class Node: MeteorDocument {
                 return false
             }
         }
-        //For non - Root element.
         else if(childSubTree?.count == 0) {
             return false
         }

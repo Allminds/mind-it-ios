@@ -1,10 +1,4 @@
-//
-//  Presenter.swift
-//  MindIt-IOS
-//
-//  Created by Swapnil Gaikwad on 09/02/16.
-//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-//
+
 import Foundation
 
 class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
@@ -12,24 +6,25 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     //MARK : Properties
     var mindmap:[Node] = [Node]()
     private var meteorTracker:MeteorTracker!
-    private weak var viewDelegate:PresenterDelegate!
     var isViewInitialised = false
     var lastRightNode = "";
     
+    private weak var viewDelegate:PresenterDelegate!
+    
     //MARK : Initializers
-    init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker){
+    init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker) {
         super.init()
         self.viewDelegate = viewDelegate
         self.meteorTracker = meteorTracker
+        
         if(meteorTracker.isConnected) {
             meteorTracker.unsubscribe();
         }
         meteorTracker.delagate = self
     }
     
-    
     //MARK : Methods
-    func connectToServer(mindmapId: String){
+    func connectToServer(mindmapId: String) {
         if(meteorTracker.isConnectedToNetwork()) {
             meteorTracker.connectToServer(mindmapId)
         }
@@ -38,7 +33,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         }
     }
     
-    func getNodeCount() -> Int{
+    func getNodeCount() -> Int {
         return mindmap.count
     }
     
@@ -69,15 +64,13 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     }
     
     func notifyDocumentChanged(id : String , fields : NSDictionary?) {
-        if(isViewInitialised == true) {
-            // Call Build tree.
+          if(isViewInitialised == true) {
             let collection : MindmapCollection = meteorTracker.getMindmap()
             let node : Node = collection.findOne(id)!
             let rootId : String = node.getRootId()
-            
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self)
             mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId)
-            reloadView()
+            reloadTableView()
         }
     }
     
@@ -108,39 +101,25 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         if(self.lastRightNode == node.getId()){
             self.lastRightNode = (childNode?.getId())!
         }
-        reloadView();
+        reloadTableView();
     }
     
     //Collapse
     func removeSubtree(node : Node) {
-        if(node.isRoot() == true) {
-            mindmap = [Node]()
-            mindmap.append(node)
-            reloadView()
-            return
-        }
-        
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         let collection = meteorTracker.getMindmap()
-        var childSubtreeCount : Int = 0
-        
         TreeBuilder.subTreeNodes = [String]()
         TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
-        childSubtreeCount =  TreeBuilder.subTreeNodes.count
-        
-        print("Child Nodes Count : " , childSubtreeCount)
-        
-        mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + childSubtreeCount))
+        mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + TreeBuilder.subTreeNodes.count))
         
         if(TreeBuilder.subTreeNodes.contains(self.lastRightNode)){
             self.lastRightNode = node.getId();
         }
-        
-        reloadView();
+        reloadTableView();
     }
 
-    func reloadView(){
-        viewDelegate.updateChanges()    //reflect new changes to view
+    func reloadTableView(){
+        viewDelegate.updateChanges()
     }
     
 }

@@ -1,10 +1,3 @@
-    //
-    //  MindmapCollection.swift
-    //  MindIt
-    //
-    //  Created by Swapnil Gaikwad on 09/02/16.
-    //  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
-    //
     
     import SwiftDDP
     
@@ -24,7 +17,7 @@
             delegate.notifyDocumentChanged(id , fields:  fields)
         }
         
-        //Delete Will nerver be called (Soft delete)
+        //Delete Will nerver calle as we are only removing id of deleted node from parent's chaildsubtree ( Soft delete)
         override func documentWasRemoved(collection: String, id: String) {
             super.documentWasRemoved(collection, id: id)
             
