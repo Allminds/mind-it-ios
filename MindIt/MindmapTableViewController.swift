@@ -52,7 +52,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             //giveAlert(Config.NETWORK_ERROR)
         }
         else if(indexPath.row == 0) {
-            //Root Element.
             cell.nodeDataLabel.text = node?.getName()
             cell.nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
             cell.nodeDataLabel.textColor = UIColor.orangeColor()
@@ -61,6 +60,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             return cell
         }
         else {
+            cell.nodeDataLabel.font = UIFont.systemFontOfSize(16)
+            cell.nodeDataLabel.textColor = UIColor.blackColor()
             cell.setData(node!, presenter: presenter)
         }
         
