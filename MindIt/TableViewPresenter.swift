@@ -16,10 +16,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         super.init()
         self.viewDelegate = viewDelegate
         self.meteorTracker = meteorTracker
-        
-        if(meteorTracker.isConnected) {
-            meteorTracker.unsubscribe();
-        }
         meteorTracker.delagate = self
     }
     

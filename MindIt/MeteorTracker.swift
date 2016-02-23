@@ -10,7 +10,6 @@ class MeteorTracker : CollectionDelegate {
     
     weak var delagate : TrackerDelegate?
     var mindmapId:String?
-    var isConnected:Bool = false
     
     //MARK : Intialiser
     private init() {
@@ -32,14 +31,36 @@ class MeteorTracker : CollectionDelegate {
     
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
-            self.isConnected = true
-            self.subscribe(mindmapId)
+            if(self.mindmapId == nil) {
+                self.subscribe(mindmapId)
+            }
+            else if(self.mindmapId != mindmapId) {
+                self.resubscribe(mindmapId)
+            }
+            else {
+                self.subscribe(mindmapId)
+                print("No action in subscription.")
+                self.delagate!.connected(Config.CONNECTED)
+            }
         }
         return true
     }
     
+    private func resubscribe(newMindmapId : String) {
+        print("UnSubscribing ...")
+        Meteor.unsubscribe("mindmap") {
+            print("UnSubscribing Done..")
+            Meteor.subscribe("mindmap", params: [newMindmapId]) {
+                print("ReSubscribed Done..")
+                self.mindmapId = newMindmapId
+                self.mindmapSubscriptionIsReady(Config.CONNECTED)
+            }
+        }
+    }
+    
     private func subscribe(mindmapId : String) {
         Meteor.subscribe("mindmap" , params: [mindmapId]) {
+            print("Subscription Done.")
             self.mindmapId = mindmapId
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
         }
