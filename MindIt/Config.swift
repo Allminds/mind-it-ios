@@ -1,6 +1,6 @@
 struct Config {
     static let URL:String = "ws://www.mindit.xyz/websocket";
-    static let MINDMAPID = "kvF9fWZzhvvjtSxGg"
+    static let MINDMAPID = "WxGHceBnSHYbyfLgZ"
     static let CONNECTED = "Connected"
     static let NETWORK_ERROR = "Network error"
     static let COLLAPSED = "collapsed"

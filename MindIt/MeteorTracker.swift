@@ -31,48 +31,35 @@ class MeteorTracker : CollectionDelegate {
     
     func connectToServer(mindmapId: String) -> Bool {
         Meteor.connect(Config.URL) {
-            if(self.mindmapId == nil) {
-                self.subscribe(mindmapId)
-            }
-            else if(self.mindmapId != mindmapId) {
-                self.resubscribe(mindmapId)
-            }
-            else {
-                self.subscribe(mindmapId)
-                print("No action in subscription.")
-                self.delagate!.connected(Config.CONNECTED)
-            }
+            self.subscribe(mindmapId)
         }
         return true
     }
     
-    private func resubscribe(newMindmapId : String) {
-        print("UnSubscribing ...")
-        Meteor.unsubscribe("mindmap") {
-            print("UnSubscribing Done..")
-            Meteor.subscribe("mindmap", params: [newMindmapId]) {
-                print("ReSubscribed Done..")
-                self.mindmapId = newMindmapId
-                self.mindmapSubscriptionIsReady(Config.CONNECTED)
+    
+    private func subscribe(mindmapId : String) {
+        let result : String = Meteor.subscribe("mindmap" , params: [mindmapId]) {
+            self.mindmapId = mindmapId
+            self.mindmapSubscriptionIsReady(Config.CONNECTED)
+        }
+        
+        if(result.containsString("already subscribed")) {
+            Meteor.unsubscribe("mindmap") {
+                Meteor.subscribe("mindmap" , params: [mindmapId]) {
+                    self.mindmapSubscriptionIsReady(Config.CONNECTED)
+                }
             }
         }
     }
     
-    private func subscribe(mindmapId : String) {
-        Meteor.subscribe("mindmap" , params: [mindmapId]) {
-            print("Subscription Done.")
-            self.mindmapId = mindmapId
-            self.mindmapSubscriptionIsReady(Config.CONNECTED)
-        }
-    }
     
     private func mindmapSubscriptionIsReady(result : String) {
         print("Subscribed to mindmap " , mindmap.count);
-        delagate!.connected(result)
+        delagate?.connected(result)
     }
     
     func unsubscribe() {
-        Meteor.unsubscribe("mindmap")
+        //Meteor.unsubscribe("mindmap")
     }
     
     func notifyDocumentChanged(id: String , fields : NSDictionary?) {
