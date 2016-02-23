@@ -19,10 +19,11 @@ class MeteorTracker : CollectionDelegate {
     
     //MARK: Methods
     static func getInstance() -> MeteorTracker {
-        if(meteorTracker == nil) {
-            meteorTracker = MeteorTracker();
-        }
-        return meteorTracker!;
+//        if(meteorTracker == nil) {
+//            meteorTracker = MeteorTracker();
+//        }
+//        return meteorTracker!;
+        return MeteorTracker();
     }
     
     func getMindmap() -> MindmapCollection {
@@ -38,17 +39,9 @@ class MeteorTracker : CollectionDelegate {
     
     
     private func subscribe(mindmapId : String) {
-        let result : String = Meteor.subscribe("mindmap" , params: [mindmapId]) {
+        Meteor.subscribe("mindmap" , params: [mindmapId]) {
             self.mindmapId = mindmapId
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
-        }
-        
-        if(result.containsString("already subscribed")) {
-            Meteor.unsubscribe("mindmap") {
-                Meteor.subscribe("mindmap" , params: [mindmapId]) {
-                    self.mindmapSubscriptionIsReady(Config.CONNECTED)
-                }
-            }
         }
     }
     

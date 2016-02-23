@@ -50,7 +50,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         }
         else if(meteorTracker.mindmapId != nil) {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);
-            mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId!)
+            mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId! , previousMindmap: mindmap)
             isViewInitialised = true
             viewDelegate.didConnectSuccessfully()
         }
@@ -65,8 +65,9 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             let node : Node = collection.findOne(id)!
             let rootId : String = node.getRootId()
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self)
-            mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId)
+            mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId , previousMindmap: mindmap)
             reloadTableView()
+            
         }
     }
     

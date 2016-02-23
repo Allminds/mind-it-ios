@@ -87,7 +87,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             break
             
         default:
-           print("Something went wrong")
+           print("Something went wrong " , error)
         }
     }
     
@@ -110,7 +110,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     func giveAlert(errorMessage : String) {
-        let refreshAlert = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let refreshAlert : UIAlertController = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
             //print("Handle Ok logic here")

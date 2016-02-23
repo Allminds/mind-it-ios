@@ -9,7 +9,9 @@ class TreeBuilder {
         self.presenterDelegate = presenter
     }
     
-    func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String) -> [Node] {
+    func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String , previousMindmap : [Node]) -> [Node] {
+        setStates(mindmapCollection , previousMindmap : previousMindmap)
+        
         let root : Node? = mindmapCollection.findOne(rootId)
         var isCalledFirstTime: Bool = true
         let left : [String]? = root?.getLeft()
@@ -111,6 +113,16 @@ class TreeBuilder {
                     }
                 }
             }
+        }
+    }
+    
+    
+    
+    
+    func setStates(mindmapCollection : MindmapCollection , previousMindmap : [Node]) {
+        for arrayNode in previousMindmap {
+            let node : Node = mindmapCollection.findOne(arrayNode.getId())!
+            node.setNodeState(arrayNode.getNodeState())
         }
     }
     
