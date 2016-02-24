@@ -7,6 +7,10 @@
 		<dict>
 			<key>CFBundleURLName</key>
 			<string>com.thoughtworks.MindIt</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mindit.xyz</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>

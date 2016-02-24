@@ -73,7 +73,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //Expand
     func addSubtree(node : Node) {
-        let indexOfNode : Int = mindmap.indexOf(node)! + 1;
+        let indexOfNode : Int? = mindmap.indexOf(node);
         var childSubtree : [String]?
         
         if(node.isRoot()) {
@@ -93,7 +93,10 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             }
             childNode?.setDepth(node.getDepth()+1)
             
-            mindmap.insert(childNode!, atIndex: indexOfNode + index)
+            if(childNode != nil && indexOfNode != nil) {
+                mindmap.insert(childNode!, atIndex: indexOfNode! + index + 1)
+            }
+            
         }
         if(self.lastRightNode == node.getId()){
             self.lastRightNode = (childNode?.getId())!
@@ -106,7 +109,9 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         let indexOfNode : Int = mindmap.indexOf(node)! + 1;
         let collection = meteorTracker.getMindmap()
         TreeBuilder.subTreeNodes = [String]()
+        //Set SubTreeNodes
         TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
+        //Display SubTreeNodes
         mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + TreeBuilder.subTreeNodes.count))
         
         if(TreeBuilder.subTreeNodes.contains(self.lastRightNode)){
