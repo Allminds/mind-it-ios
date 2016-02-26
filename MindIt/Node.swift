@@ -3,18 +3,17 @@ import SwiftDDP
 class Node: MeteorDocument {
     
     //MARK : Properties
-    private var collection:String = "Mindmaps"
-    private var id : String?
-    private var parentId:String?
-    private var position:String?
-    private var rootId:String?
-    private var left:[String]?
-    private var right:[String]?
-    private var name:String?
-    private var childSubTree:[String]?
-    private var index:Int?
-    private var depth : Int?
-    private var state: String = Config.UNDEFINED
+    var id : String?
+    var parentId:String?
+    var position:String?
+    var rootId:String?
+    var left:[String]?
+    var right:[String]?
+    var name:String?
+    var childSubTree:[String]?
+    var index:Int?
+    var depth : Int?
+    var state: String = Config.UNDEFINED
     
     //MARK : Initialiser
     required init(id: String, fields: NSDictionary?) {
@@ -86,6 +85,9 @@ class Node: MeteorDocument {
     }
     
     func getDepth() -> Int{
+        if(self.depth == nil) {
+            self.depth = 0
+        }
         return self.depth!
     }
     
@@ -101,13 +103,8 @@ class Node: MeteorDocument {
         return right! + left!
     }
     
-    func isRoot() ->Bool {
-        if(self.parentId == nil && self.rootId == nil){
-            return true;
-        }
-        else{
-            return false;
-        }
+    func isRoot() -> Bool {
+        return self.rootId == nil
     }
     
     func setDepth(depth : Int) {
@@ -119,19 +116,11 @@ class Node: MeteorDocument {
     }
     
     func hasChilds() -> Bool {
-        if(parentId == nil) {
-            if(left?.count > 0 || right?.count > 0) {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-        else if(childSubTree?.count == 0) {
-            return false
+        if(isRoot()) {
+            return getRootSubTree().count > 0
         }
         else {
-            return true
+            return childSubTree?.count > 0
         }
     }
 }
