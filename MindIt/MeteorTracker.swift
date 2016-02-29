@@ -19,10 +19,6 @@ class MeteorTracker : CollectionDelegate {
     
     //MARK: Methods
     static func getInstance() -> MeteorTracker {
-//        if(meteorTracker == nil) {
-//            meteorTracker = MeteorTracker();
-//        }
-//        return meteorTracker!;
         return MeteorTracker();
     }
     
@@ -41,8 +37,7 @@ class MeteorTracker : CollectionDelegate {
     private func subscribe(mindmapId : String) {
         Meteor.subscribe("mindmap" , params: [mindmapId]) {
             self.mindmapId = mindmapId
-            let node : Node = Node(id: Meteor.client.getId() , fields: ["name" : "Demo Node" , "rootId" : "mWsWAJ7C8cK3RfhLE" , "parentId" : "mWsWAJ7C8cK3RfhLE" , "childSubTree" : [] , "left" : [] , "right" : [] , "position" : "right"])
-            self.mindmap.insert(node)
+
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
         }
     }
