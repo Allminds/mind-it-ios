@@ -27,6 +27,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     override func viewWillDisappear(animated: Bool) {
         presenter.unsubscribe()
+        presenter = TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
     }
     
     func reloadTableView() {

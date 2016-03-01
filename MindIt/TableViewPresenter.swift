@@ -50,6 +50,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         }
         else if(meteorTracker.mindmapId != nil) {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);
+            
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId! , previousMindmap: mindmap)
             isViewInitialised = true
             viewDelegate.didConnectSuccessfully()
