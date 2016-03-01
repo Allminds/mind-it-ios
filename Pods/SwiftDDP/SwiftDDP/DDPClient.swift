@@ -382,14 +382,12 @@ public class DDPClient: NSObject {
     
     // Iterates over the Dictionary of subscriptions to find a subscription by name
     internal func findSubscription(name:String) -> (id:String, name:String, ready:Bool)? {
-        subscriptions.removeAll()
+        for subscription in subscriptions.values {
+            if (name == subscription.name) {
+                return subscription
+            }
+        }
         return nil
-//        for subscription in subscriptions.values {
-//            if (name == subscription.name) {
-//                return subscription
-//            }
-//        }
-//        return nil
     }
     
     //

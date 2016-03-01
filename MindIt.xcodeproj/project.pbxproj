@@ -28,7 +28,7 @@
 		41AE17BC1C69FBEB002A74D1 /* NodeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
 		41EE14D71C6F576D002C702A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EE14D61C6F576D002C702A /* Assets.xcassets */; };
-		69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */; };
+		A0D529A9DAB864154128F6B8 /* Pods_MindIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455BB334644BE49B48786465 /* Pods_MindIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.debug.xcconfig"; sourceTree = "<group>"; };
+		3C7B4861459609F3CE9F7F9E /* Pods-MindIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.debug.xcconfig"; sourceTree = "<group>"; };
 		412431871C6D07D8007A7E81 /* PresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterDelegate.swift; sourceTree = "<group>"; };
 		412431891C6D08F0007A7E81 /* TrackerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerDelegate.swift; sourceTree = "<group>"; };
 		415BBA2B1C69EA770014F6FC /* MindIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,8 +77,8 @@
 		41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
 		41EE14D61C6F576D002C702A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.release.xcconfig"; sourceTree = "<group>"; };
+		455BB334644BE49B48786465 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC88581C3DFDD755438F9DC /* Pods-MindIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-MindIt/Pods-MindIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69E345BF5544A72F16590F17 /* Pods_MindIt.framework in Frameworks */,
+				A0D529A9DAB864154128F6B8 /* Pods_MindIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2C2F0DF67205A5EB9977F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				455BB334644BE49B48786465 /* Pods_MindIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		415BBA221C69EA770014F6FC = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +122,8 @@
 				415BBA421C69EA770014F6FC /* MindItTests */,
 				415BBA4D1C69EA770014F6FC /* MindItUITests */,
 				415BBA2C1C69EA770014F6FC /* Products */,
-				8A9E1BAF047398BC6325C3E9 /* Pods */,
-				EB248A7160CFF005A3F1568D /* Frameworks */,
+				629CDB4556B2897A9E08B442 /* Pods */,
+				2B2C2F0DF67205A5EB9977F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,21 +222,13 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		8A9E1BAF047398BC6325C3E9 /* Pods */ = {
+		629CDB4556B2897A9E08B442 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */,
-				CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */,
+				3C7B4861459609F3CE9F7F9E /* Pods-MindIt.debug.xcconfig */,
+				7CC88581C3DFDD755438F9DC /* Pods-MindIt.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		EB248A7160CFF005A3F1568D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9C35EED14358DE4B511BC208 /* Pods_MindIt.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,12 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 415BBA531C69EA770014F6FC /* Build configuration list for PBXNativeTarget "MindIt" */;
 			buildPhases = (
-				B4B0711896852B2818841963 /* Check Pods Manifest.lock */,
+				AF268F96B6DB5584CFD13BAB /* Check Pods Manifest.lock */,
 				415BBA271C69EA770014F6FC /* Sources */,
 				415BBA281C69EA770014F6FC /* Frameworks */,
 				415BBA291C69EA770014F6FC /* Resources */,
-				2AED9E894902E3F100520F47 /* Embed Pods Frameworks */,
-				8A685CBA4B799A8A7EE8DD6F /* Copy Pods Resources */,
+				202F47E6A57CD8DE793E9A4E /* Embed Pods Frameworks */,
+				AE174DDE11022486812C19CA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -365,7 +365,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2AED9E894902E3F100520F47 /* Embed Pods Frameworks */ = {
+		202F47E6A57CD8DE793E9A4E /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -380,7 +380,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MindIt/Pods-MindIt-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8A685CBA4B799A8A7EE8DD6F /* Copy Pods Resources */ = {
+		AE174DDE11022486812C19CA /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -395,7 +395,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MindIt/Pods-MindIt-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B4B0711896852B2818841963 /* Check Pods Manifest.lock */ = {
+		AF268F96B6DB5584CFD13BAB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -552,7 +552,7 @@
 		};
 		415BBA541C69EA770014F6FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 327BDDC98D1373CBDB046DD0 /* Pods-MindIt.debug.xcconfig */;
+			baseConfigurationReference = 3C7B4861459609F3CE9F7F9E /* Pods-MindIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MindIt/Info.plist;
@@ -564,7 +564,7 @@
 		};
 		415BBA551C69EA770014F6FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD7A4D76B1FD4179D2F68D13 /* Pods-MindIt.release.xcconfig */;
+			baseConfigurationReference = 7CC88581C3DFDD755438F9DC /* Pods-MindIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MindIt/Info.plist;
