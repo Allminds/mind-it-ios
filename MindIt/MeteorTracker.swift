@@ -8,7 +8,7 @@ class MeteorTracker : CollectionDelegate {
     private let mindmap: MindmapCollection
     private static var meteorTracker: MeteorTracker? = nil;
     
-    weak var delagate : TrackerDelegate?
+    weak var delegate : TrackerDelegate?
     var mindmapId:String?
     
     //MARK : Intialiser
@@ -19,7 +19,10 @@ class MeteorTracker : CollectionDelegate {
     
     //MARK: Methods
     static func getInstance() -> MeteorTracker {
-        return MeteorTracker();
+        if(meteorTracker == nil) {
+            meteorTracker = MeteorTracker()
+        }
+        return meteorTracker!
     }
     
     func getMindmap() -> MindmapCollection {
@@ -27,12 +30,17 @@ class MeteorTracker : CollectionDelegate {
     }
     
     func connectToServer(mindmapId: String) -> Bool {
-        Meteor.connect(Config.URL) {
+        if(mindmapId == Config.FIRST_CONNECT && self.mindmapId == nil) {
+            return false
+        }
+        else if(mindmapId == Config.FIRST_CONNECT && self.mindmapId != nil) {
+            self.subscribe(self.mindmapId!)
+        }
+        else {
             self.subscribe(mindmapId)
         }
         return true
     }
-    
     
     private func subscribe(mindmapId : String) {
         let result : String = Meteor.subscribe("mindmap" , params: [mindmapId]) {
@@ -49,18 +57,17 @@ class MeteorTracker : CollectionDelegate {
         }
     }
     
-    
     private func mindmapSubscriptionIsReady(result : String) {
         print("Subscribed to mindmap " , mindmap.count);
-        delagate?.connected(result)
+        delegate?.connected(result)
     }
     
     func unsubscribe() {
-        //Meteor.unsubscribe("mindmap")
+        Meteor.unsubscribe("mindmap")
     }
     
     func notifyDocumentChanged(id: String , fields : NSDictionary?) {
-        delagate?.notifyDocumentChanged(id , fields: fields)
+        delegate?.notifyDocumentChanged(id , fields: fields)
     }
     
     func isConnectedToNetwork() -> Bool {   //methos checks connectivity to network

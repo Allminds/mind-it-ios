@@ -25,6 +25,10 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         presenter.connectToServer(mindmapId)
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        presenter.unsubscribe()
+    }
+    
     func reloadTableView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()

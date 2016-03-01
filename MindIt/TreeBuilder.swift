@@ -121,8 +121,10 @@ class TreeBuilder {
     
     func setStates(mindmapCollection : MindmapCollection , previousMindmap : [Node]) {
         for arrayNode in previousMindmap {
-            let node : Node = mindmapCollection.findOne(arrayNode.getId())!
-            node.setNodeState(arrayNode.getNodeState())
+            let node : Node? = mindmapCollection.findOne(arrayNode.getId())
+            if(node != nil) {
+                node!.setNodeState(arrayNode.getNodeState())
+            }
         }
     }
     

@@ -16,7 +16,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         super.init()
         self.viewDelegate = viewDelegate
         self.meteorTracker = meteorTracker
-        meteorTracker.delagate = self
+        meteorTracker.delegate = self
     }
     
     //MARK : Methods
@@ -124,4 +124,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         viewDelegate.updateChanges()
     }
     
+    func unsubscribe() {
+        meteorTracker.unsubscribe()
+    }
 }

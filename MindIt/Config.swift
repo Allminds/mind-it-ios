@@ -7,4 +7,5 @@ struct Config {
     static let EXPANDED = "expaned"
     static let CHILD_NODE = "child"
     static let UNDEFINED = "undefinded"
+    static let FIRST_CONNECT = "first connection"
 }
