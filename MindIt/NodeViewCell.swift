@@ -9,7 +9,6 @@ class NodeViewCell: UITableViewCell {
     @IBOutlet weak var nodeDataLabel: UILabel!
     @IBOutlet weak var toggleImageView: UIImageView!
     @IBOutlet weak var leftPaddingConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var saperatorView: UIView!
     
     //MARK : Method
@@ -20,16 +19,38 @@ class NodeViewCell: UITableViewCell {
     func setData(node: Node, presenter : TableViewPresenter) {
         self.presenter = presenter
         self.node = node
-        if(node.getName() == "") {        // To add blank node on label
-            nodeDataLabel.text = "  "
+        
+        self.setName(node.getName())
+        
+        if(node.isRoot()) {
+            self.nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
+            self.nodeDataLabel.textColor = UIColor.orangeColor()
+            self.toggleImageView.image = UIImage()
         }
-        else
-        {
-            nodeDataLabel.text = node.getName()
+        else {
+            self.nodeDataLabel.font = UIFont.systemFontOfSize(16)
+            self.nodeDataLabel.textColor = UIColor.blackColor()
+            self.setNodeImage(node.getNodeState())
+            
+            let tap = UITapGestureRecognizer(target: self, action: Selector("imageClicked"))
+            toggleImageView.addGestureRecognizer(tap)
+            toggleImageView.userInteractionEnabled = true
         }
         saperatorView.hidden = (node.getId() != presenter.lastRightNode)
         leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
-        switch(node.getNodeState()) {
+    }
+    
+    func setName(nodeName : String) {
+        if(nodeName != "") {        // To add blank node on label
+            nodeDataLabel.text = nodeName
+        }
+        else {
+            nodeDataLabel.text = "  "
+        }
+    }
+    
+    func setNodeImage(state : String) {
+        switch(state) {
             case Config.COLLAPSED:
                 toggleImageView.image = UIImage(named: Config.COLLAPSED)
                 break
@@ -42,10 +63,6 @@ class NodeViewCell: UITableViewCell {
             default:
                 print("Didn't get state.")
         }
-        
-        let tap = UITapGestureRecognizer(target: self, action: Selector("imageClicked"))
-        toggleImageView.addGestureRecognizer(tap)
-        toggleImageView.userInteractionEnabled = true
     }
     
     //Expand Collapse

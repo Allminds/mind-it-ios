@@ -47,7 +47,7 @@ class MeteorTracker : CollectionDelegate {
                 self.mindmapId = mindmapId
                 self.mindmapSubscriptionIsReady(Config.CONNECTED)
             }
-            
+            print("Result : " , result)
             if(result.containsString("already subscribed")) {
                 Meteor.unsubscribe("mindmap") {
                     Meteor.subscribe("mindmap" , params: [mindmapId]) {

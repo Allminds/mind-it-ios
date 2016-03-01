@@ -51,25 +51,12 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         
         let node : Node? = presenter.getNodeAt(indexPath.row)
         
-        
         if(node == nil) {
             cell.nodeDataLabel.text = Config.NETWORK_ERROR
-            //giveAlert(Config.NETWORK_ERROR)
-        }
-        else if(indexPath.row == 0) {
-            cell.nodeDataLabel.text = node?.getName()
-            cell.nodeDataLabel.font = UIFont.boldSystemFontOfSize(20)
-            cell.nodeDataLabel.textColor = UIColor.orangeColor()
-            cell.toggleImageView.image = UIImage()
-            cell.saperatorView.hidden = (node?.getId() != presenter.lastRightNode)
-            return cell
         }
         else {
-            cell.nodeDataLabel.font = UIFont.systemFontOfSize(16)
-            cell.nodeDataLabel.textColor = UIColor.blackColor()
             cell.setData(node!, presenter: presenter)
         }
-        
         return cell
     }
     
