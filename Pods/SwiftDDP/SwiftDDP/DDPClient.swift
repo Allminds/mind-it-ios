@@ -375,7 +375,7 @@ public class DDPClient: NSObject {
         let id = String(name.hashValue)
         if let subData = findSubscription(name) {
             log.info("You are already subscribed to \(name)")
-            return  subData.id
+            return  subData.id + "already subscribed"
         }
         return sub(id, name: name, params: params, callback: callback)
     }

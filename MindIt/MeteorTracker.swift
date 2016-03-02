@@ -43,9 +43,17 @@ class MeteorTracker : CollectionDelegate {
     }
     
     private func subscribe(mindmapId : String) {
-        Meteor.subscribe("mindmap" , params: [mindmapId]) {
+        let result : String = Meteor.subscribe("mindmap" , params: [mindmapId]) {
             self.mindmapId = mindmapId
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
+        }
+        
+        if(result.containsString("already subscribed")) {
+            Meteor.unsubscribe("mindmap") {
+                Meteor.subscribe("mindmap", params: [mindmapId]) {
+                    self.mindmapSubscriptionIsReady(Config.CONNECTED)
+                }
+            }
         }
     }
     
