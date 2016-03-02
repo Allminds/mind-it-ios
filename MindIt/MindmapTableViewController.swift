@@ -11,6 +11,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     var presenter: TableViewPresenter!
     var mindmapId: String!
     
+    private var isFullyDisappeared : Bool = true
+    
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,16 +20,26 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        showProgressBar()
-        presenter.connectToServer(mindmapId)
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if(isFullyDisappeared == true) {
+            isFullyDisappeared = false
+            showProgressBar()
+            presenter.connectToServer(mindmapId)
+        }
+        else {
+            self.reloadTableView()
+        }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        isFullyDisappeared = true
         presenter.unsubscribe()
-        presenter = TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
     }
     
     func reloadTableView() {
