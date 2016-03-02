@@ -49,10 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //Render MindmapTableView
             if(id != "") {
-                let mindmapTableViewController : MindmapTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MindmapTableView") as! MindmapTableViewController
+                let mindmapTableViewController : HomeViewController = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! HomeViewController
                 
                 navigationVC.pushViewController(mindmapTableViewController, animated: false)
-                mindmapTableViewController.mindmapId = id
+                mindmapTableViewController.mindmapIdInURL = id
             }
             self.window?.rootViewController = navigationVC
             self.window?.makeKeyAndVisible()

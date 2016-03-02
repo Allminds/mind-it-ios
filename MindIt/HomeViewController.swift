@@ -6,12 +6,18 @@ class HomeViewController: UIViewController {
     //MARK : Properties
     @IBOutlet weak var importMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
+    var mindmapIdInURL : String?
     
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         //Default Id
-        mindmapIdTextField.text = Config.MINDMAPID
+        if(mindmapIdInURL == nil) {
+            mindmapIdTextField.text = Config.MINDMAPID
+        }
+        else {
+            mindmapIdTextField.text = mindmapIdInURL
+        }
     }
     
     // MARK: - Navigation
