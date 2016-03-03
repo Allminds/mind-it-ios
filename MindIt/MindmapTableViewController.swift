@@ -85,9 +85,9 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             giveAlert(Config.NETWORK_ERROR);
             break
             
-        case "Invalid mindmap":
+        case Config.INVALID_MINDMAP:
             print("Invalid mindmap")
-            giveAlert("Invalid mindmap")
+            giveAlert(Config.INVALID_MINDMAP)
             break
             
         default:
@@ -115,9 +115,18 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     func giveAlert(errorMessage : String) {
         let refreshAlert : UIAlertController = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+        meteorTracker.subscriptionSuccess = false
+        meteorTracker.unsubscribe()
         
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            //print("Handle Ok logic here")
+            if(errorMessage == Config.NETWORK_ERROR){
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+            else if(errorMessage == Config.INVALID_MINDMAP){
+                //Invalid Mindmap
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
