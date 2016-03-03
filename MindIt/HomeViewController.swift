@@ -12,6 +12,13 @@ class HomeViewController: UIViewController {
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let logo = UIImage(named: "header")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        
+
+        
         //Default Id
         if(mindmapIdInURL == nil) {
             mindmapIdTextField.text = Config.MINDMAPID
@@ -34,7 +41,16 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (sender === openMindmap) {
-            let mindmapId : String = mindmapIdTextField.text!;
+            let text : String = mindmapIdTextField.text!;
+            let mindmapId : String
+            
+            if(text.containsString("mindit.xyz/create/")) {
+                let urlSpilt : [String] = text.componentsSeparatedByString("/")
+                mindmapId = urlSpilt[urlSpilt.count - 1]
+            }
+            else {
+                mindmapId = text
+            }
             //Passing mindmap ID
             let tableViewController = segue.destinationViewController as! MindmapTableViewController;
             tableViewController.mindmapId = mindmapId

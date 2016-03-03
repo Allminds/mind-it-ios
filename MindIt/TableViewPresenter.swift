@@ -46,7 +46,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count
         if(count == 0) {
-            viewDelegate.didFailToConnectWithError("Invalid mindmap")
+            viewDelegate.didFailToConnectWithError(Config.INVALID_MINDMAP)
         }
         else if(meteorTracker.mindmapId != nil) {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);

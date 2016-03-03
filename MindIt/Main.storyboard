@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="1825" y="313"/>
         </scene>
-        <!--MindIt-->
+        <!--Home View Controller-->
         <scene sceneID="zsB-wf-8kN">
             <objects>
                 <viewController storyboardIdentifier="HomeView" id="P4D-24-yPJ" customClass="HomeViewController" customModule="MindIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -134,7 +134,7 @@
                             <constraint firstItem="JhG-Gu-ynh" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="xRH-0O-W0x"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MindIt" id="T2l-6x-LWB"/>
+                    <navigationItem key="navigationItem" id="T2l-6x-LWB"/>
                     <connections>
                         <outlet property="mindmapIdTextField" destination="76g-06-X3b" id="0Dj-nP-woe"/>
                         <outlet property="openMindmap" destination="ANb-07-pvo" id="BVs-i2-9HP"/>

@@ -91,7 +91,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
             break
             
         default:
-           print("Something went wrong " , error)
+            giveAlert(Config.UNKNOWN_ERROR)
         }
     }
     
@@ -110,27 +110,16 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     
     func updateChanges() {
             self.reloadTableView()
-            //self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
     }
     
     func giveAlert(errorMessage : String) {
-        let refreshAlert : UIAlertController = UIAlertController(title: "Refresh", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let refreshAlert : UIAlertController = UIAlertController(title: "", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
         meteorTracker.subscriptionSuccess = false
         meteorTracker.unsubscribe()
         
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            if(errorMessage == Config.NETWORK_ERROR){
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
-            else if(errorMessage == Config.INVALID_MINDMAP){
-                //Invalid Mindmap
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
-            //print("Handle Cancel Logic here")
+            self.navigationController?.popToRootViewControllerAnimated(false)
         }))
         
         presentViewController(refreshAlert, animated: true, completion: nil)
