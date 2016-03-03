@@ -4,7 +4,8 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK : Properties
-    @IBOutlet weak var importMindmap: UIButton!
+    
+    @IBOutlet weak var openMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
     var mindmapIdInURL : String?
     
@@ -22,7 +23,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Navigation
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if(sender === importMindmap) {
+        if(sender === openMindmap) {
             let text = mindmapIdTextField.text
             if(text == "") {
                 return false
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (sender === importMindmap) {
+        if (sender === openMindmap) {
             let mindmapId : String = mindmapIdTextField.text!;
             //Passing mindmap ID
             let tableViewController = segue.destinationViewController as! MindmapTableViewController;
