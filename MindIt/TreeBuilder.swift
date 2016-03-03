@@ -17,7 +17,10 @@ class TreeBuilder {
         let left : [String]? = root?.getLeft()
         let right : [String]? = root?.getRight()
         
-     
+        if(root == nil) {
+            return treeNodes
+        }
+        
         treeNodes.append(root!)
         root?.setDepth(0);
         if(right?.count == 0) {
