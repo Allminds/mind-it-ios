@@ -39,4 +39,14 @@ class HomeViewController: UIViewController {
             tableViewController.mindmapId = mindmapId
         }
     }
+    override func viewWillAppear(animated: Bool) {
+        let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+        if(meteorTracker.mindmapId == nil){
+            mindmapIdTextField.text = Config.MINDMAPID
+        }
+        else{
+            mindmapIdTextField.text = meteorTracker.mindmapId
+        }
+    
+    }
 }
