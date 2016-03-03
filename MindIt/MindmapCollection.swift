@@ -4,7 +4,6 @@
     class MindmapCollection: MeteorCollection<Node> {
         
         var delegate : CollectionDelegate!
-        
         //MARK: Initialisers
         init() {
             super.init(name: "Mindmaps")
@@ -14,7 +13,10 @@
         //MARK : Methods
         override func documentWasAdded(collection: String, id: String, fields: NSDictionary?) {
             super.documentWasAdded(collection, id: id, fields: fields)
-            delegate.notifyDocumentChanged(id , fields:  fields)
+            if(MeteorTracker.getInstance().subscriptionSuccess){
+                delegate.notifyDocumentChanged(id , fields:  fields)
+            }
+        
         }
         
         //Delete Will nerver calle as we are only removing id of deleted node from parent's chaildsubtree ( Soft delete)

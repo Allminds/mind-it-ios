@@ -10,7 +10,7 @@ class MeteorTracker : CollectionDelegate {
     
     weak var delegate : TrackerDelegate?
     var mindmapId:String?
-    
+    var subscriptionSuccess : Bool = false;
     //MARK : Intialiser
     private init() {
         mindmap  = MindmapCollection()
@@ -58,6 +58,7 @@ class MeteorTracker : CollectionDelegate {
     }
     
     private func mindmapSubscriptionIsReady(result : String) {
+        self.subscriptionSuccess = true;
         print("Subscribed to mindmap " , mindmap.count);
         delegate?.connected(result)
     }
@@ -85,5 +86,5 @@ class MeteorTracker : CollectionDelegate {
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         return (isReachable && !needsConnection)
     }
-    
+
 }
