@@ -1,7 +1,7 @@
 
 import UIKit
 import SwiftDDP
-class MindmapTableViewController: UITableViewController , PresenterDelegate {
+class MindmapTableViewController: UITableViewController , PresenterDelegate, UIAlertViewDelegate {
     
     //MARK:Properties
     var loader: Loader!
@@ -118,16 +118,17 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     }
     
     func giveAlert(errorMessage : String) {
-        let refreshAlert : UIAlertController = UIAlertController(title: "", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
         meteorTracker.subscriptionSuccess = false
         meteorTracker.unsubscribe()
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            self.navigationController?.popToRootViewControllerAnimated(false)
-        }))
-        
-        presentViewController(refreshAlert, animated: true, completion: nil)
+        UIAlertView(title: errorMessage, message: nil, delegate: self, cancelButtonTitle: "OK").show()
     }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        alertView.removeFromSuperview()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     
 }
