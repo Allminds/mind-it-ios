@@ -55,7 +55,7 @@ class Node: MeteorDocument {
             index = value as? Int;
             break
         default:
-            print("No Such element found : " , key);
+             break
         }
     }
     

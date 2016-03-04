@@ -59,7 +59,6 @@ class MeteorTracker : CollectionDelegate {
     
     private func mindmapSubscriptionIsReady(result : String) {
         self.subscriptionSuccess = true;
-        print("Subscribed to mindmap " , mindmap.count);
         delegate?.connected(result)
     }
     

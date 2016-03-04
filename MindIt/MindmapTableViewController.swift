@@ -90,12 +90,10 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
         stopProgressBar()
         switch(error) {
         case Config.NETWORK_ERROR  :
-            print("Error in Network")
             giveAlert(Config.NETWORK_ERROR);
             break
             
         case Config.INVALID_MINDMAP:
-            print("Invalid mindmap")
             giveAlert(Config.INVALID_MINDMAP)
             break
             

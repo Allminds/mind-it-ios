@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private func connectToServer(callback: ()-> Void) {
-        print("Calback : " , callback)
         if(isConnected == true) {
             callback()
             return

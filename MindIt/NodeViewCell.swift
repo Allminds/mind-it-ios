@@ -60,7 +60,8 @@ class NodeViewCell: UITableViewCell {
                 toggleImageView.image = UIImage(named: Config.CHILD_NODE)
                 break
             default:
-                print("Didn't get state.")
+                //print("Didn't get state.")
+            break
         }
     }
     
