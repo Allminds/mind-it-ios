@@ -16,6 +16,11 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let logo = UIImage(named: "header")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        
         presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidBecomeActive"), name: UIApplicationWillEnterForegroundNotification, object: nil)
         self.tableView.rowHeight = UITableViewAutomaticDimension
