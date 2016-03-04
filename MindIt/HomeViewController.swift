@@ -16,12 +16,9 @@ class HomeViewController: UIViewController {
         let logo = UIImage(named: "header")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        
-
-        
         //Default Id
         if(mindmapIdInURL == nil) {
-            mindmapIdTextField.text = Config.MINDMAPID
+            //mindmapIdTextField.text = Config.MINDMAPID
         }
         else {
             mindmapIdTextField.text = mindmapIdInURL
@@ -59,7 +56,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
         if(meteorTracker.mindmapId == nil){
-            mindmapIdTextField.text = Config.MINDMAPID
+            //mindmapIdTextField.text = Config.MINDMAPID
         }
         else{
             mindmapIdTextField.text = meteorTracker.mindmapId
