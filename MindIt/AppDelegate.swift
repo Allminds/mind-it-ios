@@ -66,17 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return id
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
-        print("did Become Active");
-        let mindmapId : String? = MeteorTracker.getInstance().mindmapId
-        if(mindmapId != nil){
-            Meteor.subscribe("mindmap",params: [mindmapId!])
-            
-        }
-    }
-    
     func applicationDidEnterBackground(application: UIApplication) {
-     Meteor.unsubscribe("mindmap")
-     MeteorTracker.getInstance().subscriptionSuccess = false;
+        Meteor.unsubscribe("mindmap")
+        MeteorTracker.getInstance().subscriptionSuccess = false;
     }
 }

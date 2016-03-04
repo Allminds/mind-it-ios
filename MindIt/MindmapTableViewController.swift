@@ -17,12 +17,17 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidBecomeActive"), name: UIApplicationWillEnterForegroundNotification, object: nil)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
     }
+    
+    func applicationDidBecomeActive() {
+        presenter.connectToServer(mindmapId)
+    }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if(isFullyDisappeared == true) {
             isFullyDisappeared = false
