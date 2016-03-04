@@ -302,7 +302,7 @@
 				TargetAttributes = {
 					415BBA2A1C69EA770014F6FC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8523BD9C43;
+						DevelopmentTeam = 9HK4QP6364;
 					};
 					415BBA3E1C69EA770014F6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -555,10 +555,14 @@
 			baseConfigurationReference = 3C7B4861459609F3CE9F7F9E /* Pods-MindIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MindIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.MindIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.MindIt.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -567,10 +571,14 @@
 			baseConfigurationReference = 7CC88581C3DFDD755438F9DC /* Pods-MindIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ThoughtWorks Ltd (9HK4QP6364)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ThoughtWorks Ltd (9HK4QP6364)";
 				INFOPLIST_FILE = MindIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.MindIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.MindIt.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

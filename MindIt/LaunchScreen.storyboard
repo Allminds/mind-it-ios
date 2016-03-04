@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,15 +14,54 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="mAc-ez-hRH">
+                                <rect key="frame" x="215" y="215" width="170" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="dVB-Ug-njW"/>
+                                    <constraint firstAttribute="height" constant="170" id="tj1-D7-fRO"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mAc-ez-hRH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8GI-YX-bSO"/>
+                            <constraint firstItem="mAc-ez-hRH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9eQ-AM-ixs"/>
+                            <constraint firstItem="mAc-ez-hRH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="200" id="AdF-LW-mYP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mAc-ez-hRH" secondAttribute="trailing" constant="200" id="P7S-ff-wAt"/>
+                            <constraint firstItem="mAc-ez-hRH" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="210" id="QX3-ya-hyp"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="mAc-ez-hRH" secondAttribute="bottom" constant="210" id="whU-1J-k7o"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="AdF-LW-mYP"/>
+                                <exclude reference="P7S-ff-wAt"/>
+                                <exclude reference="QX3-ya-hyp"/>
+                                <exclude reference="whU-1J-k7o"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="3S6-tf-sYn" id="Gvo-TD-LaN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="3S6-tf-sYn">
+                    <connections>
+                        <outlet property="delegate" destination="01J-lp-oVM" id="Ua3-xn-NMG"/>
+                        <outlet property="searchContentsController" destination="01J-lp-oVM" id="TnR-ku-dvV"/>
+                        <outlet property="searchResultsDataSource" destination="01J-lp-oVM" id="UUF-hZ-F0R"/>
+                        <outlet property="searchResultsDelegate" destination="01J-lp-oVM" id="7Ii-rD-ej1"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchscreen" width="125" height="125"/>
+    </resources>
 </document>
