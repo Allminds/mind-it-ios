@@ -10,7 +10,7 @@ class NodeViewCell: UITableViewCell {
     @IBOutlet weak var toggleImageView: UIImageView!
     @IBOutlet weak var leftPaddingConstraint: NSLayoutConstraint!
     @IBOutlet weak var saperatorView: UIView!
-    
+    @IBOutlet weak var imageContainer: UIView!
     //MARK : Method
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -33,11 +33,10 @@ class NodeViewCell: UITableViewCell {
             self.setNodeImage(node.getNodeState())
             
             let tap = UITapGestureRecognizer(target: self, action: Selector("imageClicked"))
-            toggleImageView.addGestureRecognizer(tap)
-            toggleImageView.userInteractionEnabled = true
+            imageContainer.addGestureRecognizer(tap)
         }
         saperatorView.hidden = (node.getId() != presenter.lastRightNode)
-        leftPaddingConstraint.constant = CGFloat(node.getDepth() * 20)
+        leftPaddingConstraint.constant = CGFloat((node.getDepth()-1) * 20)
     }
     
     func setName(nodeName : String) {
@@ -80,5 +79,7 @@ class NodeViewCell: UITableViewCell {
             node?.setNodeState(Config.EXPANDED)
         }
     }
+    
+    
 }
 
