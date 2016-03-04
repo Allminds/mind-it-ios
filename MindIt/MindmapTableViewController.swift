@@ -16,7 +16,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     //MARK : Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let logo = UIImage(named: "header")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
