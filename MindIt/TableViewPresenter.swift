@@ -8,7 +8,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     private var meteorTracker:MeteorTracker!
     var isViewInitialised = false
     var lastRightNode = "";
-    
     private weak var viewDelegate:PresenterDelegate!
     
     //MARK : Initializers
@@ -21,11 +20,22 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //MARK : Methods
     func connectToServer(mindmapId: String) {
+        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
+        
         if(meteorTracker.isConnectedToNetwork()) {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+            })
             meteorTracker.connectToServer(mindmapId)
         }
         else {
             viewDelegate.didFailToConnectWithError(Config.NETWORK_ERROR)
+        }
+    }
+    
+    func invalidateConnection() {
+        if(!(self.meteorTracker.subscriptionSuccess)){
+            self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
         }
     }
     
