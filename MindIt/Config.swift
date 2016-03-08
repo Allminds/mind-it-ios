@@ -12,4 +12,5 @@ struct Config {
     static let NETWORK_ERROR = "Please Check Your Network Connection"
     static let INVALID_MINDMAP = "Invalid mindmap URL"
     static let UNKNOWN_ERROR = "Something went wrong "
+    static let SUBSCRIPTION_NAME = "mindmap"
 }

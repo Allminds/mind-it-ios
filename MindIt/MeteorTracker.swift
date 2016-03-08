@@ -43,14 +43,14 @@ class MeteorTracker : CollectionDelegate {
     }
     
     private func subscribe(mindmapId : String) {
-        let result : String = Meteor.subscribe("mindmap" , params: [mindmapId]) {
+        let result : String = Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
             self.mindmapId = mindmapId
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
         }
         
         if(result.containsString("already subscribed")) {
-            Meteor.unsubscribe("mindmap") {
-                Meteor.subscribe("mindmap", params: [mindmapId]) {
+            Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
+                Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
                     self.mindmapSubscriptionIsReady(Config.CONNECTED)
                 }
             }
@@ -63,7 +63,7 @@ class MeteorTracker : CollectionDelegate {
     }
     
     func unsubscribe() {
-        Meteor.unsubscribe("mindmap")
+        Meteor.unsubscribe(Config.SUBSCRIPTION_NAME)
     }
     
     func notifyDocumentChanged(id: String , fields : NSDictionary?) {
