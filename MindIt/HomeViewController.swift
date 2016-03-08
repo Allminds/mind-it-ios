@@ -1,7 +1,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITextFieldDelegate {
     
     //MARK : Properties
     
@@ -16,13 +16,8 @@ class HomeViewController: UIViewController {
         let logo = UIImage(named: "header")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        //Default Id
-        if(mindmapIdInURL == nil) {
-            //mindmapIdTextField.text = Config.MINDMAPID
-        }
-        else {
-            mindmapIdTextField.text = mindmapIdInURL
-        }
+        mindmapIdTextField.delegate = self
+        mindmapIdTextField.text = mindmapIdInURL
     }
     
     // MARK: - Navigation
@@ -62,5 +57,10 @@ class HomeViewController: UIViewController {
             mindmapIdTextField.text = meteorTracker.mindmapId
         }
     
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        mindmapIdTextField.resignFirstResponder()
+        return true
     }
 }
