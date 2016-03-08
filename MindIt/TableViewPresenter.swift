@@ -34,8 +34,11 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     }
     
     func invalidateConnection() {
-        if(!(self.meteorTracker.subscriptionSuccess)){
-            self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
+        if(!(MeteorTracker.getInstance().subscriptionSuccess)){
+            if(self.viewDelegate != nil){
+                self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
+
+            }
         }
     }
     

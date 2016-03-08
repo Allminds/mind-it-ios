@@ -49,6 +49,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         isFullyDisappeared = true
+        MeteorTracker.getInstance().subscriptionSuccess = false;
         presenter.unsubscribe()
     }
     
