@@ -32,6 +32,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.tintColor = UIColor.orangeColor()
         
         if(isFullyDisappeared == true) {
             isFullyDisappeared = false
