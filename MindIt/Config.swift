@@ -13,4 +13,5 @@ struct Config {
     static let INVALID_MINDMAP = "Invalid mindmap URL"
     static let UNKNOWN_ERROR = "Something went wrong "
     static let SUBSCRIPTION_NAME = "mindmap"
+    static let COLLECTION_NAME = "Mindmaps"
 }

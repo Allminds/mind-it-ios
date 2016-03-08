@@ -6,7 +6,7 @@
         var delegate : CollectionDelegate!
         //MARK: Initialisers
         init() {
-            super.init(name: "Mindmaps")
+            super.init(name: Config.COLLECTION_NAME)
         }
         
         
