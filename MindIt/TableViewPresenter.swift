@@ -8,7 +8,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     private var meteorTracker:MeteorTracker!
     var isViewInitialised = false
     var lastRightNode = "";
-    private weak var viewDelegate:PresenterDelegate!
+    private weak var viewDelegate:PresenterDelegate?
     
     //MARK : Initializers
     init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker) {
@@ -20,22 +20,22 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //MARK : Methods
     func connectToServer(mindmapId: String) {
-        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
         
         if(meteorTracker.isConnectedToNetwork()) {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
             })
-            meteorTracker.connectToServer(mindmapId)
+            meteorTracker.connectToServer(mindmapId) { (result: String) in
+                if(result == Config.FIRST_CONNECT) {
+                    self.viewDelegate?.didFailToConnectWithError(Config.INVALID_MINDMAP)
+                }
+                else {
+                    self.connected(Config.CONNECTED)
+                }
+            }
         }
         else {
-            viewDelegate.didFailToConnectWithError(Config.NETWORK_ERROR)
-        }
-    }
-    
-    func invalidateConnection() {
-        if(!(self.meteorTracker.subscriptionSuccess)){
-            self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
+            self.viewDelegate?.didFailToConnectWithError(Config.NETWORK_ERROR)
         }
     }
     
@@ -56,17 +56,17 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count
         if(count == 0) {
-            viewDelegate.didFailToConnectWithError(Config.INVALID_MINDMAP)
+            viewDelegate?.didFailToConnectWithError(Config.INVALID_MINDMAP)
         }
         else if(meteorTracker.mindmapId != nil) {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);
             
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId! , previousMindmap: mindmap)
             isViewInitialised = true
-            viewDelegate.didConnectSuccessfully()
+            viewDelegate?.didConnectSuccessfully()
         }
         else {
-            viewDelegate.didFailToConnectWithError(result)
+            viewDelegate?.didFailToConnectWithError(result)
         }
     }
     
@@ -78,7 +78,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self)
             mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId , previousMindmap: mindmap)
             reloadTableView()
-            
         }
     }
     
@@ -132,7 +131,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     }
 
     func reloadTableView(){
-        viewDelegate.updateChanges()
+        viewDelegate?.updateChanges()
     }
     
     func unsubscribe() {

@@ -7,7 +7,7 @@ struct Config {
     static let CHILD_NODE = "child"
     static let UNDEFINED = "undefinded"
     static let FIRST_CONNECT = "first connection"
-    static let MAXIMUM_LOADING_TIME: Int = 7
+    static let MAXIMUM_LOADING_TIME: Int = 10
     
     static let NETWORK_ERROR = "Please Check Your Network Connection"
     static let INVALID_MINDMAP = "Invalid mindmap URL"

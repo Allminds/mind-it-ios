@@ -30,8 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if(meteorTracker.isConnectedToNetwork()) {
                 Meteor.connect(Config.URL) {
                     self.isConnected = true
-                    meteorTracker.connectToServer(Config.FIRST_CONNECT)
-                    callback()
+                    meteorTracker.connectToServer(Config.FIRST_CONNECT) { (result: String) in
+                        callback()
+                    }
                 }
             }
         }

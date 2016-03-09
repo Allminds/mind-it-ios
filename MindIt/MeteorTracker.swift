@@ -29,37 +29,35 @@ class MeteorTracker : CollectionDelegate {
         return mindmap;
     }
     
-    func connectToServer(mindmapId: String) -> Bool {
+    func connectToServer(mindmapId: String , callback: (result : String) -> Void) -> Bool {
         if(mindmapId == Config.FIRST_CONNECT && self.mindmapId == nil) {
+            callback(result: Config.FIRST_CONNECT)
             return false
         }
         else if(mindmapId == Config.FIRST_CONNECT && self.mindmapId != nil) {
-            self.subscribe(self.mindmapId!)
+            self.subscribe(self.mindmapId! , callback: callback)
         }
         else {
-            self.subscribe(mindmapId)
+            self.subscribe(mindmapId ,callback: callback)
         }
         return true
     }
     
-    private func subscribe(mindmapId : String) {
+    private func subscribe(mindmapId : String , callback: (result : String) -> Void) {
         let result : String = Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
             self.mindmapId = mindmapId
-            self.mindmapSubscriptionIsReady(Config.CONNECTED)
+            self.subscriptionSuccess = true
+            callback(result: Config.CONNECTED)
         }
         
         if(result.containsString("already subscribed")) {
             Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
                 Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
-                    self.mindmapSubscriptionIsReady(Config.CONNECTED)
+                    self.subscriptionSuccess = true
+                    callback(result: Config.CONNECTED)
                 }
             }
         }
-    }
-    
-    private func mindmapSubscriptionIsReady(result : String) {
-        self.subscriptionSuccess = true;
-        delegate?.connected(result)
     }
     
     func unsubscribe() {

@@ -10,6 +10,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     
     var presenter: TableViewPresenter!
     var mindmapId: String!
+    var timer : NSTimer?
+    
     
     private var isFullyDisappeared : Bool = true
     
@@ -21,7 +23,9 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
         self.navigationItem.titleView = imageView
         
         presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidBecomeActive"), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
     }
@@ -50,6 +54,8 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
         super.viewDidDisappear(animated)
         isFullyDisappeared = true
         presenter.unsubscribe()
+        let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+        meteorTracker.subscriptionSuccess = false
     }
     
     func reloadTableView() {
@@ -104,13 +110,26 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     }
     
     private func showProgressBar() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
+        
         dispatch_async(dispatch_get_main_queue(), {
             self.loader = NSBundle.mainBundle().loadNibNamed("Loader", owner: self, options: nil).first as! Loader
             self.loader.show("Loading Mindmap...")
         })
     }
     
+    func invalidateConnection() {
+        let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+        if(!(meteorTracker.subscriptionSuccess)){
+            self.didFailToConnectWithError(Config.UNKNOWN_ERROR)
+        }
+        else {
+            self.didConnectSuccessfully()
+        }
+    }
+    
     private func stopProgressBar() {
+        timer?.invalidate()
         dispatch_async(dispatch_get_main_queue()) {
             self.loader.hide()
         }

@@ -1,16 +1,35 @@
+//
+//  MeteorTrackerTests.swift
+//  MindIt
+//
+//  Created by Swapnil Gaikwad on 08/03/16.
+//  Copyright © 2016 ThoughtWorks Inc. All rights reserved.
+//
 
 import XCTest
-@testable import MindIt
-class MeteorTracketTests: XCTestCase {
-    let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+
+class MeteorTrackerTests: XCTestCase {
     
-    func connectToServerTest(){
-        meteorTracker.mindmapId = nil;
-        XCTAssertEqual(meteorTracker.connectToServer(Config.FIRST_CONNECT), false, "Should return false when mindmapId is Not Set and connectToServer is called with firstConnect")
-     
-        meteorTracker.mindmapId = "78drh54R"
-        XCTAssertEqual(meteorTracker.connectToServer(Config.FIRST_CONNECT), true, "Should Return True When mindmapId is set and connectrToServerCalled with config.firstConnect")
+    override func setUp() {
+        super.setUp()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measureBlock {
+            // Put the code you want to measure the time of here.
+        }
+    }
     
 }
