@@ -45,7 +45,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         isFullyDisappeared = true
-        MeteorTracker.getInstance().subscriptionSuccess = false
         presenter.unsubscribe()
     }
     
@@ -119,7 +118,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     
     func giveAlert(errorMessage : String) {
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
-        meteorTracker.subscriptionSuccess = false
         meteorTracker.unsubscribe()
         
         UIAlertView(title: errorMessage, message: nil, delegate: self, cancelButtonTitle: "OK").show()

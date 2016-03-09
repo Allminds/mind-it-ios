@@ -10,6 +10,7 @@ class TreeBuilder {
     }
     
     func buidTreeFromCollection(mindmapCollection: MindmapCollection ,rootId : String , previousMindmap : [Node]) -> [Node] {
+        treeNodes = [Node]()
         setStates(mindmapCollection , previousMindmap : previousMindmap)
         
         let root : Node? = mindmapCollection.findOne(rootId)
@@ -45,25 +46,22 @@ class TreeBuilder {
     
     
     private func getRootChilds(nodeIds : [String] , mindmapCollection : MindmapCollection , isCalledFirstTime : Bool ) {
-        for rightChildId in nodeIds {
-            let rightNode = mindmapCollection.findOne(rightChildId)
+        for rootChildId in nodeIds {
+            let rightNode = mindmapCollection.findOne(rootChildId)
             if(rightNode == nil) {
                 continue
             }
     
             rightNode?.setDepth(1)
             if(rightNode?.hasChilds() == true) {
-    
-                if(rightNode?.getNodeState() == Config.UNDEFINED) {
-                    rightNode?.setNodeState(Config.COLLAPSED)
-                }
-                else if(rightNode?.getNodeState() == Config.CHILD_NODE) {
+                if(rightNode?.getNodeState() == Config.UNDEFINED || rightNode?.getNodeState() == Config.CHILD_NODE) {
                     rightNode?.setNodeState(Config.COLLAPSED)
                 }
             }
             else {
                 rightNode?.setNodeState(Config.CHILD_NODE)
             }
+            
             treeNodes.append(rightNode!)
     
             if(isCalledFirstTime == false && rightNode?.getNodeState() == Config.EXPANDED) {

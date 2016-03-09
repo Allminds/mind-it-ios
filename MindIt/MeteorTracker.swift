@@ -11,6 +11,7 @@ class MeteorTracker : CollectionDelegate {
     weak var delegate : TrackerDelegate?
     var mindmapId:String?
     var subscriptionSuccess : Bool = false;
+    
     //MARK : Intialiser
     private init() {
         mindmap  = MindmapCollection()
@@ -43,17 +44,9 @@ class MeteorTracker : CollectionDelegate {
     }
     
     private func subscribe(mindmapId : String) {
-        let result : String = Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
+        Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
             self.mindmapId = mindmapId
             self.mindmapSubscriptionIsReady(Config.CONNECTED)
-        }
-        
-        if(result.containsString("already subscribed")) {
-            Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
-                Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
-                    self.mindmapSubscriptionIsReady(Config.CONNECTED)
-                }
-            }
         }
     }
     
@@ -63,7 +56,9 @@ class MeteorTracker : CollectionDelegate {
     }
     
     func unsubscribe() {
-        Meteor.unsubscribe(Config.SUBSCRIPTION_NAME)
+        Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
+            self.subscriptionSuccess = false
+        }
     }
     
     func notifyDocumentChanged(id: String , fields : NSDictionary?) {

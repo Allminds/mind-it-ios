@@ -55,7 +55,8 @@ class Node: MeteorDocument {
             index = value as? Int;
             break
         default:
-             break
+            print("New attribute found in Node class.")
+            break
         }
     }
     
@@ -63,8 +64,8 @@ class Node: MeteorDocument {
         return self.name!
     }
     
-    func getChildSubtree() -> [String] {
-        return self.childSubTree!
+    func getChildSubtree() -> [String]? {
+        return self.childSubTree
     }
     
     func getRootId() -> String {
@@ -100,7 +101,12 @@ class Node: MeteorDocument {
     }
     
     func getRootSubTree() -> [String] {
-        return right! + left!
+        if(isRoot()) {
+            return right! + left!
+        }
+        else {
+            return [String]()
+        }
     }
     
     func isRoot() -> Bool {

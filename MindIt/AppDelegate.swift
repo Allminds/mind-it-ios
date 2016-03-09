@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(application: UIApplication) {
         Meteor.unsubscribe(Config.SUBSCRIPTION_NAME)
-        MeteorTracker.getInstance().subscriptionSuccess = false;
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
