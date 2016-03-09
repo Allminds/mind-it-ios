@@ -10,6 +10,8 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     var lastRightNode = "";
     private weak var viewDelegate:PresenterDelegate!
     
+    var timer : NSTimer?
+    
     //MARK : Initializers
     init(viewDelegate: PresenterDelegate, meteorTracker: MeteorTracker) {
         super.init()
@@ -20,15 +22,13 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //MARK : Methods
     func connectToServer(mindmapId: String) {
-        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
         
         if(meteorTracker.isConnectedToNetwork()) {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-            })
             meteorTracker.connectToServer(mindmapId)
         }
         else {
+            timer?.invalidate()
             viewDelegate.didFailToConnectWithError(Config.NETWORK_ERROR)
         }
     }
@@ -37,7 +37,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         if(!(MeteorTracker.getInstance().subscriptionSuccess)){
             if(self.viewDelegate != nil){
                 self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
-
             }
         }
     }
@@ -56,6 +55,8 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     }
     
     func connected(result: String) {
+        timer?.invalidate()
+        
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count
         if(count == 0) {
@@ -81,7 +82,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self)
             mindmap = treeBuilder.buidTreeFromCollection(collection, rootId: rootId , previousMindmap: mindmap)
             reloadTableView()
-            
         }
     }
     
@@ -110,7 +110,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             if(childNode != nil && indexOfNode != nil) {
                 mindmap.insert(childNode!, atIndex: indexOfNode! + index + 1)
             }
-            
         }
         if(self.lastRightNode == node.getId()){
             self.lastRightNode = (childNode?.getId())!

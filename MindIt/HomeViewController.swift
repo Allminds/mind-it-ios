@@ -7,7 +7,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var openMindmap: UIButton!
     @IBOutlet weak var mindmapIdTextField: UITextField!
-    var mindmapIdInURL : String?
     
     //MARK : Methods
     override func viewDidLoad() {
@@ -17,7 +16,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
         mindmapIdTextField.delegate = self
-        mindmapIdTextField.text = mindmapIdInURL
     }
     
     // MARK: - Navigation
@@ -50,13 +48,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     override func viewWillAppear(animated: Bool) {
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
-        if(meteorTracker.mindmapId == nil){
-            //mindmapIdTextField.text = Config.MINDMAPID
-        }
-        else{
+        if(meteorTracker.mindmapId != nil){
             mindmapIdTextField.text = meteorTracker.mindmapId
         }
-    
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

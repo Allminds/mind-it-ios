@@ -19,20 +19,16 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
         let logo = UIImage(named: "header")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
+        self.navigationController!.navigationBar.tintColor = UIColor.orangeColor()
         
         presenter =  TableViewPresenter(viewDelegate: self, meteorTracker: MeteorTracker.getInstance())
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidBecomeActive"), name: UIApplicationWillEnterForegroundNotification, object: nil)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
     }
     
-    func applicationDidBecomeActive() {
-        presenter.connectToServer(mindmapId)
-    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.tintColor = UIColor.orangeColor()
         
         if(isFullyDisappeared == true) {
             isFullyDisappeared = false
@@ -49,7 +45,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         isFullyDisappeared = true
-        MeteorTracker.getInstance().subscriptionSuccess = false;
+        MeteorTracker.getInstance().subscriptionSuccess = false
         presenter.unsubscribe()
     }
     
