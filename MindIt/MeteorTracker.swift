@@ -6,8 +6,7 @@ class MeteorTracker : CollectionDelegate {
     
     //MARK : Properties
     private let mindmap: MindmapCollection
-    private static var meteorTracker: MeteorTracker? = nil;
-    
+    private static var meteorTracker: MeteorTracker?
     weak var delegate : TrackerDelegate?
     var mindmapId:String?
     var subscriptionSuccess : Bool = false;
@@ -38,25 +37,29 @@ class MeteorTracker : CollectionDelegate {
             self.subscribe(self.mindmapId!)
         }
         else {
+            self.mindmapId = mindmapId
             self.subscribe(mindmapId)
         }
         return true
     }
     
     private func subscribe(mindmapId : String) {
-        Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
+        let result : String = Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
             self.mindmapId = mindmapId
-            self.mindmapSubscriptionIsReady(Config.CONNECTED)
+            self.subscriptionSuccessfullyDone()
         }
+        
     }
     
-    private func mindmapSubscriptionIsReady(result : String) {
+    private func subscriptionSuccessfullyDone() {
         self.subscriptionSuccess = true;
-        delegate?.connected(result)
+        self.delegate?.connected(Config.CONNECTED)
     }
+    
     
     func unsubscribe() {
         Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
+            self.mindmapId = nil
             self.subscriptionSuccess = false
         }
     }

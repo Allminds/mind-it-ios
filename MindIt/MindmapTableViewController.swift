@@ -35,9 +35,6 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
             showProgressBar()
             presenter.connectToServer(mindmapId)
         }
-        else {
-            self.reloadTableView()
-        }
     }
     
     
@@ -113,7 +110,7 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
     }
     
     func updateChanges() {
-            self.reloadTableView()
+        self.reloadTableView()
     }
     
     func giveAlert(errorMessage : String) {

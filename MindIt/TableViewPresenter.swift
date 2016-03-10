@@ -7,9 +7,8 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     var mindmap:[Node] = [Node]()
     private var meteorTracker:MeteorTracker!
     var isViewInitialised = false
-    var lastRightNode = "";
+    var lastRightNode = ""
     private weak var viewDelegate:PresenterDelegate!
-    
     var timer : NSTimer?
     
     //MARK : Initializers
@@ -22,20 +21,19 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     //MARK : Methods
     func connectToServer(mindmapId: String) {
+        //Start timer
         timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(Config.MAXIMUM_LOADING_TIME), target: self, selector: Selector("invalidateConnection"), userInfo: nil, repeats: false)
-        
         if(meteorTracker.isConnectedToNetwork()) {
             meteorTracker.connectToServer(mindmapId)
         }
         else {
             timer?.invalidate()
-            viewDelegate.didFailToConnectWithError(Config.NETWORK_ERROR)
         }
     }
     
     func invalidateConnection() {
-        if(!(MeteorTracker.getInstance().subscriptionSuccess)){
-            if(self.viewDelegate != nil){
+        if(MeteorTracker.getInstance().subscriptionSuccess == false) {
+            if(self.viewDelegate != nil) {
                 self.viewDelegate.didFailToConnectWithError(Config.UNKNOWN_ERROR)
             }
         }
@@ -55,6 +53,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     }
     
     func connected(result: String) {
+        //Stop Timer
         timer?.invalidate()
         
         let collection = meteorTracker.getMindmap();
@@ -66,11 +65,17 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             let treeBuilder : TreeBuilder = TreeBuilder(presenter: self);
             
             mindmap = treeBuilder.buidTreeFromCollection(collection , rootId: meteorTracker.mindmapId! , previousMindmap: mindmap)
-            isViewInitialised = true
-            viewDelegate.didConnectSuccessfully()
+            if(mindmap.count == 0) {
+                isViewInitialised = false
+                viewDelegate.didFailToConnectWithError(Config.INVALID_MINDMAP)
+            }
+            else {
+                isViewInitialised = true
+                viewDelegate.didConnectSuccessfully()
+            }
         }
         else {
-            viewDelegate.didFailToConnectWithError(result)
+            viewDelegate.didFailToConnectWithError(Config.INVALID_MINDMAP)
         }
     }
     
@@ -111,7 +116,8 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
                 mindmap.insert(childNode!, atIndex: indexOfNode! + index + 1)
             }
         }
-        if(self.lastRightNode == node.getId()){
+        //Added simple coditation but if not required remove it (childNode != nil).
+        if(self.lastRightNode == node.getId() && childNode != nil) {
             self.lastRightNode = (childNode?.getId())!
         }
         reloadTableView();
@@ -126,6 +132,8 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         TreeBuilder.getChildSubTree(node, mindmapCollection: collection)
         //Display SubTreeNodes
         mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + TreeBuilder.subTreeNodes.count))
+        //Release memmory by assgning empty array to subTreeNode
+        TreeBuilder.subTreeNodes = [String]()
         
         if(TreeBuilder.subTreeNodes.contains(self.lastRightNode)){
             self.lastRightNode = node.getId();
@@ -139,5 +147,6 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     func unsubscribe() {
         meteorTracker.unsubscribe()
+        isViewInitialised = false
     }
 }

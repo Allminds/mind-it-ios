@@ -13,7 +13,7 @@ class MindmapCollection: MeteorCollection<Node> {
     //MARK : Methods
     override func documentWasAdded(collection: String, id: String, fields: NSDictionary?) {
         super.documentWasAdded(collection, id: id, fields: fields)
-        if(MeteorTracker.getInstance().subscriptionSuccess){
+        if (MeteorTracker.getInstance().subscriptionSuccess) {
             delegate.notifyDocumentChanged(id , fields:  fields)
         }
     }

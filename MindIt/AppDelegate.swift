@@ -9,16 +9,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var isConnected : Bool = false
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        connectToServer( { () -> Void in
-            
-        })
+
+        connectToServerMindIt(){ () -> Void in
+        }
         
         return true
     }
     
     
-    private func connectToServer(callback: ()-> Void) {
+    private func connectToServerMindIt(callback: ()-> Void) {
         if(isConnected == true) {
             callback()
             return
@@ -39,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        connectToServer({()-> Void in
+        connectToServerMindIt({()-> Void in
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let navigationVC = mainStoryboard.instantiateInitialViewController() as! UINavigationController
