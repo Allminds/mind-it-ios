@@ -44,7 +44,7 @@ class MeteorTracker : CollectionDelegate {
     }
     
     private func subscribe(mindmapId : String) {
-        let result : String = Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
+        Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
             self.mindmapId = mindmapId
             self.subscriptionSuccessfullyDone()
         }
