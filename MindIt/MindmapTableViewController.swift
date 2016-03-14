@@ -29,15 +29,16 @@ class MindmapTableViewController: UITableViewController , PresenterDelegate, UIA
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         if(isFullyDisappeared == true) {
             isFullyDisappeared = false
-            showProgressBar()
-            presenter.connectToServer(mindmapId)
+            retrieveMindMap()
         }
     }
     
-    
+    func retrieveMindMap() {
+        showProgressBar()
+        presenter.connectToServer(mindmapId)
+    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

@@ -39,21 +39,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         connectToServerMindIt({()-> Void in
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let navigationVC = mainStoryboard.instantiateInitialViewController() as! UINavigationController
             
             let id : String = self.getIdFromURL(String(url))
-            
             //Render MindmapTableView
             if(id != "") {
-                let mindmapTableViewController : MindmapTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MindmapTableView") as! MindmapTableViewController
-                
-                navigationVC.pushViewController(mindmapTableViewController, animated: false)
-                mindmapTableViewController.mindmapId = id
+                let currentNavC = self.window?.rootViewController as? UINavigationController
+                let mindMapVC = currentNavC?.topViewController as? MindmapTableViewController
+                if mindMapVC != nil {
+                    mindMapVC?.mindmapId = id
+                    mindMapVC?.retrieveMindMap()
+                } else {
+                    let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let navigationVC = mainStoryboard.instantiateInitialViewController() as! UINavigationController
+                    let mindmapTableViewController : MindmapTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MindmapTableView") as! MindmapTableViewController
+                    mindmapTableViewController.mindmapId = id
+                    navigationVC.pushViewController(mindmapTableViewController, animated: false)
+                    self.window?.rootViewController = navigationVC
+                    self.window?.makeKeyAndVisible()
+                }
             }
-            self.window?.rootViewController = navigationVC
-            self.window?.makeKeyAndVisible()
         })
         return true
     }
