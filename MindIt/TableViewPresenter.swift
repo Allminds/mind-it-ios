@@ -27,7 +27,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
             meteorTracker.connectToServer(mindmapId)
         }
         else {
-            timer?.invalidate()
+            //timer?.invalidate()
         }
     }
     
@@ -54,7 +54,7 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
     
     func connected(result: String) {
         //Stop Timer
-        timer?.invalidate()
+        //timer?.invalidate()
         
         let collection = meteorTracker.getMindmap();
         let count : Int = collection.count

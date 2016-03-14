@@ -59,7 +59,6 @@ class MeteorTracker : CollectionDelegate {
     
     func unsubscribe() {
         Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
-            self.mindmapId = nil
             self.subscriptionSuccess = false
         }
     }
