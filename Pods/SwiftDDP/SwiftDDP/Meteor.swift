@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Peter Siegesmund <peter.siegesmund@icloud.com>
+// Copyright (c) 2016 Peter Siegesmund <peter.siegesmund@icloud.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 /*
 enum Error: String {
@@ -57,10 +58,7 @@ public class Meteor {
     */
     
     public static func collection(name:String) -> MeteorCollectionType? {
-        if let meteorCollection = collections[name] {
-            return meteorCollection
-        }
-        return nil
+        return collections[name]
     }
     
     /**
@@ -212,6 +210,83 @@ public class Meteor {
     
     public static func loginWithPassword(email:String, password:String) {
         client.loginWithPassword(email, password: password, callback: nil)
+    }
+    
+    internal static func loginWithService<T: UIViewController>(service: String, clientId: String, viewController: T) {
+        
+        // Resume rather than
+        if Meteor.client.loginWithToken(nil) == false {
+            var url:String!
+            
+            switch service {
+            case "twitter":
+                url = MeteorOAuthServices.twitter()
+                
+            case "facebook":
+                url =  MeteorOAuthServices.facebook(clientId)
+                
+            case "github":
+                url = MeteorOAuthServices.github(clientId)
+                
+            case "google":
+                url = MeteorOAuthServices.google(clientId)
+                
+            default:
+                url = nil
+            }
+            
+            let oauthDialog = MeteorOAuthDialogViewController()
+            oauthDialog.serviceName = service.capitalizedString
+            oauthDialog.url = NSURL(string: url)
+            viewController.presentViewController(oauthDialog, animated: true, completion: nil)
+            
+        } else {
+            log.debug("Already have valid server login credentials. Logging in with preexisting login token")
+        }
+        
+    }
+    
+    /**
+     Logs a user into the server using Twitter
+     
+     - parameter viewController:    A view controller from which to launch the OAuth modal dialog
+     */
+    
+    public static func loginWithTwitter<T: UIViewController>(viewController: T) {
+        Meteor.loginWithService("twitter", clientId: "", viewController: viewController)
+    }
+    
+    /**
+     Logs a user into the server using Facebook
+     
+     - parameter viewController:    A view controller from which to launch the OAuth modal dialog
+     - parameter clientId:          The apps client id, provided by the service (Facebook, Google, etc.)
+     */
+    
+    public static func loginWithFacebook<T: UIViewController>(clientId: String, viewController: T) {
+        Meteor.loginWithService("facebook", clientId: clientId, viewController: viewController)
+    }
+    
+    /**
+     Logs a user into the server using Github
+     
+     - parameter viewController:    A view controller from which to launch the OAuth modal dialog
+     - parameter clientId:          The apps client id, provided by the service (Facebook, Google, etc.)
+     */
+    
+    public static func loginWithGithub<T: UIViewController>(clientId: String, viewController: T) {
+        Meteor.loginWithService("github", clientId: clientId, viewController: viewController)
+    }
+
+    /**
+     Logs a user into the server using Google
+     
+     - parameter viewController:    A view controller from which to launch the OAuth modal dialog
+     - parameter clientId:          The apps client id, provided by the service (Facebook, Google, etc.)
+     */
+    
+    public static func loginWithGoogle<T: UIViewController>(clientId: String, viewController: T) {
+        Meteor.loginWithService("google", clientId: clientId, viewController: viewController)
     }
     
     /**

@@ -1,6 +1,7 @@
 struct Config {
     static let URL:String = "ws://www.mindit.xyz/websocket"
     static let MINDMAPID = "kvF9fWZzhvvjtSxGg"
+    static let GOOGLE_CLIENT_ID = "898854004180-l4en162tc2gmau04natb48n0oobmqim0.apps.googleusercontent.com"
     static let CONNECTED = "Connected"
     static let COLLAPSED = "collapsed"
     static let EXPANDED = "expaned"

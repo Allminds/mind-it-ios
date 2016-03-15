@@ -2,7 +2,7 @@
 //
 //  A DDP Client written in Swift
 //
-// Copyright (c) 2015 Peter Siegesmund <peter.siegesmund@icloud.com>
+// Copyright (c) 2016 Peter Siegesmund <peter.siegesmund@icloud.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,13 +33,13 @@ import XCGLogger
 let log = XCGLogger(identifier: "DDP")
 
 public typealias DDPMethodCallback = (result:AnyObject?, error:DDPError?) -> ()
-public typealias DDPConnectedCallback = (session:String)->()
+public typealias DDPConnectedCallback = (session:String) -> ()
 public typealias DDPCallback = () -> ()
 
 
 /**
-DDPDelegate provides an interface to react to user events
-*/
+ DDPDelegate provides an interface to react to user events
+ */
 
 public protocol SwiftDDPDelegate {
     func ddpUserDidLogin(user:String)
@@ -47,8 +47,8 @@ public protocol SwiftDDPDelegate {
 }
 
 /**
-DDPClient is the base class for communicating with a server using the DDP protocol
-*/
+ DDPClient is the base class for communicating with a server using the DDP protocol
+ */
 
 public class DDPClient: NSObject {
     
@@ -60,7 +60,7 @@ public class DDPClient: NSObject {
         queue.name = "DDP Background Data Queue"
         queue.qualityOfService = .Background
         return queue
-        }()
+    }()
     
     // Callbacks execute in the order they're received
     internal let callbackQueue: NSOperationQueue = {
@@ -69,9 +69,9 @@ public class DDPClient: NSObject {
         queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .UserInitiated
         return queue
-        }()
+    }()
     
-    // Document messages are processed in the order that they are received, 
+    // Document messages are processed in the order that they are received,
     // separately from callbacks
     internal let documentQueue: NSOperationQueue = {
         let queue = NSOperationQueue()
@@ -79,7 +79,7 @@ public class DDPClient: NSObject {
         queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .Background
         return queue
-        }()
+    }()
     
     // Hearbeats get a special queue so that they're not blocked by
     // other operations, causing the connection to close
@@ -88,42 +88,67 @@ public class DDPClient: NSObject {
         queue.name = "DDP Heartbeat Queue"
         queue.qualityOfService = .Utility
         return queue
-        }()
+    }()
     
     let userBackground: NSOperationQueue = {
         let queue = NSOperationQueue()
         queue.name = "DDP High Priority Background Queue"
         queue.qualityOfService = .UserInitiated
         return queue
-        }()
+    }()
     
     let userMainQueue: NSOperationQueue = {
         let queue = NSOperationQueue.mainQueue()
         queue.name = "DDP High Priorty Main Queue"
         queue.qualityOfService = .UserInitiated
         return queue
-        }()
+    }()
     
-    private var socket:WebSocket!
+    private var socket:WebSocket!{
+        didSet{ socket.allowSelfSignedSSL = self.allowSelfSignedSSL }
+    }
+
     private var server:(ping:NSDate?, pong:NSDate?) = (nil, nil)
     
     internal var resultCallbacks:[String:Completion] = [:]
     internal var subCallbacks:[String:Completion] = [:]
     internal var unsubCallbacks:[String:Completion] = [:]
     
-    private var url:String!
+    public var url:String!
     private var subscriptions = [String:(id:String, name:String, ready:Bool)]()
     
     internal var events = DDPEvents()
     internal var connection:(ddp:Bool, session:String?) = (false, nil)
     
     public var delegate:SwiftDDPDelegate?
-    public var logLevel = XCGLogger.LogLevel.Debug
+    
+
+    // MARK: Settings
+    
+    /**
+    Boolean value that determines whether the
+    */
+    
+    public var allowSelfSignedSSL:Bool = false {
+        didSet{
+            guard let currentSocket = socket else { return }
+            currentSocket.allowSelfSignedSSL = allowSelfSignedSSL
+        }
+    }
+    
+    /**
+    Sets the log level. The default value is .None.
+    Possible values: .Verbose, .Debug, .Info, .Warning, .Error, .Severe, .None
+    */
+    
+    public var logLevel = XCGLogger.LogLevel.None {
+        didSet {
+            log.setup(logLevel, showLogIdentifier: true, showFunctionName: true, showThreadName: true, showLogLevel: true, showFileNames: false, showLineNumbers: true, showDate: false, writeToFile: nil, fileLogLevel: .None)
+        }
+    }
     
     internal override init() {
         super.init()
-        setLogLevel(logLevel)
-        print("Mark - SwiftDDP")
     }
     
     /**
@@ -145,36 +170,49 @@ public class DDPClient: NSObject {
     }
     
     /**
-    Makes a DDP connection to the server
-    
-    - parameter url:        The String url to connect to, ex. "wss://todos.meteor.com/websocket"
-    - parameter callback:   A closure that takes a String argument with the value of the websocket session token
-    */
+     Makes a DDP connection to the server
+     
+     - parameter url:        The String url to connect to, ex. "wss://todos.meteor.com/websocket"
+     - parameter callback:   A closure that takes a String argument with the value of the websocket session token
+     */
     
     public func connect(url:String, callback:DDPConnectedCallback?) {
-        
+        self.url = url
         // capture the thread context in which the function is called
         let executionQueue = NSOperationQueue.currentQueue()
         
         socket = WebSocket(url)
+        //Create backoff
+        let backOff:DDPExponentialBackoff = DDPExponentialBackoff()
         
         socket.event.close = {code, reason, clean in
-            log.info("Web socket connection closed with code \(code). Clean: \(clean). \(reason)")
-            let event = self.socket.event
-            self.socket = WebSocket(url)
-            self.socket.event = event
-            self.ping()
+            //Use backoff to slow reconnection retries
+            backOff.createBackoff({
+                log.info("Web socket connection closed with code \(code). Clean: \(clean). \(reason)")
+                let event = self.socket.event
+                self.socket = WebSocket(url)
+                self.socket.event = event
+                self.ping()
+            })
         }
         
         socket.event.error = events.onWebsocketError
         
         socket.event.open = {
             self.heartbeat.addOperationWithBlock() {
-                if let c = callback {
-                    var completion = Completion(callback: c)
-                    completion.executionQueue = executionQueue
-                    self.events.onConnected = completion
+                
+                // Add a subscription to loginServices to each connection event
+                let callbackWithServiceConfiguration = { (session:String) in
+                    // let loginServicesSubscriptionCollection = "meteor_accounts_loginServiceConfiguration"
+                    self.sub("meteor.loginServiceConfiguration", params: nil)           // /tools/meteor-services/auth.js line 922
+                    callback?(session: session)
                 }
+                
+                var completion = Completion(callback: callbackWithServiceConfiguration)
+                //Reset the backoff to original values
+                backOff.reset()
+                completion.executionQueue = executionQueue
+                self.events.onConnected = completion
                 self.sendMessage(["msg":"connect", "version":"1", "support":["1"]])
             }
         }
@@ -187,16 +225,6 @@ public class DDPClient: NSObject {
                 }
             }
         }
-    }
-    
-    /**
-    Sets the XCGLogger loglevel.
-    
-    - parameter logLevel:   An XCGLogger LogLevel enum value, ex. .Info, .Debug, .Error
-    */
-    
-    public func setLogLevel(logLevel:XCGLogger.LogLevel) {
-        log.setup(logLevel, showLogIdentifier: true, showFunctionName: true, showThreadName: true, showLogLevel: true, showFileNames: false, showLineNumbers: true, showDate: false, writeToFile: nil, fileLogLevel: .None)
     }
     
     private func ping() {
@@ -242,40 +270,40 @@ public class DDPClient: NSObject {
             // Principal callbacks for managing data
             // Document was added
         case .Added: documentQueue.addOperationWithBlock() {
-                if let collection = message.collection,
-                    let id = message.id {
-                        self.documentWasAdded(collection, id: id, fields: message.fields)
-                }
+            if let collection = message.collection,
+                let id = message.id {
+                    self.documentWasAdded(collection, id: id, fields: message.fields)
+            }
             }
             
             // Document was changed
         case .Changed: documentQueue.addOperationWithBlock() {
-                if let collection = message.collection,
-                    let id = message.id {
-                        self.documentWasChanged(collection, id: id, fields: message.fields, cleared: message.cleared)
-                }
+            if let collection = message.collection,
+                let id = message.id {
+                    self.documentWasChanged(collection, id: id, fields: message.fields, cleared: message.cleared)
+            }
             }
             
             // Document was removed
         case .Removed: documentQueue.addOperationWithBlock() {
-                if let collection = message.collection,
-                    let id = message.id {
-                        self.documentWasRemoved(collection, id: id)
-                }
+            if let collection = message.collection,
+                let id = message.id {
+                    self.documentWasRemoved(collection, id: id)
+            }
             }
             
             // Notifies you when the result of a method changes
         case .Updated: documentQueue.addOperationWithBlock() {
-                if let methods = message.methods {
-                    self.methodWasUpdated(methods)
-                }
+            if let methods = message.methods {
+                self.methodWasUpdated(methods)
+            }
             }
             
             // Callbacks for managing subscriptions
         case .Ready: documentQueue.addOperationWithBlock() {
-                if let subs = message.subs {
-                    self.ready(subs)
-                }
+            if let subs = message.subs {
+                self.ready(subs)
+            }
             }
             
             // Callback that fires when subscription has been completely removed
@@ -284,8 +312,8 @@ public class DDPClient: NSObject {
             if let id = message.id {
                 self.nosub(id, error: message.error)
             }
-        }
-        
+            }
+            
         case .Ping: heartbeat.addOperationWithBlock() { self.pong(message) }
             
         case .Pong: heartbeat.addOperationWithBlock() { self.server.pong = NSDate() }
@@ -306,27 +334,29 @@ public class DDPClient: NSObject {
     }
     
     /**
-    Executes a method on the server. If a callback is passed, the callback is asynchronously
-    executed when the method has completed. The callback takes two arguments: result and error. It 
-    the method call is successful, result contains the return value of the method, if any. If the method fails, 
-    error contains information about the error.
-    
-    - parameter name:       The name of the method
-    - parameter params:     An object containing method arguments, if any
-    - parameter callback:   The closure to be executed when the method has been executed
-    */
+     Executes a method on the server. If a callback is passed, the callback is asynchronously
+     executed when the method has completed. The callback takes two arguments: result and error. It
+     the method call is successful, result contains the return value of the method, if any. If the method fails,
+     error contains information about the error.
+     
+     - parameter name:       The name of the method
+     - parameter params:     An object containing method arguments, if any
+     - parameter callback:   The closure to be executed when the method has been executed
+     */
     
     public func method(name: String, params: AnyObject?, callback: DDPMethodCallback?) -> String {
         let id = getId()
-            let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
-            if let p = params { message["params"] = p }
-            if let completionCallback = callback {
-                let completion = Completion(callback: completionCallback)
-                self.resultCallbacks[id] = completion
-            }
-            userBackground.addOperationWithBlock() {
-                self.sendMessage(message)
-            }
+        let message = ["msg":"method", "method":name, "id":id] as NSMutableDictionary
+        if let p = params { message["params"] = p }
+        
+        if let completionCallback = callback {
+            let completion = Completion(callback: completionCallback)
+            self.resultCallbacks[id] = completion
+        }
+        
+        userBackground.addOperationWithBlock() {
+            self.sendMessage(message)
+        }
         return id
     }
     
@@ -334,27 +364,28 @@ public class DDPClient: NSObject {
     // Subscribe
     //
     
-    
     internal func sub(id: String, name: String, params: [AnyObject]?, callback: DDPCallback?) -> String {
+        
         if let completionCallback = callback {
             let completion = Completion(callback: completionCallback)
             self.subCallbacks[id] = completion
         }
+        
         self.subscriptions[id] = (id, name, false)
         let message = ["msg":"sub", "name":name, "id":id] as NSMutableDictionary
         if let p = params { message["params"] = p }
         userBackground.addOperationWithBlock() {
-             self.sendMessage(message)
+            self.sendMessage(message)
         }
         return id
     }
     
     /**
-    Sends a subscription request to the server.
-    
-    - parameter name:       The name of the subscription
-    - parameter params:     An object containing method arguments, if any
-    */
+     Sends a subscription request to the server.
+     
+     - parameter name:       The name of the subscription
+     - parameter params:     An object containing method arguments, if any
+     */
     
     public func sub(name: String, params: [AnyObject]?) -> String {
         let id = String(name.hashValue)
@@ -362,20 +393,20 @@ public class DDPClient: NSObject {
     }
     
     /**
-    Sends a subscription request to the server. If a callback is passed, the callback asynchronously
-    runs when the client receives a 'ready' message indicating that the initial subset of documents contained
-    in the subscription has been sent by the server.
-    
-    - parameter name:       The name of the subscription
-    - parameter params:     An object containing method arguments, if any
-    - parameter callback:   The closure to be executed when the server sends a 'ready' message
-    */
+     Sends a subscription request to the server. If a callback is passed, the callback asynchronously
+     runs when the client receives a 'ready' message indicating that the initial subset of documents contained
+     in the subscription has been sent by the server.
+     
+     - parameter name:       The name of the subscription
+     - parameter params:     An object containing method arguments, if any
+     - parameter callback:   The closure to be executed when the server sends a 'ready' message
+     */
     
     public func sub(name:String, params: [AnyObject]?, callback: DDPCallback?) -> String {
         let id = String(name.hashValue)
         if let subData = findSubscription(name) {
             log.info("You are already subscribed to \(name)")
-            return  subData.id + "already subscribed"
+            return  subData.id
         }
         return sub(id, name: name, params: params, callback: callback)
     }
@@ -405,13 +436,13 @@ public class DDPClient: NSObject {
     }
     
     /**
-    Sends an unsubscribe request to the server. If a callback is passed, the callback asynchronously
-    runs when the client receives a 'ready' message indicating that the subset of documents contained
-    in the subscription have been removed.
-    
-    - parameter name:       The name of the subscription
-    - parameter callback:   The closure to be executed when the server sends a 'ready' message
-    */
+     Sends an unsubscribe request to the server. If a callback is passed, the callback asynchronously
+     runs when the client receives a 'ready' message indicating that the subset of documents contained
+     in the subscription have been removed.
+     
+     - parameter name:       The name of the subscription
+     - parameter callback:   The closure to be executed when the server sends a 'ready' message
+     */
     
     public func unsub(name: String, callback: DDPCallback?) -> String? {
         if let sub = findSubscription(name) {
@@ -451,7 +482,7 @@ public class DDPClient: NSObject {
     
     private func nosub(id: String, error: DDPError?) {
         if let e = error where (e.isValid == true) {
-            print(e)
+            log.error("\(e)")
         } else {
             if let completion = unsubCallbacks[id],
                 let _ = subscriptions[id] {
@@ -481,66 +512,66 @@ public class DDPClient: NSObject {
     public func subscriptionIsReady(subscriptionId: String, subscriptionName:String) {}
     
     /**
-    Executes when a subscription is removed.
-    
-    - parameter subscriptionId:             A String representation of the hash of the subscription name
-    - parameter subscriptionName:           The name of the subscription
-    */
+     Executes when a subscription is removed.
+     
+     - parameter subscriptionId:             A String representation of the hash of the subscription name
+     - parameter subscriptionName:           The name of the subscription
+     */
     
     public func subscriptionWasRemoved(subscriptionId:String, subscriptionName:String) {}
     
     
     /**
-    Executes when the server has sent a new document.
-    
-    - parameter collection:                 The name of the collection that the document belongs to
-    - parameter id:                         The document's unique id
-    - parameter fields:                     The documents properties
-    */
+     Executes when the server has sent a new document.
+     
+     - parameter collection:                 The name of the collection that the document belongs to
+     - parameter id:                         The document's unique id
+     - parameter fields:                     The documents properties
+     */
     
     public func documentWasAdded(collection:String, id:String, fields:NSDictionary?) {
         if let added = events.onAdded { added(collection: collection, id: id, fields: fields) }
     }
     
     /**
-    Executes when the server sends a message to remove a document.
-    
-    - parameter collection:                 The name of the collection that the document belongs to
-    - parameter id:                         The document's unique id
-    */
+     Executes when the server sends a message to remove a document.
+     
+     - parameter collection:                 The name of the collection that the document belongs to
+     - parameter id:                         The document's unique id
+     */
     
     public func documentWasRemoved(collection:String, id:String) {
         if let removed = events.onRemoved { removed(collection: collection, id: id) }
     }
     
     /**
-    Executes when the server sends a message to update a document.
-    
-    - parameter collection:                 The name of the collection that the document belongs to
-    - parameter id:                         The document's unique id
-    - parameter fields:                     Optional object with EJSON values containing the fields to update
-    - parameter cleared:                    Optional array of strings (field names to delete)
-    */
+     Executes when the server sends a message to update a document.
+     
+     - parameter collection:                 The name of the collection that the document belongs to
+     - parameter id:                         The document's unique id
+     - parameter fields:                     Optional object with EJSON values containing the fields to update
+     - parameter cleared:                    Optional array of strings (field names to delete)
+     */
     
     public func documentWasChanged(collection:String, id:String, fields:NSDictionary?, cleared:[String]?) {
         if let changed = events.onChanged { changed(collection:collection, id:id, fields:fields, cleared:cleared) }
     }
     
     /**
-    Executes when the server sends a message indicating that the result of a method has changed.
-    
-    - parameter methods:                    An array of strings (ids passed to 'method', all of whose writes have been reflected in data messages)
-    */
+     Executes when the server sends a message indicating that the result of a method has changed.
+     
+     - parameter methods:                    An array of strings (ids passed to 'method', all of whose writes have been reflected in data messages)
+     */
     
     public func methodWasUpdated(methods:[String]) {
         if let updated = events.onUpdated { updated(methods: methods) }
     }
     
     /**
-    Executes when the client receives an error message from the server. Such a message is used to represent errors raised by the method or subscription, as well as an attempt to subscribe to an unknown subscription or call an unknown method.
-    
-    - parameter message:                    A DDPError object with information about the error
-    */
+     Executes when the client receives an error message from the server. Such a message is used to represent errors raised by the method or subscription, as well as an attempt to subscribe to an unknown subscription or call an unknown method.
+     
+     - parameter message:                    A DDPError object with information about the error
+     */
     
     public func didReceiveErrorMessage(message: DDPError) {
         if let error = events.onError { error(message: message) }
