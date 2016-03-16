@@ -1,8 +1,8 @@
-platform :ios, '9.0'
+platform :ios, '8.0'
 use_frameworks!
 
 target 'MindIt' do
-    pod "SwiftDDP", "~> 0.2.0"
+    pod 'SwiftDDP'
     pod 'XCGLogger'
 end
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Peter Siegesmund <peter.siegesmund@icloud.com>
+// Copyright (c) 2015 Peter Siegesmund <peter.siegesmund@icloud.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -251,7 +251,7 @@ extension DDPClient {
     }
     
     // Callback runs on main thread
-    public func login(params: NSDictionary, callback: ((result: AnyObject?, error: DDPError?) -> ())?) {
+    internal func login(params: NSDictionary, callback: ((result: AnyObject?, error: DDPError?) -> ())?) {
         
         // method is run on the userBackground queue
         method("login", params: NSArray(arrayLiteral: params)) { result, error in

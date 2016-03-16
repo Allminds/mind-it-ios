@@ -1,6 +1,5 @@
 
 import UIKit
-import SwiftDDP
 
 class HomeViewController: UIViewController, UITextFieldDelegate {
     
@@ -58,9 +57,4 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         mindmapIdTextField.resignFirstResponder()
         return true
     }
-    
-    @IBAction func loginWithGoogle(sender: UIButton) {
-        Meteor.loginWithGoogle(Config.GOOGLE_CLIENT_ID, viewController: self)
-    }
-    
 }

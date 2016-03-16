@@ -10,10 +10,6 @@
 //
 
 public struct PKCS7: Padding {
-
-    public enum Error: ErrorType {
-        case InvalidPaddingValue
-    }
     
     public init() {
         
@@ -35,18 +31,13 @@ public struct PKCS7: Padding {
         }
         return withPadding
     }
-
+    
     public func remove(bytes: [UInt8], blockSize:Int?) -> [UInt8] {
         let lastByte = bytes.last!
         let padding = Int(lastByte) // last byte
-        let finalLength = bytes.count - padding
-
-        if finalLength < 0 {
-            return bytes
-        }
-
-        if padding >= 1 {
-            return Array(bytes[0..<finalLength])
+        
+        if padding >= 1 { //TODO: need test for that, what about empty padding
+            return Array(bytes[0..<(bytes.count - padding)])
         }
         return bytes
     }

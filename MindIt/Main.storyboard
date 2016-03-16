@@ -122,22 +122,13 @@
                                     <segue destination="NuU-PK-STG" kind="show" id="kdJ-y0-Qgo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r41-tX-Wji">
-                                <rect key="frame" x="238" y="427" width="124" height="30"/>
-                                <state key="normal" title="Login with Google"/>
-                                <connections>
-                                    <action selector="loginWithGoogle:" destination="P4D-24-yPJ" eventType="touchUpInside" id="3Mk-ZW-AFu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="1J3-mq-1iC"/>
                             <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="25" id="44t-0y-wmb"/>
-                            <constraint firstItem="r41-tX-Wji" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="146" id="9l2-Zs-KUa"/>
                             <constraint firstItem="76g-06-X3b" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="FO7-3Z-ib6"/>
                             <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="NEL-BT-zON" secondAttribute="centerX" id="Q35-5H-zRi"/>
-                            <constraint firstItem="r41-tX-Wji" firstAttribute="centerX" secondItem="ANb-07-pvo" secondAttribute="centerX" id="Rl7-Wt-F2Q"/>
                             <constraint firstItem="NEL-BT-zON" firstAttribute="bottom" secondItem="6fA-FR-9mE" secondAttribute="top" id="T0h-cA-sYI"/>
                             <constraint firstItem="JhG-Gu-ynh" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" constant="117" id="aGf-9q-Z6K"/>
                             <constraint firstItem="NEL-BT-zON" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" id="ibA-4F-0kU"/>
