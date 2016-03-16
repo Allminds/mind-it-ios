@@ -1,7 +1,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITextFieldDelegate , HomeViewDelegate {
     
     //MARK : Properties
     
@@ -48,6 +48,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     override func viewWillAppear(animated: Bool) {
         let meteorTracker : MeteorTracker = MeteorTracker.getInstance()
+        meteorTracker.homeViewDelegate = self
+        
+        if(meteorTracker.subscriptionSuccess == true) {
+            openMindmap.enabled = false
+        }
+        else {
+            openMindmap.enabled = true
+        }
+        
         if(meteorTracker.mindmapId != nil){
             mindmapIdTextField.text = meteorTracker.mindmapId
         }
@@ -56,5 +65,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         mindmapIdTextField.resignFirstResponder()
         return true
+    }
+    
+    func enableOpenMindmapButtonOnUnsubscribe() {
+        openMindmap.enabled = true
     }
 }

@@ -10,6 +10,7 @@ class MeteorTracker : CollectionDelegate {
     weak var delegate : TrackerDelegate?
     var mindmapId:String?
     var subscriptionSuccess : Bool = false;
+    var homeViewDelegate : HomeViewDelegate?
     
     //MARK : Intialiser
     private init() {
@@ -61,6 +62,7 @@ class MeteorTracker : CollectionDelegate {
         Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
             self.mindmapId = nil
             self.subscriptionSuccess = false
+            self.homeViewDelegate?.enableOpenMindmapButtonOnUnsubscribe()
         }
     }
     

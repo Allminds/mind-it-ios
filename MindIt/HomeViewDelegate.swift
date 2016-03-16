@@ -1,0 +1,3 @@
+protocol HomeViewDelegate {
+    func enableOpenMindmapButtonOnUnsubscribe()
+}
