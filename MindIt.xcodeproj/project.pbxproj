@@ -27,6 +27,7 @@
 		41A763691C72E90E0097326A /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A763681C72E90E0097326A /* Loader.swift */; };
 		41AE17BC1C69FBEB002A74D1 /* NodeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */; };
 		41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */; };
+		41C48CCE1CA11C4C00CD99F7 /* HomeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C48CCD1CA11C4C00CD99F7 /* HomeViewDelegate.swift */; };
 		41EE14D71C6F576D002C702A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EE14D61C6F576D002C702A /* Assets.xcassets */; };
 		6D5998851C8E9D27006D505C /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5998841C8E9D27006D505C /* NodeTests.swift */; };
 		6D5998871C8EA4DB006D505C /* MeteorTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5998861C8EA4DB006D505C /* MeteorTrackerTests.swift */; };
@@ -78,6 +79,7 @@
 		41A763681C72E90E0097326A /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Loader.swift; path = View/Loader.swift; sourceTree = "<group>"; };
 		41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewCell.swift; sourceTree = "<group>"; };
 		41AE17BD1C6A1349002A74D1 /* MindmapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindmapCollection.swift; sourceTree = "<group>"; };
+		41C48CCD1CA11C4C00CD99F7 /* HomeViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewDelegate.swift; sourceTree = "<group>"; };
 		41EE14D61C6F576D002C702A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		455BB334644BE49B48786465 /* Pods_MindIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D5998841C8E9D27006D505C /* NodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				415BBA611C69EC0E0014F6FC /* MindmapTableViewController.swift */,
 				412431871C6D07D8007A7E81 /* PresenterDelegate.swift */,
 				415BBA631C69EC570014F6FC /* HomeViewController.swift */,
+				41C48CCD1CA11C4C00CD99F7 /* HomeViewDelegate.swift */,
 				41AE17BB1C69FBEB002A74D1 /* NodeViewCell.swift */,
 			);
 			name = ViewControllers;
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C48CCE1CA11C4C00CD99F7 /* HomeViewDelegate.swift in Sources */,
 				415BBA621C69EC0E0014F6FC /* MindmapTableViewController.swift in Sources */,
 				415BBA5E1C69EBBC0014F6FC /* TableViewPresenter.swift in Sources */,
 				41AE17BE1C6A1349002A74D1 /* MindmapCollection.swift in Sources */,

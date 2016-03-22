@@ -133,11 +133,13 @@ class TableViewPresenter:NSObject, TrackerDelegate , TreeBuilderDelegate {
         //Display SubTreeNodes
         mindmap.removeRange(Range<Int>(start : indexOfNode, end: indexOfNode + TreeBuilder.subTreeNodes.count))
         //Release memmory by assgning empty array to subTreeNode
-        TreeBuilder.subTreeNodes = [String]()
+        
         
         if(TreeBuilder.subTreeNodes.contains(self.lastRightNode)){
             self.lastRightNode = node.getId();
         }
+        
+        TreeBuilder.subTreeNodes = [String]()
         reloadTableView();
     }
 
