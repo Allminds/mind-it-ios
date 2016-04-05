@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OAM-PQ-vmo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OAM-PQ-vmo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -31,7 +31,9 @@
                                             <rect key="frame" x="0.0" y="43" width="600" height="1"/>
                                             <color key="backgroundColor" red="0.70484713520331055" green="1" blue="0.56370390652095348" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="vdh-Fw-Uhe"/>
+                                                <constraint firstAttribute="height" constant="1" id="vdh-Fw-Uhe">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="2"/>
+                                                </constraint>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j04-bh-ggy">
@@ -47,9 +49,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="37" id="Luf-oK-Qx3"/>
+                                                <constraint firstAttribute="width" constant="37" id="Luf-oK-Qx3">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="37"/>
+                                                </constraint>
                                                 <constraint firstItem="AvC-wJ-UHp" firstAttribute="centerY" secondItem="j04-bh-ggy" secondAttribute="centerY" id="RPr-Ug-090"/>
-                                                <constraint firstAttribute="height" constant="37" id="eIZ-z9-SmC"/>
+                                                <constraint firstAttribute="height" constant="37" id="eIZ-z9-SmC">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="37"/>
+                                                </constraint>
                                                 <constraint firstItem="AvC-wJ-UHp" firstAttribute="centerX" secondItem="j04-bh-ggy" secondAttribute="centerX" id="gPY-xC-nvg"/>
                                             </constraints>
                                         </view>
@@ -104,20 +110,44 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="JhG-Gu-ynh">
                                 <rect key="frame" x="251" y="181" width="98" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="bk1-ni-mzE"/>
-                                    <constraint firstAttribute="width" constant="98" id="x3V-NY-bUV"/>
+                                    <constraint firstAttribute="height" constant="100" id="bk1-ni-mzE">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="98" id="x3V-NY-bUV">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                    </constraint>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" preservesSuperviewLayoutMargins="NO"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a MindMap id or url" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76g-06-X3b">
                                 <rect key="frame" x="208" y="306" width="184" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="IQw-IX-qV1">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IQw-IX-qV1"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <mask key="constraints">
+                                        <include reference="IQw-IX-qV1"/>
+                                    </mask>
+                                </variation>
                             </textField>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANb-07-pvo">
                                 <rect key="frame" x="248" y="361" width="105" height="30"/>
                                 <state key="normal" title="Open Mindmap">
                                     <color key="titleColor" red="0.95294117647058818" green="0.61176470588235299" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="NuU-PK-STG" kind="show" id="kdJ-y0-Qgo"/>
                                 </connections>
@@ -126,14 +156,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="1J3-mq-1iC"/>
-                            <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="25" id="44t-0y-wmb"/>
+                            <constraint firstItem="76g-06-X3b" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="25" id="44t-0y-wmb">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
                             <constraint firstItem="76g-06-X3b" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="FO7-3Z-ib6"/>
                             <constraint firstItem="ANb-07-pvo" firstAttribute="centerX" secondItem="NEL-BT-zON" secondAttribute="centerX" id="Q35-5H-zRi"/>
                             <constraint firstItem="NEL-BT-zON" firstAttribute="bottom" secondItem="6fA-FR-9mE" secondAttribute="top" id="T0h-cA-sYI"/>
                             <constraint firstItem="JhG-Gu-ynh" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" constant="117" id="aGf-9q-Z6K"/>
                             <constraint firstItem="NEL-BT-zON" firstAttribute="top" secondItem="ttv-96-fB3" secondAttribute="bottom" id="ibA-4F-0kU"/>
                             <constraint firstItem="NEL-BT-zON" firstAttribute="leading" secondItem="zsv-z6-ABy" secondAttribute="leading" id="kSr-z4-4an"/>
-                            <constraint firstItem="ANb-07-pvo" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="80" id="uhG-6B-xqe"/>
+                            <constraint firstItem="ANb-07-pvo" firstAttribute="top" secondItem="JhG-Gu-ynh" secondAttribute="bottom" constant="80" id="uhG-6B-xqe">
+                                <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            </constraint>
                             <constraint firstItem="JhG-Gu-ynh" firstAttribute="centerX" secondItem="zsv-z6-ABy" secondAttribute="centerX" id="xRH-0O-W0x"/>
                         </constraints>
                     </view>
