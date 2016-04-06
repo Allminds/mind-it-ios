@@ -111,10 +111,10 @@
                                 <rect key="frame" x="251" y="181" width="98" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="bk1-ni-mzE">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="220"/>
                                     </constraint>
                                     <constraint firstAttribute="width" constant="98" id="x3V-NY-bUV">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="220"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="heightClass=regular-widthClass=regular" preservesSuperviewLayoutMargins="NO"/>
