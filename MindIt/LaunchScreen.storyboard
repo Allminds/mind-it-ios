@@ -22,10 +22,10 @@
                                 <rect key="frame" x="215" y="215" width="170" height="170"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="dVB-Ug-njW">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="170" id="tj1-D7-fRO">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
                                     </constraint>
                                 </constraints>
                             </imageView>
