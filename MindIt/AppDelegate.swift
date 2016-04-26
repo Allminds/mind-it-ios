@@ -38,9 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        print("URL : " , url)
         connectToServerMindIt({()-> Void in
             
             let id : String = self.getIdFromURL(String(url))
+            
             //Render MindmapTableView
             if(id != "") {
                 let currentNavC = self.window?.rootViewController as? UINavigationController
@@ -64,7 +66,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private func getIdFromURL(url : String) -> String {
-        let id : String = url.stringByReplacingOccurrencesOfString("mindit.xyz://create/", withString: "")
+        var  id : String = ""
+        
+        if(url.containsString("mindit.xyz://create/")) {
+            id = url.stringByReplacingOccurrencesOfString("mindit.xyz://create/", withString: "")
+        }
+        else if(url.containsString("mindit.xyz://sharedLink/")){
+            id = "sharedLink/" + url.stringByReplacingOccurrencesOfString("mindit.xyz://sharedLink/", withString: "")
+        }
+        
         return id
     }
     

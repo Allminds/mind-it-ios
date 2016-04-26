@@ -35,13 +35,18 @@ class HomeViewController: UIViewController, UITextFieldDelegate , HomeViewDelega
             let mindmapId : String
             
             if(text.containsString("mindit.xyz/create/")) {
-                let urlSpilt : [String] = text.componentsSeparatedByString("/")
-                mindmapId = urlSpilt[urlSpilt.count - 1]
+                let urlSplit : [String] = text.componentsSeparatedByString("/")
+                mindmapId = urlSplit[urlSplit.count - 1]
+            }
+            else if(text.containsString("mindit.xyz/sharedLink/")) {
+                let urlSplit : [String] = text.componentsSeparatedByString("/");
+                mindmapId = "sharedLink/" + urlSplit[urlSplit.count - 1];
             }
             else {
                 mindmapId = text
             }
             //Passing mindmap ID
+            print("Mindmap Id : " , mindmapId);
             let tableViewController = segue.destinationViewController as! MindmapTableViewController;
             tableViewController.mindmapId = mindmapId
         }
@@ -57,7 +62,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate , HomeViewDelega
             openMindmap.enabled = true
         }
         
-        if(meteorTracker.mindmapId != nil){
+        if(meteorTracker.sharedLink != ""){
+            mindmapIdTextField.text = meteorTracker.sharedLink
+        }
+        else if(meteorTracker.mindmapId != nil) {
             mindmapIdTextField.text = meteorTracker.mindmapId
         }
     }

@@ -9,6 +9,7 @@ class MeteorTracker : CollectionDelegate {
     private static var meteorTracker: MeteorTracker?
     weak var delegate : TrackerDelegate?
     var mindmapId:String?
+    var sharedLink : String?
     var subscriptionSuccess : Bool = false;
     var homeViewDelegate : HomeViewDelegate?
     
@@ -38,23 +39,43 @@ class MeteorTracker : CollectionDelegate {
             self.subscribe(self.mindmapId!)
         }
         else {
-            self.mindmapId = mindmapId
             self.subscribe(mindmapId)
         }
         return true
     }
     
-    private func subscribe(mindmapId : String) {
-        Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
-            self.mindmapId = mindmapId
-            self.subscriptionSuccessfullyDone()
+    private func subscribe( mindmapId : String) {
+        if(mindmapId.containsString("sharedLink")) {
+            Meteor.call("getRootNodeFromLink", params: [mindmapId]) { result, error in
+                if((error) != nil) {
+                    print("Error : " , error)
+                }
+                else {
+                    let properties : NSDictionary? = result as? NSDictionary
+                    let rootId : String? = properties?.objectForKey("rootId") as? String
+                    
+                    if(rootId != nil) {
+                        Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [ rootId! , "*" , Config.READ_ONLY]) {
+                            self.mindmapId = rootId!
+                            self.sharedLink = mindmapId
+                            self.subscriptionSuccessfullyDone()
+                        }
+                    }
+                }
+            }
         }
-        
+        else {
+            Meteor.subscribe(Config.SUBSCRIPTION_NAME, params: [mindmapId]) {
+                self.mindmapId = mindmapId
+                self.subscriptionSuccessfullyDone()
+            }
+        }
     }
     
     private func subscriptionSuccessfullyDone() {
         self.subscriptionSuccess = true;
         self.delegate?.connected(Config.CONNECTED)
+        self.sharedLink = nil
     }
     
     
