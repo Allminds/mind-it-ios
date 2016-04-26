@@ -75,13 +75,13 @@ class MeteorTracker : CollectionDelegate {
     private func subscriptionSuccessfullyDone() {
         self.subscriptionSuccess = true;
         self.delegate?.connected(Config.CONNECTED)
-        self.sharedLink = nil
     }
     
     
     func unsubscribe() {
         Meteor.unsubscribe(Config.SUBSCRIPTION_NAME) {
             self.mindmapId = nil
+            self.sharedLink = nil
             self.subscriptionSuccess = false
             self.homeViewDelegate?.enableOpenMindmapButtonOnUnsubscribe()
         }

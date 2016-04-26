@@ -46,7 +46,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate , HomeViewDelega
                 mindmapId = text
             }
             //Passing mindmap ID
-            print("Mindmap Id : " , mindmapId);
             let tableViewController = segue.destinationViewController as! MindmapTableViewController;
             tableViewController.mindmapId = mindmapId
         }
@@ -62,7 +61,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate , HomeViewDelega
             openMindmap.enabled = true
         }
         
-        if(meteorTracker.sharedLink != ""){
+        if(meteorTracker.sharedLink != nil){
             mindmapIdTextField.text = meteorTracker.sharedLink
         }
         else if(meteorTracker.mindmapId != nil) {

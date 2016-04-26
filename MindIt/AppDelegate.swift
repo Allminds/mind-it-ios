@@ -38,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        print("URL : " , url)
         connectToServerMindIt({()-> Void in
             
             let id : String = self.getIdFromURL(String(url))
